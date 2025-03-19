@@ -19,6 +19,6 @@ from django.urls import path, include
 from workouts import views as workout_views
 
 urlpatterns = [
-    path('workouts', workout_views.index, name='index'),
+    path('', workout_views.index, name='index'),
     path('admin/', admin.site.urls),
 ]
