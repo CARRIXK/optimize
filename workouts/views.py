@@ -1,6 +1,7 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.views import generic
+from .models import Exercise
 
 # Create your views here.
-def index(request):
-    return HttpResponse("Hello, world. You're at the workouts index.")
+class ExerciseList(generic.ListView):
+    model = Exercise

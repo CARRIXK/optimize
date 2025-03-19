@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Views Part 1</title>
+</head>
+
+<body>
+    <h1>Excersise list</h1>
+    {% for Excersise in object_list %}
+    <h2>{{Excersise.name}}</h2>
+    <p>Description URL: <a href="{{ Excersise.description_url }}">{{ Excersise.description_url }}</a></p>
+    <p>Exercise Image: <img src="{{ Excersise.exercise_image }}" alt="{{ Excersise.name }}"></p>
+    <p>Exercise Image 1: <img src="{{ Excersise.exercise_image1 }}" alt="{{ Excersise.name }}"></p>
+    <p>Muscle Group Details: {{ Excersise.muscle_group_details }}</p>
+    <p>Muscle group: {{Excersise.muscle_group}}</p>
+    <p>Equipment Details: {{ Excersise.equipment_details }}</p>
+    <p>Equipment: {{ Excersise.equipment }}</p>
+    <p>Rating: {{ Excersise.rating }}</p>
+
+
+
+
+    
+    {% endfor %}
+</body>
+
+</html>
