@@ -4,4 +4,5 @@ from .models import Exercise
 
 # Create your views here.
 class ExerciseList(generic.ListView):
-    model = Exercise
+    queryset = Exercise.objects.all()
+    template_name = "exercise_list.html"
