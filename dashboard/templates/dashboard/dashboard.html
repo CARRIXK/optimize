@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Welcome back, (Dummy name)!</h1>
+
+<h2>Recent Workouts</h2>
+<ul>
+    {% for workout in workouts %}
+        <li>{{ workout.name }} - {{ workout.date_completed }}</li>
+    {% empty %}
+        <p>No recent workouts logged.</p>
+    {% endfor %}
+</ul>
+
+<a href="#">View All Workouts</a>
+{% endblock %}
