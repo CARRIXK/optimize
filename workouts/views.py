@@ -5,7 +5,14 @@ from .models import Exercise
 # Create your views here.
 class ExerciseList(generic.ListView):
     queryset = Exercise.objects.all()
-    template_name = "exercise_list.html"
+    template_name = "excersise_list.html"
+    paginate_by = 2
+
+# Create your views here.
+class Home(generic.ListView):
+    queryset = Exercise.objects.all()
+    template_name = "workouts/index.html"
+    paginate_by = 6
 
 
 import openpyxl
