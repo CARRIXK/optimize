@@ -8,8 +8,8 @@ class Exercise(models.Model):
     description_url = models.URLField(blank=True, null=True, default="https://example.com")
     exercise_image = models.URLField(blank=True, null=True, default="https://example.com/image.jpg")
     exercise_image1 = models.URLField(blank=True, null=True, default="https://example.com/image1.jpg")
-    muscle_gp_details = models.URLField(blank=True, null=True, default="https://example.com/muscle-group")
-    muscle_gp = models.CharField(max_length=100, default="Generic Muscle Group")
+    muscle_group_details = models.URLField(blank=True, null=True, default="https://example.com/muscle-group")
+    muscle_group = models.CharField(max_length=100, default="Generic Muscle Group")
     equipment_details = models.URLField(blank=True, null=True, default="https://example.com/equipment")
     equipment = models.CharField(max_length=100, default="Generic Equipment")
     rating = models.FloatField(blank=True, null=True, default=5.0)  # Assuming a default rating of 5
