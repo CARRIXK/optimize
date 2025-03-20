@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workout Plan</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .exercise-name {
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Workout Plan for {{workout_title}}</h1>
+    <h2>Selected exercises: {{selected_excersises}}</h2>
+
+    <div class="workout-exercises">
+        {% for exercise in selected_exercises %}
+            <div class="exercise">
+                <p class="exercise-name">{{ exercise.name }}</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Set Number</th>
+                            <th>Reps</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for set in exercise.sets %}
+                            <tr>
+                                <td>{{ set.set_number }}</td>
+                                <td>{{ set.reps }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% endfor %}
+    </div>
+
+</body>
+</html>

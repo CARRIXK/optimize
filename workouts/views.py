@@ -39,23 +39,16 @@ def add_exercises(request):
 
 
 # Add sets to an exercise
-def add_exercise_sets(request, exercise_id):
-    exercise = Exercise.objects.get(id=exercise_id)
-
-    if request.method == 'POST' and 'create_set' in request.POST:
-        exercise_set_form = ExerciseSetForm(request.POST)
-        if exercise_set_form.is_valid():
-            exercise_set = exercise_set_form.save(commit=False)
-            exercise_set.exercise = exercise
-            exercise_set.save()
-            return redirect('add_exercise_sets', exercise_id=exercise.id)
-    else:
-        exercise_set_form = ExerciseSetForm()
-
-    return render(request, 'workouts/add_exercise_sets.html', {
-        'exercise_set_form': exercise_set_form,
-        'exercise': exercise
-    })
+def add_exercise_sets(request):
+    if request.method == 'POST':
+        workout_title = request.POST.get('workout_title')  # Get workout title from the form data
+        selected_excersises = request.POST.get('selected_excersises')  # Get exercise ID from the form data
+        
+        context = {
+            'selected_excersises': selected_excersises,
+            'workout_title': workout_title,  # Replace with actual workout title
+        }
+        return render(request, 'workouts/workout_set_reps.html', context)
 
 
 

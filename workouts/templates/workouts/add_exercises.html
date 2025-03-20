@@ -11,10 +11,11 @@
 <body>
 
     <!-- index.html content starts here -->
- <h1>Add excersises to {{workout_title}}</h1>
+
  <div class="container-fluid">
       <!-- Search bar -->
       <div class="sticky-search-bar">
+        <h1>Add excersises to {{workout_title}}</h1>
         <form method="GET" action="{% url 'add_exercises' %}" class="mb-4">
             <div class="input-group">
                 <input type="text" name="q" class="form-control" placeholder="Search exercises..." value="{{ request.GET.q }}">
@@ -39,7 +40,7 @@
                                  </div>
                              </div>
                             <div class="form-check"></div></div>
-                                <input class="form-check-input" type="checkbox" name="selected_exercises" value="{{ exercise.id }}" id="exercise{{ exercise.id }}">
+                                <input class="form-check-input" type="checkbox" name="selected_exercises" value="{{ exercise.exercise_name }}" id="exercise{{ exercise.id }}">
                                 <label class="form-check-label" for="exercise{{ exercise.id }}">
                                 </label>
                             </div>
@@ -73,16 +74,22 @@
  </div>
 
 
-     <!-- Sticky Footer -->
-     <div class="sticky-footer">
-        <button id="add-ex-btn" class="btn btn-success">Add Exercises</button>
+    <!-- Sticky Footer -->
+    <div class="sticky-footer">
+        <form method="POST" action="{% url 'add_exercise_sets' %}" id="exercise-form">
+            {% csrf_token %}
+            <input  name="workout_title" value="{{ workout_title }}">
+            <input  name="selected_excersises" id="selected-exercises">
+            <!-- Button to submit the form -->
+            <button type="submit" id="add-ex-btn" class="btn btn-success">Add Exercises</button>
+        </form>
     </div>
-
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const checkboxes = document.querySelectorAll('.form-check-input');
             const addExBtn = document.getElementById('add-ex-btn');
+            const selectedExercisesInput = document.getElementById('selected-exercises');
 
             checkboxes.forEach(checkbox => {
                 checkbox.addEventListener('change', updateButtonText);
@@ -91,8 +98,16 @@
             function updateButtonText() {
                 const selectedCount = document.querySelectorAll('.form-check-input:checked').length;
                 addExBtn.textContent = `Add Exercises (${selectedCount})`;
+
+                const selectedExercises = [];
+                document.querySelectorAll('.form-check-input:checked').forEach(checkbox => {
+                    selectedExercises.push(checkbox.value);
+                });
+                selectedExercisesInput.value = JSON.stringify(selectedExercises);
+                console.log(selectedExercises);
             }
         });
     </script>
+    
 </body>
 </html>
