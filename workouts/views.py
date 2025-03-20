@@ -9,9 +9,9 @@ class ExerciseList(generic.ListView):
     paginate_by = 2
 
 # Create your views here.
-class Home(generic.ListView):
+class WorkoutsList(generic.ListView):
     queryset = Exercise.objects.all()
-    template_name = "workouts/index.html"
+    template_name = "workouts/workouts_list.html"
     paginate_by = 6
 
 

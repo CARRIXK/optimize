@@ -9,7 +9,7 @@
         <!-- Blog Entries Column -->
         <div class="col-12 mt-3 left">
             <div class="row">
-                {% for exercise in exercise_list %}
+                {% for workout in workouts_list %}
                 <div class="col-md-4">
                     <div class="card mb-4">
                         <div class="card-body">
@@ -38,22 +38,6 @@
             </div>
         </div>
     </div>
-<!-- 
-    <h1>This is the Excersise List Template</h1>
-    {% for exercise in object_list %}
-    <h2>{{ exercise.exercise_name }}</h2>
-    <p>Description URL: <a href="{{ exercise.description_url }}">{{ exercise.description_url }}</a></p>
-    <p>Exercise Image: <img src="{{ exercise.exercise_image }}" alt="{{ exercise.exercise_name }}"></p>
-    <p>Exercise Image 1: <img src="{{ exercise.exercise_image1 }}" alt="{{ exercise.exercise_name }}"></p>
-    <p>Muscle Group Details: {{ exercise.muscle_gp_details }}</p>
-    <p>Muscle Group: {{ exercise.muscle_gp }}</p>
-    <p>Equipment Details: {{ exercise.equipment_details }}</p>
-    <p>Equipment: {{ exercise.equipment }}</p>
-    <p>Rating: {{ exercise.rating }}</p>
-    {% endfor %} -->
-
-
-
 
     {% if is_paginated %}
     <nav aria-label="Page navigation">
