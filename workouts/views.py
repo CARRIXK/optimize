@@ -96,9 +96,9 @@ def import_excel_data(request):
             exercise_name, description_url, exercise_image, exercise_image1, muscle_group_details, muscle_group, equipment_details, equipment, rating, description = row
 
             # Check if the exercise already exists in the database
-            if not Exercise.objects.filter(exercise_name=exercise_name).exists():
+            if not ExerciseType.objects.filter(exercise_name=exercise_name).exists():
                 # Create the Exercise objects if it does not exist
-                Exercise.objects.create(
+                ExerciseType.objects.create(
                     exercise_name=exercise_name,
                     description_url=description_url,
                     exercise_image=exercise_image,
