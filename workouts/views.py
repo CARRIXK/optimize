@@ -21,7 +21,11 @@ def create_workout(request):
 
 # Add exercises to a workout
 def add_exercises(request):
-     return render(request, 'workouts/add_exercises.html')
+    workout_title = None
+    if request.method == 'POST':
+        workout_title = request.POST.get('workout_title')  # Get workout title from the form data
+    
+    return render(request, 'workouts/add_exercises.html', {'workout_title': workout_title})
 
 # Add sets to an exercise
 def add_exercise_sets(request, exercise_id):
