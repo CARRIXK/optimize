@@ -90,24 +90,35 @@
             const checkboxes = document.querySelectorAll('.form-check-input');
             const addExBtn = document.getElementById('add-ex-btn');
             const selectedExercisesInput = document.getElementById('selected-exercises');
-
+    
+            function updateButtonText() {
+                const checkedCheckboxes = document.querySelectorAll('.form-check-input:checked');
+                const selectedCount = checkedCheckboxes.length;
+    
+                if (addExBtn) {
+                    addExBtn.textContent = `Add Exercises (${selectedCount})`;
+                }
+    
+                const selectedExercises = Array.from(checkedCheckboxes)
+                    .map(checkbox => checkbox.value);
+    
+                if (selectedExercisesInput) {
+                    selectedExercisesInput.value = JSON.stringify(selectedExercises);
+                }
+    
+                console.log(selectedExercises);
+            }
+    
+            // Listen for changes
             checkboxes.forEach(checkbox => {
                 checkbox.addEventListener('change', updateButtonText);
             });
-
-            function updateButtonText() {
-                const selectedCount = document.querySelectorAll('.form-check-input:checked').length;
-                addExBtn.textContent = `Add Exercises (${selectedCount})`;
-
-                const selectedExercises = [];
-                document.querySelectorAll('.form-check-input:checked').forEach(checkbox => {
-                    selectedExercises.push(checkbox.value);
-                });
-                selectedExercisesInput.value = JSON.stringify(selectedExercises);
-                console.log(selectedExercises);
-            }
+    
+            // Ensure the browser registers checked state properly before updating the button
+            setTimeout(updateButtonText, 100); 
         });
     </script>
+    
     
 </body>
 </html>
