@@ -22,15 +22,20 @@ def create_workout(request):
 # Add exercises to a workout
 def add_exercises(request):
     workout_title = None
-    exercises = ExerciseType.objects.all()  # Retrieves all exercise types
 
     if request.method == 'POST':
         workout_title = request.POST.get('workout_title')  # Get workout title from the form data
     
-    return render(request, 'workouts/add_exercises.html', {
-        'workout_title': workout_title,
-        'exercises': exercises
-    })
+    query = request.GET.get('q')
+    if query:
+        exercises = ExerciseType.objects.filter(exercise_name__icontains=query)
+    else:
+        exercises = ExerciseType.objects.all()
+    context = {
+        'exercises': exercises,
+        'workout_title': workout_title,  # Replace with actual workout title
+    }
+    return render(request, 'workouts/add_exercises.html', context)
 
 
 # Add sets to an exercise
