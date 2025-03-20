@@ -22,7 +22,8 @@
 
     <form method="POST" action="{% url 'add_exercises' %}">
         {% csrf_token %}
-        <input type="text" name="workout_title" id="workout_title" placeholder="Workout Title" required><br>
+
+        <input type="text" name="workout_title" id="workout_title" placeholder="Workout Title" value="{{ workout_title|default:'' }}" required><br>
         <!-- Button to submit the form -->
         <button type="submit">Add Exercises to Workout</button>
     </form>

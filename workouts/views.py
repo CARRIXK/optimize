@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.views import generic
 from .models import Exercise, Workout, ExerciseType
 from .forms import WorkoutForm, ExerciseForm, ExerciseSetForm
+import ast
 
 # Create your views here.
 class ExerciseList(generic.ListView):
@@ -16,7 +17,14 @@ def workout_list(request):
 
 # Create a new workout
 def create_workout(request):
+    workout_title = request.GET.get('workout_title', '')  # Get workout_title from query parameters, default to an empty string if not provided
+    if(workout_title):
+        context = {
+            'workout_title': workout_title,
+        }
+        return render(request, 'workouts/create_workout.html', context)
     return render(request, 'workouts/create_workout.html')
+
 
 
 # Add exercises to a workout
@@ -28,9 +36,10 @@ def add_exercises(request):
     
     query = request.GET.get('q')
     if query:
-        exercises = ExerciseType.objects.filter(exercise_name__icontains=query)
+        exercises = ExerciseType.objects.filter(exercise_name__icontains=query).exclude(exercise_image__isnull=True)
     else:
-        exercises = ExerciseType.objects.all()
+        exercises = ExerciseType.objects.exclude(exercise_image__isnull=True)
+    
     context = {
         'exercises': exercises,
         'workout_title': workout_title,  # Replace with actual workout title
@@ -41,12 +50,22 @@ def add_exercises(request):
 # Add sets to an exercise
 def add_exercise_sets(request):
     if request.method == 'POST':
-        workout_title = request.POST.get('workout_title')  # Get workout title from the form data
-        selected_excersises = request.POST.get('selected_excersises')  # Get exercise ID from the form data
+        workout_title = request.POST.get('workout_title')
+        selected_excersises = request.POST.get('selected_excersises')
+        
+        # Convert the string of exercises into a list
+        try:
+            selected_excersises = ast.literal_eval(selected_excersises)
+        except (ValueError, SyntaxError):
+            selected_excersises = []  # Default to an empty list if conversion fails
+
+        # Filter ExerciseType objects based on selected exercise names
+        matching_exercises = ExerciseType.objects.filter(exercise_name__in=selected_excersises)
+
         
         context = {
-            'selected_excersises': selected_excersises,
-            'workout_title': workout_title,  # Replace with actual workout title
+            'selected_excersises': matching_exercises,
+            'workout_title': workout_title,
         }
         return render(request, 'workouts/workout_set_reps.html', context)
 
