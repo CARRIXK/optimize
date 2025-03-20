@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<div class="container mt-5">
+    <div class="row"></div>
+        <div class="col-md-4 text-center"></div>
+            <img src="{{ user_profile.profile_picture.url }}" class="img-fluid rounded-circle" alt="Profile Picture" />
+        </div>
+        <div class="col-md-8">
+            <h2>{{ user.get_full_name }}</h2>
+            <p><strong>Username:</strong> {{ user.username }}</p>
+            <p><strong>Email:</strong> {{ user.email }}</p>
+            <p><strong>Bio:</strong> {{ user_profile.bio }}</p>
+            <p><strong>Birth Date:</strong> {{ user_profile.birth_date }}</p>
+            <p><strong>Location:</strong> {{ user_profile.location }}</p>
+            <p><strong>Gender:</strong> {{ user_profile.gender }}</p>
+            <p><strong>Units of Measure:</strong> {{ user_profile.units_of_measure }}</p>
+            <p><strong>Weight:</strong> {{ user_profile.weight }} kg</p>
+            <p><strong>Created On:</strong> {{ user_profile.created_on }}</p>
+            <p><strong>Updated On:</strong> {{ user_profile.updated_on }}</p>
+        </div>
+    </div>
+</div>
+{% endblock content %}

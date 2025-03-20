@@ -4,6 +4,7 @@
 {% url 'account_login' as login_url %}
 {% url 'account_signup' as signup_url %}
 {% url 'account_logout' as logout_url %}
+{% url 'user_profile' as user_profile_url %}
 
 <!DOCTYPE html>
 <html class="h-100" lang="en">
@@ -41,6 +42,8 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarText">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                
+                    {% if user.is_authenticated %}
                     <li class="nav-item">
                         <a class="nav-link {% if request.path == home_url %}active{% endif %}" aria-current="page"
                             href="#">Home</a>
@@ -49,11 +52,20 @@
                         <a class="nav-link {% if request.path == home_url %}active{% endif %}" aria-current="page"
                             href="#">Workouts</a>
                     </li>
-                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a
+                          class="nav-link
+                          {% if request.path == user_profile_url %}active{%endif%}"
+                          aria-current="page"
+                          href="{% url 'user_profile' %}"
+                          >Profile</a
+                        >
+                      </li>
                     <li class="nav-item">
                         <a class="nav-link {% if request.path == logout_url %}active{% endif %}" aria-current="page"
                             href="{% url 'account_logout' %}">Logout</a>
                     </li>
+                 
                     {% else %}
                     <li class="nav-item">
                         <a class="nav-link {% if request.path == signup_url %}active{% endif %}" aria-current="page"

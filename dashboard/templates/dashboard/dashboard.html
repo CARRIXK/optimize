@@ -4,9 +4,6 @@
 
 {% if user.is_authenticated %}
 <h1>Welcome back {{ user }}!</h1>
-{% else %}
-<p class="text-end m-3">You are not logged in</p>
-{% endif %}
 
 
 <h2>Recent Workouts</h2>
@@ -19,4 +16,12 @@
 </ul>
 
 <a href="#">View All Workouts</a>
+
+{% else %}
+<p class="text-end m-3">You are not logged in</p>
+{% endif %}
+
+
 {% endblock %}
+
+
