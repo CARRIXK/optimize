@@ -14,20 +14,23 @@
  <h1>Add excersises to {{workout_title}}</h1>
  <div class="container-fluid">
       <!-- Search bar -->
-      <form method="GET" action="{% url 'add_exercises' %}" class="mb-4">
-        <div class="input-group">
-            <input type="text" name="q" class="form-control" placeholder="Search exercises..." value="{{ request.GET.q }}">
-            <button class="btn btn-primary" type="submit">Search</button>
-        </div>
-    </form>
+      <div class="sticky-search-bar">
+        <form method="GET" action="{% url 'add_exercises' %}" class="mb-4">
+            <div class="input-group">
+                <input type="text" name="q" class="form-control" placeholder="Search exercises..." value="{{ request.GET.q }}">
+                <button class="btn btn-primary" type="submit">Search</button>
+            </div>
+        </form>
+    </div>
      <div class="row">
          <!-- Blog Entries Column -->
          <div class="col-12 mt-3 left">
              <div class="row">
                  {% for exercise in exercises %}
-                 <div class="col-md-4">
+                 {% if exercise.exercise_image %}
+                 <div class="col-md-4"></div>
                      <div class="card mb-4">
-                         <div class="card-body">
+                         <div class="card-body"></div>
                              <h2 class="title">{{ exercise.exercise_name }}</h2>
                              <h3 class="card-title">{{ exercise.muscle_group }}</h3>
                              <div class="image-container">
@@ -35,7 +38,11 @@
                                     <img src="{{exercise.exercise_image}}" alt="" style="width: 25%; ">
                                  </div>
                              </div>
-                    
+                            <div class="form-check"></div></div>
+                                <input class="form-check-input" type="checkbox" name="selected_exercises" value="{{ exercise.id }}" id="exercise{{ exercise.id }}">
+                                <label class="form-check-label" for="exercise{{ exercise.id }}">
+                                </label>
+                            </div>
  
                              <hr />
                              <p class="card-text text-muted h6">{{ post.created_on}}
@@ -44,6 +51,8 @@
                      </div>
                  </div>
                  {% if forloop.counter|divisibleby:3 %}
+                 {% endif %}
+                
              </div>
              <div class="row">
                  {% endif %}
@@ -63,5 +72,27 @@
      {% endif %}
  </div>
 
+
+     <!-- Sticky Footer -->
+     <div class="sticky-footer">
+        <button id="add-ex-btn" class="btn btn-success">Add Exercises</button>
+    </div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const checkboxes = document.querySelectorAll('.form-check-input');
+            const addExBtn = document.getElementById('add-ex-btn');
+
+            checkboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', updateButtonText);
+            });
+
+            function updateButtonText() {
+                const selectedCount = document.querySelectorAll('.form-check-input:checked').length;
+                addExBtn.textContent = `Add Exercises (${selectedCount})`;
+            }
+        });
+    </script>
 </body>
 </html>
