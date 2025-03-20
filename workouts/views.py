@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views import generic
-from .models import Exercise
+from .models import Exercise, Workout
 
 # Create your views here.
 class ExerciseList(generic.ListView):
@@ -8,11 +8,9 @@ class ExerciseList(generic.ListView):
     template_name = "excersise_list.html"
     paginate_by = 2
 
-# Create your views here.
-class WorkoutsList(generic.ListView):
-    queryset = Exercise.objects.all()
-    template_name = "workouts/workouts_list.html"
-    paginate_by = 6
+def workout_list(request):
+    workouts = Workout.objects.all()
+    return render(request, 'workouts/workout_list.html', {'workouts': workouts})
 
 
 import openpyxl

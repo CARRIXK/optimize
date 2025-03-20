@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<!-- index.html content starts here -->
+<h1>My Workouts</h1>
+<a href="#" class="btn btn-primary" style="float: right;">+ New Workout</a>
+
+<ul>
+    {% for workout in workouts %}
+        <li>
+            <h2>{{ workout.title }}</h2>
+            <p>Created on: {{ workout.date_created|date:"d M Y" }}</p>
+            <a href="#">View Details</a>
+        </li>
+    {% empty %}
+        <p>No workouts found. Click the + button to create one!</p>
+    {% endfor %}
+</ul>
+
+<!-- index.html content ends here -->
+{% endblock %}
