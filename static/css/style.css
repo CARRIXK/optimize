@@ -205,6 +205,8 @@ body {
     padding: 10px;
     border: 1px solid #ddd;
     text-align: center;
+    align-items: center;
+    width: 100%;
 }
 .custom-table th {
     background-color: #f2f2f2;
@@ -220,4 +222,8 @@ body {
     top: 10%;
     bottom: 10%;
     overflow-y: scroll;
+}
+
+.exercise {
+    margin: 5%;
 }
