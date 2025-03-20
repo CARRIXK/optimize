@@ -1,7 +1,13 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Welcome back, (Dummy name)!</h1>
+
+{% if user.is_authenticated %}
+<h1>Welcome back {{ user }}!</h1>
+{% else %}
+<p class="text-end m-3">You are not logged in</p>
+{% endif %}
+
 
 <h2>Recent Workouts</h2>
 <ul>
