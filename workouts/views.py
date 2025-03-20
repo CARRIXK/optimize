@@ -1,11 +1,11 @@
 from django.shortcuts import render, redirect
 from django.views import generic
-from .models import Exercise, Workout
+from .models import Exercise, Workout, ExerciseType
 from .forms import WorkoutForm, ExerciseForm, ExerciseSetForm
 
 # Create your views here.
 class ExerciseList(generic.ListView):
-    queryset = Exercise.objects.all()
+    queryset = ExerciseType.objects.all()
     template_name = "excersise_list.html"
     paginate_by = 2
 
@@ -22,10 +22,16 @@ def create_workout(request):
 # Add exercises to a workout
 def add_exercises(request):
     workout_title = None
+    exercises = ExerciseType.objects.all()  # Retrieves all exercise types
+
     if request.method == 'POST':
         workout_title = request.POST.get('workout_title')  # Get workout title from the form data
     
-    return render(request, 'workouts/add_exercises.html', {'workout_title': workout_title})
+    return render(request, 'workouts/add_exercises.html', {
+        'workout_title': workout_title,
+        'exercises': exercises
+    })
+
 
 # Add sets to an exercise
 def add_exercise_sets(request, exercise_id):

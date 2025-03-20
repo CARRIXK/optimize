@@ -20,57 +20,27 @@ class ExerciseType(models.Model):
     
 
 class Workout(models.Model):
-    id = models.AutoField(primary_key=True)  # Explicitly defining the primary key as `id`
     title = models.CharField(max_length=100)
-    date_created = models.DateTimeField(auto_now_add=True)  # Automatically set to the current date and time when a workout is created
+    date_created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.title
 
 
 class Exercise(models.Model):
-    id = models.AutoField(primary_key=True)  # Primary key for Exercise model
-    workout = models.ForeignKey(Workout, related_name='exercises', on_delete=models.CASCADE, default=1)
-    exercise_type = models.ForeignKey(ExerciseType, related_name='exercises', on_delete=models.CASCADE)
+    workout = models.ForeignKey(Workout, related_name='exercises', on_delete=models.CASCADE, null=True, blank=True) 
+    exercise_type = models.ForeignKey('ExerciseType', related_name='exercises', on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
-        return f"Exercise {self.id}"
-
-
-class ExerciseSet(models.Model):
-    exercise = models.ForeignKey(Exercise, related_name='sets', on_delete=models.CASCADE)
-    set_number = models.IntegerField()  # Set number (e.g., 1, 2, 3, ...)
-    reps = models.IntegerField()  # Number of reps for this set
-    weight = models.FloatField()  # Optional: Weight used for this set
-
-    def __str__(self):
-        return f"Set {self.set_number} - {self.reps} reps"
-    
-
-
-
-class WorkoutSession(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)  # Link workout to a specific user
-    title = models.CharField(max_length=200)  # Title for the workout session
-    date = models.DateField(auto_now_add=True)  # Automatically set to current date
-    exercises = models.ManyToManyField(Exercise, through='ExerciseLog')  # Many to Many with Exercise, through a join model
-    total_duration = models.IntegerField()  # Duration of the workout in minutes
-    date_completed = models.DateTimeField(auto_now_add=True)
-    
-    class Meta:
-        ordering = ["-date_completed"]
-    
-    def __str__(self):
-        return f"Workout: {self.title} completed by {self.user}"
-    
+        return f"Exercise {self.exercise_type.name if self.exercise_type else 'Unnamed'}"
 
 
 class ExerciseLog(models.Model):
-    workout_session = models.ForeignKey(WorkoutSession, on_delete=models.CASCADE)
-    exercise = models.ForeignKey(Exercise, on_delete=models.CASCADE)
+    workout_session = models.ForeignKey('WorkoutSession', on_delete=models.CASCADE)
+    exercise = models.ForeignKey(Exercise, on_delete=models.CASCADE, null=True, blank=True)
     sets = models.IntegerField()
     reps = models.IntegerField()
-    weight = models.DecimalField(max_digits=5, decimal_places=2)  # Weight lifted (kg or lbs)
-    
+    weight = models.DecimalField(max_digits=5, decimal_places=2)
+
     def __str__(self):
-        return f"{self.exercise.name} - {self.sets} sets of {self.reps} reps"
+        return f"{self.exercise.exercise_type.name if self.exercise and self.exercise.exercise_type else 'Unnamed'} - {self.sets} sets of {self.reps} reps"
