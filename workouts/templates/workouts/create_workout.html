@@ -1,7 +1,9 @@
 <!-- workouts/templates/workouts/create_workout.html -->
 {% load static %}
 
-<!-- create_workout.html -->
+<!-- workouts/templates/workouts/create_workout.html -->
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,10 +14,11 @@
 <body>
     <h1>Create a New Workout</h1>
 
-    <form method="post">
-        {% csrf_token %}
-        {{ workout_form.as_p }}
-        <button type="submit" name="create_workout">Create Workout</button>
-    </form>
+    <input type="text" placeholder="Workout Title"><br>
+    <!-- Button to go to the add exercises page -->
+    <a href="{% url 'add_exercises' %}">
+        <button type="button">Add Exercises to Workout</button>
+    </a>
+
 </body>
 </html>

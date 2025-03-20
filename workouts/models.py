@@ -20,18 +20,21 @@ class ExerciseType(models.Model):
     
 
 class Workout(models.Model):
+    id = models.AutoField(primary_key=True)  # Explicitly defining the primary key as `id`
     title = models.CharField(max_length=100)
-
-def __str__(self):
-    return self.title
-
-class Exercise(models.Model):
-    workout = models.ForeignKey(Workout, related_name='exercises', on_delete=models.CASCADE)
-    name = models.CharField(max_length=255)
-    description = models.TextField()
+    date_created = models.DateTimeField(auto_now_add=True)  # Automatically set to the current date and time when a workout is created
 
     def __str__(self):
-        return self.name
+        return self.title
+
+
+class Exercise(models.Model):
+    id = models.AutoField(primary_key=True)  # Primary key for Exercise model
+    workout = models.ForeignKey(Workout, related_name='exercises', on_delete=models.CASCADE, default=1)
+    exercise_type = models.ForeignKey(ExerciseType, related_name='exercises', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"Exercise {self.id}"
 
 
 class ExerciseSet(models.Model):
