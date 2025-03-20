@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 
 
 
-class Exercise(models.Model):
+class ExerciseType(models.Model):
     exercise_name = models.CharField(max_length=200, unique=True, default="Default Exercise Name")
     description_url = models.URLField(blank=True, null=True, default="https://example.com")
     exercise_image = models.URLField(blank=True, null=True, default="https://example.com/image.jpg")
@@ -21,13 +21,31 @@ class Exercise(models.Model):
 
 class Workout(models.Model):
     title = models.CharField(max_length=100)
-    exercises = models.ManyToManyField('Exercise')
-    date_created = models.DateTimeField(auto_now_add=True)
 
 def __str__(self):
     return self.title
+
+class Exercise(models.Model):
+    workout = models.ForeignKey(Workout, related_name='exercises', on_delete=models.CASCADE)
+    name = models.CharField(max_length=255)
+    description = models.TextField()
+
+    def __str__(self):
+        return self.name
+
+
+class ExerciseSet(models.Model):
+    exercise = models.ForeignKey(Exercise, related_name='sets', on_delete=models.CASCADE)
+    set_number = models.IntegerField()  # Set number (e.g., 1, 2, 3, ...)
+    reps = models.IntegerField()  # Number of reps for this set
+    weight = models.FloatField()  # Optional: Weight used for this set
+
+    def __str__(self):
+        return f"Set {self.set_number} - {self.reps} reps"
     
-    
+
+
+
 class WorkoutSession(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)  # Link workout to a specific user
     title = models.CharField(max_length=200)  # Title for the workout session

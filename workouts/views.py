@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views import generic
 from .models import Exercise, Workout
+from .forms import WorkoutForm, ExerciseForm
 
 # Create your views here.
 class ExerciseList(generic.ListView):
@@ -11,6 +12,40 @@ class ExerciseList(generic.ListView):
 def workout_list(request):
     workouts = Workout.objects.all()
     return render(request, 'workouts/workout_list.html', {'workouts': workouts})
+
+
+# View to create the workout title
+def create_workout(request):
+    if request.method == 'POST' and 'create_workout' in request.POST:
+        workout_form = WorkoutForm(request.POST)
+        if workout_form.is_valid():
+            workout = workout_form.save()
+            return redirect('add_exercises', workout_id=workout.id)
+    else:
+        workout_form = WorkoutForm()
+
+    return render(request, 'workouts/create_workout.html', {'workout_form': workout_form})
+
+
+# View to add exercises to a created workout
+def add_exercises(request, workout_id):
+    workout = Workout.objects.get(id=workout_id)
+    if request.method == 'POST' and 'add_exercise' in request.POST:
+        exercise_form = ExerciseForm(request.POST)
+        if exercise_form.is_valid():
+            exercise = exercise_form.save(commit=False)
+            exercise.workout = workout
+            exercise.save()
+            return redirect('add_exercises', workout_id=workout.id)
+    else:
+        exercise_form = ExerciseForm()
+
+    return render(request, 'workouts/add_exercises.html', {
+        'exercise_form': exercise_form,
+        'workout': workout
+    })
+
+
 
 
 import openpyxl

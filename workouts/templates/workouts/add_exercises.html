@@ -1,0 +1,26 @@
+<!-- add_exercises.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Exercises to {{ workout.title }}</title>
+</head>
+<body>
+    <h1>Add Exercises to {{ workout.title }}</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ exercise_form.as_p }}
+        <button type="submit" name="add_exercise">Add Exercise</button>
+    </form>
+
+    <hr>
+    <h3>Exercises in this Workout:</h3>
+    <ul>
+        {% for exercise in workout.exercises.all %}
+            <li>{{ exercise.name }} - {{ exercise.sets }} sets of {{ exercise.reps }} reps</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
