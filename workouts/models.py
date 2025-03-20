@@ -21,7 +21,7 @@ class ExerciseType(models.Model):
 
 class Workout(models.Model):
     title = models.CharField(max_length=100)
-    date_created = models.DateTimeField(auto_now_add=True)
+    date_created = models.DateTimeField(auto_now_add=True)  # Automatically set when created
 
     def __str__(self):
         return self.title
@@ -35,8 +35,33 @@ class Exercise(models.Model):
         return f"Exercise {self.exercise_type.name if self.exercise_type else 'Unnamed'}"
 
 
+class ExerciseSet(models.Model):
+    exercise = models.ForeignKey(Exercise, related_name='sets', on_delete=models.CASCADE, null=True, blank=True)
+    set_number = models.IntegerField()
+    reps = models.IntegerField()
+    weight = models.FloatField()
+
+    def __str__(self):
+        return f"Set {self.set_number} - {self.reps} reps"
+
+
+class WorkoutSession(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+    title = models.CharField(max_length=200)
+    date = models.DateField(auto_now_add=True)
+    exercises = models.ManyToManyField(Exercise, through='ExerciseLog')
+    total_duration = models.IntegerField()
+    date_completed = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ["-date_completed"]
+
+    def __str__(self):
+        return f"Workout: {self.title} completed by {self.user}"
+
+
 class ExerciseLog(models.Model):
-    workout_session = models.ForeignKey('WorkoutSession', on_delete=models.CASCADE)
+    workout_session = models.ForeignKey(WorkoutSession, on_delete=models.CASCADE)
     exercise = models.ForeignKey(Exercise, on_delete=models.CASCADE, null=True, blank=True)
     sets = models.IntegerField()
     reps = models.IntegerField()
