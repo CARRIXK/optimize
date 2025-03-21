@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils.timezone import now
+from django.contrib.postgres.fields import ArrayField
 
 
 
@@ -31,6 +32,8 @@ class Workout(models.Model):
 class Exercise(models.Model):
     workout = models.ForeignKey(Workout, on_delete=models.CASCADE, related_name="exercises", null=True)
     exercise_type = models.ForeignKey(ExerciseType, on_delete=models.CASCADE, related_name="exercises", null=True)
+    sets_reps = ArrayField(models.JSONField(), default=list)  # Stores a list of sets with reps
+
     
 
 class Set(models.Model):

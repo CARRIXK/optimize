@@ -133,28 +133,33 @@
                 const exercises = [];
                 const reps = {};
 
+                console.clear();
+
                 // Collect exercise IDs and reps for each exercise
                 document.querySelectorAll('.exercise').forEach(function (exerciseDiv) {
                     const exercise_name = exerciseDiv.getAttribute('data-id');
+                    const exerciseReps = [];
 
                     // Collect the data for the workout and exercise_type (exercise name in this case)
-                    exercises.push({
-                        workout: workoutTitle,  // Assuming workoutTitle is the title you're passing (you can update this if necessary)
-                        exercise_type: exercise_name  // exercise_name (from the data-id) should be the exercise type ID here
+                    // Collect reps for each set
+                    exerciseDiv.querySelectorAll('input[type="number"]').forEach(function (input, index) {
+                        const setNumber = index + 1;  // Set number starts from 1
+                        const reps = input.value;  // Get the number of reps
+                        exerciseReps.push({ set: setNumber, reps: reps });  // Add set and reps to the array
                     });
 
-                    const exerciseReps = [];
-                    exerciseDiv.querySelectorAll('input[type="number"]').forEach(function (input) {
-                        exerciseReps.push(input.value);
+                    // Add the exercise data to the exercises array
+                    exercises.push({
+                        workout: workoutTitle,  // Assuming workoutTitle is the title you're passing
+                        exercise_type: exercise_name,  // exercise_name should be the exercise type ID here
+                        set_reps: exerciseReps  // This should be the array of sets and reps for each exercise
                     });
-                    reps[exercise_name] = exerciseReps;
                 });
 
 
                 // Output the data to the console
                 console.log('Workout Title:', workoutTitle);
                 console.log('Exercises data:', exercises);
-                console.log('Reps:', reps);
 
                 // Send AJAX request to save the workout
                 // $.ajax({
