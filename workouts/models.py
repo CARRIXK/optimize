@@ -41,6 +41,10 @@ class Set(models.Model):
         return f"{self.exercise.exercise_type.exercise_name} - {self.reps} reps"
 
 
+
+
+
+
 class ExerciseSet(models.Model):
     exercise = models.ForeignKey(Exercise, related_name='excercise_sets', on_delete=models.CASCADE, null=True, blank=True)
     set_number = models.IntegerField()
