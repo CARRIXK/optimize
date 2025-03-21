@@ -7,6 +7,11 @@ class WorkoutForm(forms.ModelForm):
         model = Workout
         fields = ['title']
 
+class ExerciseForm(forms.ModelForm):
+    class Meta:
+        model = Exercise
+        fields = ['name']
+
 # Form for creating and updating exercises
 class ExerciseForm(forms.ModelForm):
     workout = forms.ModelChoiceField(queryset=Workout.objects.all(), empty_label="Select a Workout")

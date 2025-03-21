@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils.timezone import now
 
 
 
@@ -21,18 +22,18 @@ class ExerciseType(models.Model):
 
 class Workout(models.Model):
     title = models.CharField(max_length=100)
-    date_created = models.DateTimeField(auto_now_add=True)  # Automatically set when created
+    date_created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.title
 
 
 class Exercise(models.Model):
-    workout = models.ForeignKey(Workout, related_name='exercises', on_delete=models.CASCADE, null=True, blank=True) 
-    exercise_type = models.ForeignKey('ExerciseType', related_name='exercises', on_delete=models.CASCADE, null=True, blank=True)
+    workout = models.ForeignKey(Workout, on_delete=models.CASCADE, related_name="exercises", null=True)
+    exercise_type = models.ForeignKey(ExerciseType, on_delete=models.CASCADE, related_name="exercises", null=True)
 
     def __str__(self):
-        return f"Exercise {self.exercise_type.name if self.exercise_type else 'Unnamed'}"
+        return f"{self.exercise_type.exercise_name} - {self.workout.title}"
 
 
 class ExerciseSet(models.Model):
