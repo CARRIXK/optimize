@@ -72,46 +72,43 @@ def add_exercise_sets(request):
     
 
     
-
 def save_workout(request):
-    if request.method == 'POST':
-        # Initialize forms
+    if request.method == "POST":
+        workout_title = request.POST.get('workout_title')
+        
+        # Create and validate WorkoutForm
         workout_form = WorkoutForm(request.POST)
-        exercise_form = ExerciseForm(request.POST)
-        set_form = SetForm(request.POST)
+        if workout_form.is_valid():
+            # Save the workout
+            workout = workout_form.save(commit=False)
+            workout.title = workout_title  # Title from front-end (could also be from form data)
+            workout.save()
 
-        # If all forms are valid
-        if workout_form.is_valid() and exercise_form.is_valid() and set_form.is_valid():
-            # Save the workout (create a new Workout instance)
-            workout = workout_form.save()
+            # Handle exercises and sets
+            exercise_ids = request.POST.getlist('exercise_ids[]')  # List of exercise ids
+            for exercise_id in exercise_ids:
+                # Create and validate ExerciseForm
+                exercise_form = ExerciseForm({
+                    'workout': workout.id,
+                    'exercise_type': exercise_id
+                })
+                if exercise_form.is_valid():
+                    exercise = exercise_form.save()
 
-            # Save the exercise (associate with the workout)
-            exercise = exercise_form.save(commit=False)
-            exercise.workout = workout
-            exercise.save()
+                    # Now handle the sets for each exercise
+                    set_reps = request.POST.getlist(f'reps_{exercise_id}[]')  # Collect reps for each exercise
+                    for rep in set_reps:
+                        set_form = SetForm({
+                            'exercise': exercise.id,
+                            'reps': rep
+                        })
+                        if set_form.is_valid():
+                            set_form.save()
 
-            # Save the set (associate with the exercise)
-            set = set_form.save(commit=False)
-            set.exercise = exercise
-            set.save()
+            return JsonResponse({'status': 'success', 'message': 'Workout saved successfully'})
 
-            return JsonResponse({'success': True, 'message': 'Workout saved successfully!'})
+    return JsonResponse({'status': 'error', 'message': 'Invalid request method'})
 
-        else:
-            # If any form is invalid, return errors
-            return JsonResponse({'success': False, 'message': 'Form submission failed. Please check your data.'})
-
-    else:
-        # If GET request, display empty forms
-        workout_form = WorkoutForm()
-        exercise_form = ExerciseForm()
-        set_form = SetForm()
-
-    return render(request, 'save_workout.html', {
-        'workout_form': workout_form,
-        'exercise_form': exercise_form,
-        'set_form': set_form
-    })
 
 
 import openpyxl

@@ -2,6 +2,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,31 +12,33 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
+
 <body>
     <header class="sticky-header">
-        <h1>Workout Plan for: {{ workout_title }}</h1>
+        <h1>Workout Plan for: <span id="workout-title">{{ workout_title }}<span></h1>
     </header>
 
     <div class="workout-exercises">
         {% for exercise in selected_excersises %}
         <div class="exercise" data-id="{{ exercise.id }}">
             <h2>{{ exercise.exercise_name }}</h2>
-            <img src="{{ exercise.exercise_image }}" alt="{{ exercise.exercise_name }}" class="exercise-image" height="50px">
+            <img src="{{ exercise.exercise_image }}" alt="{{ exercise.exercise_name }}" class="exercise-image"
+                height="50px">
             <button type="button" class="delete-exercise-button btn btn-danger">Delete Exercise</button>
             <table class=".custom-table">
                 <thead>
-                <tr>
-                    <th>Set Number</th>
-                    <th>Reps</th>
-                    <th></th>
-                </tr>
+                    <tr>
+                        <th>Set Number</th>
+                        <th>Reps</th>
+                        <th></th>
+                    </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td>1</td>
-                    <td><input type="number" name="reps_{{ exercise.id }}_1" value="10" /></td>
-                    <td></td>
-                </tr>
+                    <tr>
+                        <td>1</td>
+                        <td><input type="number" name="reps_{{ exercise.id }}_1" value="10" /></td>
+                        <td></td>
+                    </tr>
                 </tbody>
             </table>
             <button type="button" class="add-set-button btn btn-primary">Add Set</button>
@@ -43,8 +46,9 @@
         {% endfor %}
     </div>
 
-      <!-- Delete Confirmation Modal -->
-      <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <!-- Delete Confirmation Modal -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -75,6 +79,8 @@
             const addSetButtons = document.querySelectorAll('.add-set-button');
             const deleteExerciseButtons = document.querySelectorAll('.delete-exercise-button');
             let exerciseToDelete = null;
+            const saveWorkoutButton = document.getElementById('save-workout-btn');
+
 
             addSetButtons.forEach(button => {
                 button.addEventListener('click', function () {
@@ -119,8 +125,58 @@
                     window.location.href = `{% url 'create_workout' %}?workout_title=${encodeURIComponent(workoutTitle)}`;
                 }
             }
+
+
+            // Save workout button click handler
+            saveWorkoutButton.addEventListener('click', function () {
+                const workoutTitle = document.getElementById('workout-title').innerText;  // Assuming you have the title in the <h1> tag
+                const exercises = [];
+                const reps = {};
+
+                // Collect exercise IDs and reps for each exercise
+                document.querySelectorAll('.exercise').forEach(function (exerciseDiv) {
+                    const exerciseId = exerciseDiv.getAttribute('data-id');
+                    exercises.push(exerciseId);
+
+                    const exerciseReps = [];
+                    exerciseDiv.querySelectorAll('input[type="number"]').forEach(function (input) {
+                        exerciseReps.push(input.value);
+                    });
+                    reps[exerciseId] = exerciseReps;
+                });
+
+                // Output the data to the console
+                console.log('Workout Title:', workoutTitle);
+                console.log('Exercise IDs:', exercises);
+                console.log('Reps:', reps);
+
+                // Send AJAX request to save the workout
+                // $.ajax({
+                //     type: 'POST',
+                //     url: '', // give it the save wokout view URL here
+                //     data: {
+                //         'workout_title': workoutTitle,
+                //         'exercise_ids[]': exercises,
+                //         'reps': reps,
+                //         'csrfmiddlewaretoken': '{{ csrf_token }}'
+                //     },
+                //     success: function (response) {
+                //         if (response.status === 'success') {
+                //             alert(response.message);
+                //         } else {
+                //             alert('Failed to save workout.');
+                //         }
+                //     },
+                //     error: function () {
+                //         alert('An error occurred.');
+                //     }
+                // });
+            });
+
+
         });
     </script>
 
 </body>
+
 </html>
