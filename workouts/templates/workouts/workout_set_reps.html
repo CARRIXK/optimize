@@ -159,16 +159,11 @@
 
                     // Add the exercise data to the exercises array
                     exercises.push({
-                        workout: workoutTitle,  // Assuming workoutTitle is the title you're passing
                         exercise_type: exercise_name,  // exercise_name should be the exercise type ID here
                         set_reps: exerciseReps  // This should be the array of sets and reps for each exercise
                     });
                 });
 
-
-                // Output the data to the console
-                console.log('Workout Title:', workoutTitle);
-                console.log('Exercises data:', exercises);
 
 
                 // Prepare data to send to the backend
@@ -181,15 +176,17 @@
                     formData.append(`exercise_${index}_sets_reps`, JSON.stringify(exercise.set_reps));  // Ensure sets_reps is sent as JSON
                 });
 
+                // Output the data to the console
+                console.log('Workout Title:', workoutTitle);
+                console.log('Exercises data:', exercises);
 
             
-
                 $.ajax({
                     type: 'POST',
                     url: "{% url 'save_workout' %}",  // Adjust this URL based on your Django URL patterns
                     data: {
                         'title': workoutTitle,
-                        // 'exercise_type': exerciseType,
+                        'exercise_type': JSON.stringify(exercises),
                         // 'set_reps': JSON.stringify(setRepsData),  // Sending the reps data as JSON
                         'csrfmiddlewaretoken': '{{ csrf_token }}'
                     },
