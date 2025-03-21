@@ -20,7 +20,7 @@
 
     <div class="workout-exercises">
         {% for exercise in selected_excersises %}
-        <div class="exercise" data-id="{{ exercise.id }}">
+        <div class="exercise" data-id="{{ exercise.exercise_name }}">
             <h2>{{ exercise.exercise_name }}</h2>
             <img src="{{ exercise.exercise_image }}" alt="{{ exercise.exercise_name }}" class="exercise-image"
                 height="50px">
@@ -135,19 +135,25 @@
 
                 // Collect exercise IDs and reps for each exercise
                 document.querySelectorAll('.exercise').forEach(function (exerciseDiv) {
-                    const exerciseId = exerciseDiv.getAttribute('data-id');
-                    exercises.push(exerciseId);
+                    const exercise_name = exerciseDiv.getAttribute('data-id');
+
+                    // Collect the data for the workout and exercise_type (exercise name in this case)
+                    exercises.push({
+                        workout: workoutTitle,  // Assuming workoutTitle is the title you're passing (you can update this if necessary)
+                        exercise_type: exercise_name  // exercise_name (from the data-id) should be the exercise type ID here
+                    });
 
                     const exerciseReps = [];
                     exerciseDiv.querySelectorAll('input[type="number"]').forEach(function (input) {
                         exerciseReps.push(input.value);
                     });
-                    reps[exerciseId] = exerciseReps;
+                    reps[exercise_name] = exerciseReps;
                 });
+
 
                 // Output the data to the console
                 console.log('Workout Title:', workoutTitle);
-                console.log('Exercise IDs:', exercises);
+                console.log('Exercises data:', exercises);
                 console.log('Reps:', reps);
 
                 // Send AJAX request to save the workout
