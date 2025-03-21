@@ -10,7 +10,7 @@ class WorkoutForm(forms.ModelForm):
 class ExerciseForm(forms.ModelForm):
     class Meta:
         model = Exercise
-        fields = ['name']
+        fields = ['workout', 'exercise_type']
 
 # Form for creating and updating exercises
 class ExerciseForm(forms.ModelForm):

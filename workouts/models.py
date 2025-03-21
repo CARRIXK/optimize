@@ -31,13 +31,18 @@ class Workout(models.Model):
 class Exercise(models.Model):
     workout = models.ForeignKey(Workout, on_delete=models.CASCADE, related_name="exercises", null=True)
     exercise_type = models.ForeignKey(ExerciseType, on_delete=models.CASCADE, related_name="exercises", null=True)
+    
+
+class Set(models.Model):
+    exercise = models.ForeignKey(Exercise, on_delete=models.CASCADE, related_name="sets", null=True)
+    reps = models.PositiveIntegerField()
 
     def __str__(self):
-        return f"{self.exercise_type.exercise_name} - {self.workout.title}"
+        return f"{self.exercise.exercise_type.exercise_name} - {self.reps} reps"
 
 
 class ExerciseSet(models.Model):
-    exercise = models.ForeignKey(Exercise, related_name='sets', on_delete=models.CASCADE, null=True, blank=True)
+    exercise = models.ForeignKey(Exercise, related_name='excercise_sets', on_delete=models.CASCADE, null=True, blank=True)
     set_number = models.IntegerField()
     reps = models.IntegerField()
     weight = models.FloatField()
