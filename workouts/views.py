@@ -74,39 +74,34 @@ def add_exercise_sets(request):
     
 def save_workout(request):
     if request.method == "POST":
-        workout_title = request.POST.get('workout_title')
+        print("Request POST: ", request.POST)
+        workout_title = request.POST.get('title')
+        
+        # Check if a workout with the same title already exists
+        if Workout.objects.filter(title=workout_title).exists():
+            return JsonResponse({'status': 'error', 'message': 'Workout with this title already exists.'})
         
         # Create and validate WorkoutForm
         workout_form = WorkoutForm(request.POST)
+
         if workout_form.is_valid():
-            # Save the workout
+            # Save the workout form data to the database
             workout = workout_form.save(commit=False)
-            workout.title = workout_title  # Title from front-end (could also be from form data)
-            workout.save()
 
-            # Handle exercises and sets
-            exercise_ids = request.POST.getlist('exercise_ids[]')  # List of exercise ids
-            for exercise_id in exercise_ids:
-                # Create and validate ExerciseForm
-                exercise_form = ExerciseForm({
-                    'workout': workout.id,
-                    'exercise_type': exercise_id
-                })
-                if exercise_form.is_valid():
-                    exercise = exercise_form.save()
+            # You can do additional operations here if needed, such as adding related data
+            # Example: workout.user = request.user  (if you have user-based data)
 
-                    # Now handle the sets for each exercise
-                    set_reps = request.POST.getlist(f'reps_{exercise_id}[]')  # Collect reps for each exercise
-                    for rep in set_reps:
-                        set_form = SetForm({
-                            'exercise': exercise.id,
-                            'reps': rep
-                        })
-                        if set_form.is_valid():
-                            set_form.save()
+            workout.save()  # Save the workout to the database
 
-            return JsonResponse({'status': 'success', 'message': 'Workout saved successfully'})
-
+            # Print a success message
+            print('Workout saved successfully!')
+            print('Workout ID:', workout.id)  # Optionally print the workout ID or other relevant info
+            return JsonResponse({'status': 'success', 'message': 'Workout saved successfully!'})
+        else:
+            # Print an error if the form is not valid
+            print('Invalid form data. Please check your inputs.')
+            return JsonResponse({'status': 'error', 'message': 'Invalid form data. Please check your inputs.'})
+    
     return JsonResponse({'status': 'error', 'message': 'Invalid request method'})
 
 

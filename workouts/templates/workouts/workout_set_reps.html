@@ -43,6 +43,14 @@
             </table>
             <button type="button" class="add-set-button btn btn-primary">Add Set</button>
         </div>
+
+        <form id="save_data_form" method="POST" action="{% url 'save_workout' %}">
+            {% csrf_token %}
+    
+            <input type="text" name="title" id="workout_title" placeholder="Workout Title" value="{{ workout_title|default:'' }}" required><br>
+            <!-- Button to submit the form -->
+            
+        </form>
         {% endfor %}
     </div>
 
@@ -161,27 +169,20 @@
                 console.log('Workout Title:', workoutTitle);
                 console.log('Exercises data:', exercises);
 
-                // Send AJAX request to save the workout
-                // $.ajax({
-                //     type: 'POST',
-                //     url: '', // give it the save wokout view URL here
-                //     data: {
-                //         'workout_title': workoutTitle,
-                //         'exercise_ids[]': exercises,
-                //         'reps': reps,
-                //         'csrfmiddlewaretoken': '{{ csrf_token }}'
-                //     },
-                //     success: function (response) {
-                //         if (response.status === 'success') {
-                //             alert(response.message);
-                //         } else {
-                //             alert('Failed to save workout.');
-                //         }
-                //     },
-                //     error: function () {
-                //         alert('An error occurred.');
-                //     }
-                // });
+
+                // Prepare data to send to the backend
+                const formData = new FormData();
+                formData.append('workout_title', workoutTitle);
+
+                // Append each exercise to the FormData object
+                exercises.forEach((exercise, index) => {
+                    formData.append(`exercise_${index}_exercise_type`, exercise.exercise_type);
+                    formData.append(`exercise_${index}_sets_reps`, JSON.stringify(exercise.set_reps));  // Ensure sets_reps is sent as JSON
+                });
+
+                //submit the save data form
+                document.getElementById('save_data_form').submit();
+            
             });
 
 
