@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
 from django.views import generic
 from .models import Exercise, Workout, ExerciseType
-from .forms import WorkoutForm, ExerciseForm, ExerciseSetForm
+from .forms import WorkoutForm, ExerciseForm, SetForm, ExerciseSetForm
 import ast
+from django.http import JsonResponse
 
 # Create your views here.
 class ExerciseList(generic.ListView):
@@ -68,8 +69,49 @@ def add_exercise_sets(request):
             'workout_title': workout_title,
         }
         return render(request, 'workouts/workout_set_reps.html', context)
+    
 
+    
 
+def save_workout(request):
+    if request.method == 'POST':
+        # Initialize forms
+        workout_form = WorkoutForm(request.POST)
+        exercise_form = ExerciseForm(request.POST)
+        set_form = SetForm(request.POST)
+
+        # If all forms are valid
+        if workout_form.is_valid() and exercise_form.is_valid() and set_form.is_valid():
+            # Save the workout (create a new Workout instance)
+            workout = workout_form.save()
+
+            # Save the exercise (associate with the workout)
+            exercise = exercise_form.save(commit=False)
+            exercise.workout = workout
+            exercise.save()
+
+            # Save the set (associate with the exercise)
+            set = set_form.save(commit=False)
+            set.exercise = exercise
+            set.save()
+
+            return JsonResponse({'success': True, 'message': 'Workout saved successfully!'})
+
+        else:
+            # If any form is invalid, return errors
+            return JsonResponse({'success': False, 'message': 'Form submission failed. Please check your data.'})
+
+    else:
+        # If GET request, display empty forms
+        workout_form = WorkoutForm()
+        exercise_form = ExerciseForm()
+        set_form = SetForm()
+
+    return render(request, 'save_workout.html', {
+        'workout_form': workout_form,
+        'exercise_form': exercise_form,
+        'set_form': set_form
+    })
 
 
 import openpyxl
