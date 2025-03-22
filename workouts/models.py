@@ -37,8 +37,10 @@ class Exercise(models.Model):
     
 
 class Set(models.Model):
-    exercise = models.ForeignKey(Exercise, on_delete=models.CASCADE, related_name="sets", null=True)
-    sets = models.PositiveIntegerField()
+    exercise = models.ForeignKey(Exercise, on_delete=models.CASCADE, related_name="sets")
+    set_number = models.PositiveIntegerField(null=True, blank=True)  # Allow nulls for migration ease
+    reps = models.PositiveIntegerField(null=True, blank=True)  # Allow reps to be null
+    weight = models.DecimalField(max_digits=5, decimal_places=2, null=True, blank=True)  # Optional weight
 
     def __str__(self):
         return f"{self.exercise.exercise_type.exercise_name} - {self.reps} reps"
