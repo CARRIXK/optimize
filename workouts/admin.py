@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import ExerciseType, Workout, WorkoutSession, ExerciseLog
+from .models import ExerciseType, Workout, Exercise, Set, WorkoutSession, ExerciseLog
 from django_summernote.admin import SummernoteModelAdmin
 
 
@@ -13,7 +13,13 @@ class ExerciseAdmin(SummernoteModelAdmin):
 class WorkoutAdmin(admin.ModelAdmin):
     list_display = ['title']
 
+admin.site.register(Exercise)
+admin.site.register(Set)
+
+
+
 # Register your models here.
 # admin.site.register(Exercise)
 admin.site.register(WorkoutSession)
 admin.site.register(ExerciseLog)
+
