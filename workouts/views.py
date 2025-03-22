@@ -86,8 +86,11 @@ def save_workout(request):
                 if not workout_form.is_valid():
                     return JsonResponse({'status': 'error', 'message': 'Invalid workout data', 'errors': workout_form.errors})
                 
-                # Save the workout
-                workout = workout_form.save()
+                
+                # Associate the workout with the logged-in user
+                workout = workout_form.save(commit=False)
+                workout.user = request.user  # Set the user field to the logged-in user
+                workout.save()
 
                 # Deserialize exercises JSON string into Python list
                 exercises_json = request.POST.get("exercise_type")  # This is a string

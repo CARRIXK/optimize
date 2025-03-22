@@ -23,6 +23,7 @@ class ExerciseType(models.Model):
 
 class Workout(models.Model):
     title = models.CharField(max_length=100)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True) 
     date_created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -32,7 +33,6 @@ class Workout(models.Model):
 class Exercise(models.Model):
     workout = models.ForeignKey(Workout, on_delete=models.CASCADE, related_name="exercises", null=True)
     exercise_type = models.ForeignKey(ExerciseType, on_delete=models.CASCADE, related_name="exercises", null=True)
-    sets_reps = ArrayField(models.JSONField(), default=list)  # Stores a list of sets with reps
 
     
 
