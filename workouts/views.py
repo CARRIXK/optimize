@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views import generic
 from .models import Exercise, Workout, ExerciseType, Set
 from .forms import WorkoutForm, ExerciseForm, SetForm, ExerciseSetForm
@@ -146,6 +146,19 @@ def save_workout(request):
     return JsonResponse({'status': 'error', 'message': 'Invalid request method'})
 
 
+def delete_workout(request, id):
+    # Fetch the workout using the ID, and ensure the user owns the workout
+    workout = get_object_or_404(Workout, id=id, user=request.user)
+
+    if request.method == 'POST':  # Ensure the request method is POST for safety
+        workout.delete()  # Delete the workout
+        print("workout sucessfully deleted")
+        messages.success(request, "Workout deleted successfully.")  # Show success message
+        return redirect('workouts')  # Redirect to the workouts page
+
+    # If it's not a POST request, redirect to the workouts page or display an error
+    messages.error(request, "Invalid request.")
+    return redirect('workouts')
 
 
 import openpyxl
