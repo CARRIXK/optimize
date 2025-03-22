@@ -129,9 +129,7 @@ def save_workout(request):
                         
 
                 # If everything works, return success
-                
-                
-                messages.success(request, 'Workout saved successfully.')
+                return JsonResponse({'status': 'success', 'message': 'Workout saved sucessfully.'})
 
         except ExerciseType.DoesNotExist as e:
             return JsonResponse({'status': 'error', 'message': 'Invalid exercise type.'})
@@ -148,17 +146,18 @@ def save_workout(request):
 
 def delete_workout(request, id):
     # Fetch the workout using the ID, and ensure the user owns the workout
+    print("The view has been triggered")
     workout = get_object_or_404(Workout, id=id, user=request.user)
+    print(f"delete workout view got the id of: {id}")
 
-    if request.method == 'POST':  # Ensure the request method is POST for safety
-        workout.delete()  # Delete the workout
-        print("workout sucessfully deleted")
-        messages.success(request, "Workout deleted successfully.")  # Show success message
-        return redirect('workouts')  # Redirect to the workouts page
+    print("workout to delete", workout)
 
-    # If it's not a POST request, redirect to the workouts page or display an error
-    messages.error(request, "Invalid request.")
-    return redirect('workouts')
+    if workout.user == request.user:
+        workout.delete()
+        print("sucessfully deleted workout")
+        
+    return redirect('workouts')  # Redirect to the workouts page
+    
 
 
 import openpyxl
