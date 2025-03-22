@@ -75,8 +75,7 @@ def add_exercise_sets(request):
     
 def save_workout(request):
     if request.method == "POST":
-        print("Request POST: ", request.POST)
-        workout_title = request.POST.get('title')
+        print("Data sent from front end: ", request.POST)
         
         # # Check if a workout with the same title already exists
         # if Workout.objects.filter(title=workout_title).exists():
@@ -102,42 +101,67 @@ def save_workout(request):
         #     print('Invalid form data. Please check your inputs.')
         #     return JsonResponse({'status': 'error', 'message': 'Invalid form data. Please check your inputs.'})
         
-        exercise_form = ExerciseForm(request.POST)
-          # Parse the exercises JSON data
-        exercises_json = request.POST.get('exercise_type')
-        exercises_data = json.loads(exercises_json)
-        print('Exercises:', exercises_data)
+
+        title = request.POST.get('title')
+        print("title")
+        exercises_json = request.POST.get("exercise_type")  # This is a string
+        print("Excercises Json: ",exercises_json)
+
+        # Deserialize JSON string into Python list
+        exercises = json.loads(exercises_json)  
+
+        # Create Workout object
+        workout = Workout.objects.create(title=title)
+
+        # Process exercises and sets
+        for exercise_data in exercises:
+            #get or create excercise type instance
+            exercise_type = ExerciseType.objects.get(exercise_name=exercise_data["exercise_type"])
+
+            exercise = Exercise.objects.create(
+                workout=workout,
+                exercise_type=exercise_type 
+            )
+            print("This is the created excersise object", exercise.workout, exercise.exercise_type)
+
+            for set_data in exercise_data["set_reps"]:
+                Set.objects.create(
+                    exercise=exercise,
+                    set_number=set_data["set"],
+                    reps=set_data["reps"]
+                )
+
         
-        for exercise_data in exercises_data:
-            exercise_type_name = exercise_data['exercise_type']
-            set_reps = exercise_data['set_reps']
+        # for exercise_data in exercises_data:
+        #     exercise_type_name = exercise_data['exercise_type']
+        #     set_reps = exercise_data['set_reps']
 
-            print("Exercise type name: ", exercise_type_name)
-            print("Sets reps to be inserted", set_reps)
+        #     print("Exercise type name: ", exercise_type_name)
+        #     print("Sets reps to be inserted", set_reps)
 
-            # Create a new ExerciseForm instance with the exercise data
-            exercise_form = ExerciseForm({
-            'workout': workout_title,
-            'exercise_type': exercise_type_name,
-            'set_reps': set_reps,
-            })
+        #     # Create a new ExerciseForm instance with the exercise data
+        #     exercise_form = ExerciseForm({
+        #     'workout': workout_title,
+        #     'exercise_type': exercise_type_name,
+        #     'set_reps': set_reps,
+        #     })
 
-            if exercise_form.is_valid():
-                # Save the exercise form data to the database
-                exercise = exercise_form.save(commit=False)
-                exercise.workout = workout_title  # Associate the exercise with the workout
-                exercise.save()
+        #     if exercise_form.is_valid():
+        #         # Save the exercise form data to the database
+        #         exercise = exercise_form.save(commit=False)
+        #         exercise.workout = workout_title  # Associate the exercise with the workout
+        #         exercise.save()
 
-                # Print a success message
-                print('Exercise saved successfully!')
-                print('Exercise ID:', exercise.id)  # Optionally print the exercise ID or other relevant info
-            else:
-                # Print an error if the form is not valid
-                print('Invalid form data. Please check your inputs.')
-                print('Form errors:', exercise_form.errors)
-                return JsonResponse({'status': 'error', 'message': 'Invalid form data. Please check your inputs.', 'errors': exercise_form.errors})
+        #         # Print a success message
+        #         print('Exercise saved successfully!')
+        #         print('Exercise ID:', exercise.id)  # Optionally print the exercise ID or other relevant info
+        #     else:
+        #         # Print an error if the form is not valid
+        #         print('Invalid form data. Please check your inputs.')
+        #         print('Form errors:', exercise_form.errors)
+        #         return JsonResponse({'status': 'error', 'message': 'Invalid form data. Please check your inputs.', 'errors': exercise_form.errors})
 
-        return JsonResponse({'status': 'success', 'message': 'Workout saved successfully!'})
+        # return JsonResponse({'status': 'success', 'message': 'Workout saved successfully!'})
             
 
         
