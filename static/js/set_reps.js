@@ -128,9 +128,6 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         });
 
-        //submit the save data form
-        // document.getElementById('save_data_form').submit();
-
     });
 
 

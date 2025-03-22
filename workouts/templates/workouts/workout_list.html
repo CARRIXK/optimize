@@ -21,7 +21,7 @@
     <a href="#" class="btn btn-success" title="Start your workout">Start Workout</a>
 
     <!-- Edit Button -->
-    <a href="#" class="btn btn-warning" title="Edit your workout">Edit</a>
+    <a href="{% url 'edit_workout' workout.id %}" class="btn btn-warning" title="Edit your workout">Edit</a>
 
     <!-- Delete Button -->
     <button type="button" class="btn btn-danger delete-workout" workout_id="{{ workout.id }}" workout_title="{{ workout.title}}">Delete</button>

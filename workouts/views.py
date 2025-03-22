@@ -157,8 +157,36 @@ def delete_workout(request, id):
         print("sucessfully deleted workout")
         
     return redirect('workouts')  # Redirect to the workouts page
-    
 
+def edit_workout(request, id):
+    # Fetch the workout using the ID, and ensure the user owns the workout
+    print("edit workout id is:", id)
+    workout = get_object_or_404(Workout, id=id, user=request.user)
+    print("edit workout id is:", workout.title)
+
+    # Get the exercises in the workout
+    exercises = Exercise.objects.filter(workout=workout)
+    exercise_types = ExerciseType.objects.filter(id__in=exercises.values('exercise_type'))
+    # Get the sets associated with each exercise
+    exercises_with_sets = []
+    for exercise in exercises:
+        sets = Set.objects.filter(exercise=exercise)
+
+        exercises_with_sets.append({
+            'exercise_name': exercise.exercise_type.exercise_name,  # Return the name of the exercise
+            'sets': sets
+        })
+
+    return render(request, 'workouts/edit_workout.html', {'workout': workout, 'exercises_with_sets': exercises_with_sets})
+    
+    # print("excersises with sets:", exercises_with_sets)
+    
+    # print("Exercises in edit workout are:", exercises_with_sets)
+
+
+    return render(request, 'workouts/edit_workout.html', {'workout': workout, 'excersises': exercises})
+    
+    
 
 import openpyxl
 from django.shortcuts import render
