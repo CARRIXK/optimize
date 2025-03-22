@@ -8,11 +8,13 @@
 
 <ul>
     {% for workout in workouts %}
-        <li>
-            <h2>{{ workout.title }}</h2>
-            <p>Created on: {{ workout.date_created|date:"d M Y" }}</p>
-            <a href="#">View Details</a>
-        </li>
+        {% if workout.user == request.user %}
+            <li>
+                <h2>{{ workout.title }}</h2>
+                <p>Created on: {{ workout.date_created|date:"d M Y" }}</p>
+                <a href="#">View Details</a>
+            </li>
+        {% endif %}
     {% empty %}
         <p>No workouts found. Click the + button to create one!</p>
     {% endfor %}
