@@ -123,13 +123,15 @@ def save_workout(request):
                 exercise_type=exercise_type 
             )
             print("This is the created excersise object", exercise.workout, exercise.exercise_type)
-
             for set_data in exercise_data["set_reps"]:
-                Set.objects.create(
+                set_obj = Set.objects.create(
                     exercise=exercise,
                     set_number=set_data["set"],
                     reps=set_data["reps"]
                 )
+                print(f"Set created: Exercise - {set_obj.exercise}, Set Number - {set_obj.set_number}, Reps - {set_obj.reps}")
+                
+        
 
         
         # for exercise_data in exercises_data:
