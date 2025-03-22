@@ -6,6 +6,7 @@ import ast
 import json
 from django.http import JsonResponse
 from django.db import IntegrityError, transaction
+from django.contrib import messages
 
 # Create your views here.
 class ExerciseList(generic.ListView):
@@ -125,10 +126,13 @@ def save_workout(request):
                         
                         # Save the set
                         set_form.save()
+                        
 
                 # If everything works, return success
-                return JsonResponse({'status': 'success', 'message': 'Workout saved successfully.'})
-        
+                
+                
+                messages.success(request, 'Workout saved successfully.')
+
         except ExerciseType.DoesNotExist as e:
             return JsonResponse({'status': 'error', 'message': 'Invalid exercise type.'})
 

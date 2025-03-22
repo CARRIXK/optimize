@@ -13,6 +13,18 @@
                 <h2>{{ workout.title }}</h2>
                 <p>Created on: {{ workout.date_created|date:"d M Y" }}</p>
                 <a href="#">View Details</a>
+                
+                <!-- Start Button -->
+                <a href="#" class="btn btn-success">Start Workout</a>
+                
+                <!-- Edit Button -->
+                <a href="#" class="btn btn-warning">Edit</a>
+                
+                <!-- Delete Button -->
+                <form action="#" method="POST" style="display:inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this workout?');">Delete</button>
+                </form>
             </li>
         {% endif %}
     {% empty %}
