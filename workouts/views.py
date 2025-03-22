@@ -5,6 +5,7 @@ from .forms import WorkoutForm, ExerciseForm, SetForm, ExerciseSetForm
 import ast
 import json
 from django.http import JsonResponse
+from django.db import IntegrityError, transaction
 
 # Create your views here.
 class ExerciseList(generic.ListView):
@@ -77,45 +78,64 @@ def save_workout(request):
     if request.method == "POST":
         try:
             print("Data sent from front end: ", request.POST)
-            
 
-            title = request.POST.get('title')
-            print("title")
-            exercises_json = request.POST.get("exercise_type")  # This is a string
-            print("Excercises Json: ",exercises_json)
+            # Start a transaction block
+            with transaction.atomic():
+                # First, validate and create Workout using the form
+                workout_form = WorkoutForm(request.POST)
+                if not workout_form.is_valid():
+                    return JsonResponse({'status': 'error', 'message': 'Invalid workout data', 'errors': workout_form.errors})
+                
+                # Save the workout
+                workout = workout_form.save()
 
-            # Deserialize JSON string into Python list
-            exercises = json.loads(exercises_json)  
+                # Deserialize exercises JSON string into Python list
+                exercises_json = request.POST.get("exercise_type")  # This is a string
+                exercises = json.loads(exercises_json)
 
-            # Create Workout object
-            workout = Workout.objects.create(title=title)
+                # Process exercises and sets
+                for exercise_data in exercises:
+                    # Create Exercise using the form
+                    exercise_form = ExerciseForm({
+                        'workout': workout.id,
+                        'exercise_type': ExerciseType.objects.get(exercise_name=exercise_data["exercise_type"]).id
+                    })
 
-            # Process exercises and sets
-            for exercise_data in exercises:
-                #get or create excercise type instance
-                exercise_type = ExerciseType.objects.get(exercise_name=exercise_data["exercise_type"])
+                    if not exercise_form.is_valid():
+                        # If any exercise form is invalid, roll back the entire transaction
+                        raise IntegrityError("Invalid exercise data")
+                    
+                    # Save the exercise
+                    exercise = exercise_form.save()
 
-                exercise = Exercise.objects.create(
-                    workout=workout,
-                    exercise_type=exercise_type 
-                )
-                print("This is the created excersise object", exercise.workout, exercise.exercise_type)
-                for set_data in exercise_data["set_reps"]:
-                    set_obj = Set.objects.create(
-                        exercise=exercise,
-                        set_number=set_data["set"],
-                        reps=set_data["reps"]
-                    )
-                    print(f"Set created: Exercise - {set_obj.exercise}, Set Number - {set_obj.set_number}, Reps - {set_obj.reps}")
+                    # Process sets
+                    for set_data in exercise_data["set_reps"]:
+                        set_form = SetForm({
+                            'exercise': exercise.id,
+                            'set_number': set_data["set"],
+                            'reps': set_data["reps"]
+                        })
+
+                        if not set_form.is_valid():
+                            # If any set form is invalid, roll back the entire transaction
+                            raise IntegrityError("Invalid set data")
+                        
+                        # Save the set
+                        set_form.save()
+
+                # If everything works, return success
+                return JsonResponse({'status': 'success', 'message': 'Workout saved successfully.'})
         
-            # If everything is successful
-            return JsonResponse({'status': 'success', 'message': 'Workout saved successfully.'})
-        
+        except ExerciseType.DoesNotExist as e:
+            return JsonResponse({'status': 'error', 'message': 'Invalid exercise type.'})
+
+        except IntegrityError as e:
+            return JsonResponse({'status': 'error', 'message': str(e)})
+
         except Exception as e:
-                    print(f"Unexpected error: {e}")
-                    return JsonResponse({'status': 'error', 'message': 'An unexpected error occurred.'})
-        
-    #If the request method is not POST
+            return JsonResponse({'status': 'error', 'message': 'An unexpected error occurred.'})
+    
+    # If the request method is not POST
     return JsonResponse({'status': 'error', 'message': 'Invalid request method'})
 
 
