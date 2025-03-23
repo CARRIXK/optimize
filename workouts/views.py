@@ -73,7 +73,6 @@ def add_exercise_sets(request):
         }
         return render(request, 'workouts/workout_set_reps.html', context)
     
-
     
 def save_workout(request):
     if request.method == "POST":
@@ -143,7 +142,6 @@ def save_workout(request):
     # If the request method is not POST
     return JsonResponse({'status': 'error', 'message': 'Invalid request method'})
 
-
 def delete_workout(request, id):
     # Fetch the workout using the ID, and ensure the user owns the workout
     print("The view has been triggered")
@@ -159,6 +157,7 @@ def delete_workout(request, id):
     return redirect('workouts')  # Redirect to the workouts page
 
 def edit_workout(request, id):
+
     # Fetch the workout using the ID, and ensure the user owns the workout
     print("edit workout id is:", id)
     workout = get_object_or_404(Workout, id=id, user=request.user)
@@ -186,7 +185,79 @@ def edit_workout(request, id):
 
     return render(request, 'workouts/edit_workout.html', {'workout': workout, 'excersises': exercises})
     
-    
+def update_workout(request):
+    if(request.method == "POST"):
+            print("request method was:", request.method)
+            print("Reached the update workout view")
+            print("Workout id", id)
+            print(request.POST)
+            
+    try:
+        print("Data sent from front end: ", request.POST)
+
+        # Start a transaction block
+        with transaction.atomic():
+            # First, validate and create Workout using the form
+            workout_form = WorkoutForm(request.POST)
+            if not workout_form.is_valid():
+                return JsonResponse({'status': 'error', 'message': 'Invalid workout data', 'errors': workout_form.errors})
+            
+            
+            # Associate the workout with the logged-in user
+            # workout = workout_form.save(commit=False)
+            # workout.user = request.user  # Set the user field to the logged-in user
+            # workout.save()
+
+            # Deserialize exercises JSON string into Python list
+            exercises_json = request.POST.get("exercise_type")  # This is a string
+            exercises = json.loads(exercises_json)
+
+            # # Process exercises and sets
+            # for exercise_data in exercises:
+            #     # Create Exercise using the form
+            #     exercise_form = ExerciseForm({
+            #         'workout': workout.id,
+            #         'exercise_type': ExerciseType.objects.get(exercise_name=exercise_data["exercise_type"]).id
+            #     })
+
+            #     if not exercise_form.is_valid():
+            #         # If any exercise form is invalid, roll back the entire transaction
+            #         raise IntegrityError("Invalid exercise data")
+                
+            #     # Save the exercise
+            #     exercise = exercise_form.save()
+
+            #     # Process sets
+            #     for set_data in exercise_data["set_reps"]:
+            #         set_form = SetForm({
+            #             'exercise': exercise.id,
+            #             'set_number': set_data["set"],
+            #             'reps': set_data["reps"]
+            #         })
+
+            #         if not set_form.is_valid():
+            #             # If any set form is invalid, roll back the entire transaction
+            #             raise IntegrityError("Invalid set data")
+                    
+            #         # Save the set
+            #         set_form.save()
+                    
+
+            # If everything works, return success
+            return JsonResponse({'status': 'success', 'message': 'Workout saved sucessfully.'})
+
+    except ExerciseType.DoesNotExist as e:
+        return JsonResponse({'status': 'error', 'message': 'Invalid exercise type.'})
+
+    except IntegrityError as e:
+        return JsonResponse({'status': 'error', 'message': str(e)})
+
+    except Exception as e:
+        return JsonResponse({'status': 'error', 'message': 'An unexpected error occurred.'})
+
+    # If the request method is not POST
+    return JsonResponse({'status': 'error', 'message': 'Invalid request method'})
+
 
 import openpyxl
 from django.shortcuts import render
