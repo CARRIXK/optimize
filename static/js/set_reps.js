@@ -53,55 +53,122 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
     // Save workout button click handler
-    saveWorkoutButton.addEventListener('click', function () {
-        const workoutTitle = document.getElementById('workout-title').innerText;  // Assuming you have the title in the <h1> tag
+    // saveWorkoutButton.addEventListener('click', function () {
+    //     const workoutTitle = document.getElementById('workout-title').innerText;  // Assuming you have the title in the <h1> tag
+    //     const exercises = [];
+    //     const reps = {};
+
+    //     console.clear();
+
+    //     // Collect exercise IDs and reps for each exercise
+    //     document.querySelectorAll('.exercise').forEach(function (exerciseDiv) {
+    //         const exercise_name = exerciseDiv.getAttribute('data-id');
+    //         const exerciseReps = [];
+
+    //         // Collect the data for the workout and exercise_type (exercise name in this case)
+    //         // Collect reps for each set
+    //         exerciseDiv.querySelectorAll('input[type="number"]').forEach(function (input, index) {
+    //             const setNumber = index + 1;  // Set number starts from 1
+    //             const reps = input.value;  // Get the number of reps
+    //             exerciseReps.push({ set: setNumber, reps: reps });  // Add set and reps to the array
+    //         });
+
+    //         // Add the exercise data to the exercises array
+    //         exercises.push({
+    //             exercise_type: exercise_name,  // exercise_name should be the exercise type ID here
+    //             set_reps: exerciseReps  // This should be the array of sets and reps for each exercise
+    //         });
+    //     });
+
+
+
+    //     // Prepare data to send to the backend
+    //     const formData = new FormData();
+    //     formData.append('workout_title', workoutTitle);
+
+    //     // Append each exercise to the FormData object
+    //     exercises.forEach((exercise, index) => {
+    //         formData.append(`exercise_${index}_exercise_type`, exercise.exercise_type);
+    //         formData.append(`exercise_${index}_sets_reps`, JSON.stringify(exercise.set_reps));  // Ensure sets_reps is sent as JSON
+    //     });
+
+    //     // Output the data to the console
+    //     console.log('Workout Title:', workoutTitle);
+    //     console.log('Exercises data:', exercises);
+
+    
+
+    //     createWorkoutUrl = 'save_workout';
+    //     editWorkoutUrl = 'edit_workout';
+
+
+    //     // Add CSRF token to all jQuery AJAX requests
+    //     $.ajaxSetup({
+    //         headers: {
+    //             'X-CSRFToken': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+    //         }
+    //     });
+
+    //     $.ajax({
+    //         type: 'POST',
+    //         url: createWorkoutUrl,
+    //         data: {
+    //         'title': workoutTitle,
+    //         'exercise_type': JSON.stringify(exercises),
+            
+    //         },
+    //         success: function (response) {
+    //         if (response.status === 'success') {
+    //             alert('Workout saved successfully!');
+    //         } else {
+    //             alert('Failed to save workout.');
+    //         }
+    //         },
+    //         error: function () {
+    //         alert('An error occurred.');
+    //         }
+    //     });
+
+    // });
+
+
+
+    // Function to gather workout data
+    function gatherWorkoutData() {
+        const workoutTitle = document.getElementById('workout-title').innerText;
         const exercises = [];
-        const reps = {};
 
         console.clear();
 
-        // Collect exercise IDs and reps for each exercise
         document.querySelectorAll('.exercise').forEach(function (exerciseDiv) {
             const exercise_name = exerciseDiv.getAttribute('data-id');
             const exerciseReps = [];
 
-            // Collect the data for the workout and exercise_type (exercise name in this case)
-            // Collect reps for each set
             exerciseDiv.querySelectorAll('input[type="number"]').forEach(function (input, index) {
-                const setNumber = index + 1;  // Set number starts from 1
-                const reps = input.value;  // Get the number of reps
-                exerciseReps.push({ set: setNumber, reps: reps });  // Add set and reps to the array
+                const setNumber = index + 1;
+                const reps = input.value;
+                exerciseReps.push({ set: setNumber, reps: reps });
             });
 
-            // Add the exercise data to the exercises array
             exercises.push({
-                exercise_type: exercise_name,  // exercise_name should be the exercise type ID here
-                set_reps: exerciseReps  // This should be the array of sets and reps for each exercise
+                exercise_type: exercise_name,
+                set_reps: exerciseReps
             });
         });
 
-
-
-        // Prepare data to send to the backend
-        const formData = new FormData();
-        formData.append('workout_title', workoutTitle);
-
-        // Append each exercise to the FormData object
-        exercises.forEach((exercise, index) => {
-            formData.append(`exercise_${index}_exercise_type`, exercise.exercise_type);
-            formData.append(`exercise_${index}_sets_reps`, JSON.stringify(exercise.set_reps));  // Ensure sets_reps is sent as JSON
-        });
-
-        // Output the data to the console
         console.log('Workout Title:', workoutTitle);
         console.log('Exercises data:', exercises);
 
-    
+        return {
+            title: workoutTitle,
+            exercises: exercises
+        };
+    }
 
-        createWorkoutUrl = 'save_workout';
+    // Function to send workout data to the backend
+    function sendWorkoutData(url) {
+        const workoutData = gatherWorkoutData();
 
-
-        // Add CSRF token to all jQuery AJAX requests
         $.ajaxSetup({
             headers: {
                 'X-CSRFToken': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
@@ -110,25 +177,31 @@ document.addEventListener('DOMContentLoaded', function () {
 
         $.ajax({
             type: 'POST',
-            url: createWorkoutUrl,
+            url: url,
             data: {
-            'title': workoutTitle,
-            'exercise_type': JSON.stringify(exercises),
-            
+                'title': workoutData.title,
+                'exercise_type': JSON.stringify(workoutData.exercises),
             },
             success: function (response) {
-            if (response.status === 'success') {
-                alert('Workout saved successfully!');
-            } else {
-                alert('Failed to save workout.');
-            }
+                if (response.status === 'success') {
+                    alert('Workout saved successfully!');
+                } else {
+                    alert('Failed to save workout.');
+                }
             },
             error: function () {
-            alert('An error occurred.');
+                alert('An error occurred.');
             }
         });
+    }
 
+    // Button click handlers
+    saveWorkoutButton.addEventListener('click', function () {
+        sendWorkoutData('save_workout');
     });
+
+
+
 
 
 });
