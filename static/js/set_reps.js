@@ -61,7 +61,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Function to gather workout data
     function gatherWorkoutData() {
-        const workoutTitle = document.getElementById('workout-title').innerText;
+        const workoutTitle = document.getElementById('workout-title').value;
+
         const exercises = [];
 
         console.clear();
