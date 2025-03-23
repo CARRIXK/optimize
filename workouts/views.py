@@ -32,8 +32,9 @@ def create_workout(request):
 
 
 # Add exercises to a workout
-def add_exercises(request):
-    workout_title = None
+def add_exercises(request, workout_title):
+    print("workout title is:", workout_title)
+
 
     if request.method == 'POST':
         workout_title = request.POST.get('workout_title')  # Get workout title from the form data

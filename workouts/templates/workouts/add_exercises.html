@@ -16,7 +16,7 @@
       <!-- Search bar -->
       <div class="sticky-search-bar">
         <h1>Add excersises to {{workout_title}}</h1>
-        <form method="GET" action="{% url 'add_exercises' %}" class="mb-4">
+        <form method="GET" action="{% url 'add_exercises' workout_title %}" class="mb-4"></form>
             <div class="input-group">
                 <input type="text" name="q" class="form-control" placeholder="Search exercises..." value="{{ request.GET.q }}">
                 <button class="btn btn-primary" type="submit">Search</button>

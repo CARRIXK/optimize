@@ -76,7 +76,7 @@
 
     <div class="sticky-footer">
         <button type="button" class="btn btn-success" id="update-workout-btn">Save Changes</button>
-        <a class="btn-primary" id="add-exercises-btn" href="{% url 'add_exercises' %}">Add Exercises</a>
+        <a class="btn-primary" id="add-exercises-btn" href="{% url 'add_exercises'  workout.title  %}">Add Exercises</a>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
