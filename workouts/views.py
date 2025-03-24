@@ -4,9 +4,10 @@ from .models import Exercise, Workout, ExerciseType, Set
 from .forms import WorkoutForm, ExerciseForm, SetForm, ExerciseSetForm
 import ast
 import json
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponseRedirect
 from django.db import IntegrityError, transaction
 from django.contrib import messages
+from django.urls import reverse
 
 # Create your views here.
 class ExerciseList(generic.ListView):
@@ -28,7 +29,6 @@ def create_workout(request):
         }
         return render(request, 'workouts/create_workout.html', context)
     return render(request, 'workouts/create_workout.html')
-
 
 
 # Add exercises to a workout
@@ -190,67 +190,69 @@ def edit_workout(request, id):
     return render(request, 'workouts/edit_workout.html', {'workout': workout, 'excersises': exercises})
     
 def update_workout(request):
-    if(request.method == "POST"):
-            print("request method was:", request.method)
-            print("Reached the update workout view")
-            workout_id = request.POST.get("id")  # This is a string
-            print("Update workout id", workout_id)
+    if request.method == "POST":
+        print("request method was:", request.method)
+        print("Reached the update workout view")
+        workout_id = request.POST.get("id")  # This is a string
+        print("Update workout id", workout_id)
 
-            # Fetch the existing workout and check permissions
-            workout = get_object_or_404(Workout, id=workout_id, user=request.user)
-            print("Workout to update", workout)
+        # Fetch the existing workout and check permissions
+        workout = get_object_or_404(Workout, id=workout_id, user=request.user)
+        print("Workout to update", workout)
+        
+        with transaction.atomic():
+            # Validate and update workout
+            workout_form = WorkoutForm(request.POST, instance=workout)
+            if not workout_form.is_valid():
+                return JsonResponse({'status': 'error', 'message': 'Invalid workout data', 'errors': workout_form.errors})
             
-            with transaction.atomic():
-                # Validate and update workout
-                workout_form = WorkoutForm(request.POST, instance=workout)
-                if not workout_form.is_valid():
-                    return JsonResponse({'status': 'error', 'message': 'Invalid workout data', 'errors': workout_form.errors})
+            workout_form.save()
+            print("Successfully updated workout title")
+
+            # Delete old exercises and their sets
+            old_exercises = Exercise.objects.filter(workout=workout)
+            for old_exercise in old_exercises:
+                Set.objects.filter(exercise=old_exercise).delete()
+            old_exercises.delete()
+            print("Successfully deleted old exercises and sets")
+
+            # Deserialize exercises JSON string into Python list
+            exercises_json = request.POST.get("exercise_type")  # This is a string
+            exercises = json.loads(exercises_json)
+
+            # Process exercises and sets
+            for exercise_data in exercises:
+                # Create Exercise using the form
+                exercise_form = ExerciseForm({
+                    'workout': workout.id,
+                    'exercise_type': ExerciseType.objects.get(exercise_name=exercise_data["exercise_type"]).id
+                })
+
+                if not exercise_form.is_valid():
+                    # If any exercise form is invalid, roll back the entire transaction
+                    raise IntegrityError("Invalid exercise data")
                 
-                workout_form.save()
-                print("Successfully updated workout title")
+                # Save the exercise
+                exercise = exercise_form.save()
 
-                # Delete old exercises and their sets
-                old_exercises = Exercise.objects.filter(workout=workout)
-                for old_exercise in old_exercises:
-                    Set.objects.filter(exercise=old_exercise).delete()
-                old_exercises.delete()
-                print("Successfully deleted old exercises and sets")
-
-                # Deserialize exercises JSON string into Python list
-                exercises_json = request.POST.get("exercise_type")  # This is a string
-                exercises = json.loads(exercises_json)
-
-                # Process exercises and sets
-                for exercise_data in exercises:
-                    # Create Exercise using the form
-                    exercise_form = ExerciseForm({
-                        'workout': workout.id,
-                        'exercise_type': ExerciseType.objects.get(exercise_name=exercise_data["exercise_type"]).id
+                # Process sets
+                for set_data in exercise_data["set_reps"]:
+                    set_form = SetForm({
+                        'exercise': exercise.id,
+                        'set_number': set_data["set"],
+                        'reps': set_data["reps"]
                     })
 
-                    if not exercise_form.is_valid():
-                        # If any exercise form is invalid, roll back the entire transaction
-                        raise IntegrityError("Invalid exercise data")
+                    if not set_form.is_valid():
+                        # If any set form is invalid, roll back the entire transaction
+                        raise IntegrityError("Invalid set data")
                     
-                    # Save the exercise
-                    exercise = exercise_form.save()
-
-                    # Process sets
-                    for set_data in exercise_data["set_reps"]:
-                        set_form = SetForm({
-                            'exercise': exercise.id,
-                            'set_number': set_data["set"],
-                            'reps': set_data["reps"]
-                        })
-
-                        if not set_form.is_valid():
-                            # If any set form is invalid, roll back the entire transaction
-                            raise IntegrityError("Invalid set data")
-                        
-                        # Save the set
-                        set_form.save()
-            
-    
+                    # Save the set
+                    set_form.save()
+        
+        print("Sending sucess message to edit workout page...")
+        # return redirect('workouts')  # Redirect to the workouts page    
+        return JsonResponse({'status': 'success', 'redirect_url': '/workouts/'})
     # If the request method is not POST
     return JsonResponse({'status': 'error', 'message': 'Invalid request method'})
 

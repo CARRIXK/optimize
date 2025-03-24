@@ -149,12 +149,14 @@ document.addEventListener('DOMContentLoaded', function () {
             success: function (response) {
                 if (response.status === 'success') {
                     alert(`Workout ${workoutId ? 'updated' : 'saved'} successfully!`);
+                    window.location.href = '/workouts/';  // Redirect to the workouts page
                 } else {
                     alert(`Failed to ${workoutId ? 'update' : 'save'} workout.`);
                 }
             },
-            error: function () {
-                alert('An error occurred.');
+            error: function (xhr, status, error) {
+                console.error('Error updating workout:', error);
+                alert('Something went wrong. Please try again.');
             }
         });
     }
