@@ -12,26 +12,55 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
 
-    addSetButtons.forEach(button => {
-        button.addEventListener('click', function () {
-            const exerciseDiv = button.closest('.exercise');
-            const tableBody = exerciseDiv.querySelector('tbody');
-            const setCount = tableBody.querySelectorAll('tr').length + 1;
-            const exerciseId = exerciseDiv.getAttribute('data-id');
+    // addSetButtons.forEach(button => {
+    //     button.addEventListener('click', function () {
+    //         const exerciseDiv = button.closest('.exercise');
+    //         const tableBody = exerciseDiv.querySelector('tbody');
+    //         const setCount = tableBody.querySelectorAll('tr').length + 1;
+    //         const exerciseId = exerciseDiv.getAttribute('data-id');
 
-            const newRow = document.createElement('tr');
-            newRow.innerHTML = `
-                <td>${setCount}</td>
-                <td><input type="number" name="reps_${exerciseId}_${setCount}" value="10" /></td>
-                <td><button type="button" class="delete-set-button btn btn-danger">Delete</button></td>
-            `;
-            const deleteButton = newRow.querySelector('.delete-set-button');
-            deleteButton.addEventListener('click', function () {
-                newRow.remove();
+    //         const newRow = document.createElement('tr');
+    //         newRow.innerHTML = `
+    //             <td>${setCount}</td>
+    //             <td><input type="number" name="reps_${exerciseId}_${setCount}" value="10" /></td>
+    //             <td><button type="button" class="delete-set-button btn btn-danger">Delete</button></td>
+    //         `;
+    //         const deleteButton = newRow.querySelector('.delete-set-button');
+    //         deleteButton.addEventListener('click', function () {
+    //             newRow.remove();
+    //         });
+    //         tableBody.appendChild(newRow);
+    //     });
+    // });
+
+    function assignAddSetButtonEvent() {
+        const addSetButtons = document.querySelectorAll('.add-set-button');
+
+        addSetButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                const exerciseDiv = button.closest('.exercise');
+                const tableBody = exerciseDiv.querySelector('tbody');
+                const setCount = tableBody.querySelectorAll('tr').length + 1;
+                const exerciseId = exerciseDiv.getAttribute('data-id');
+
+                const newRow = document.createElement('tr');
+                newRow.innerHTML = `
+                    <td>${setCount}</td>
+                    <td><input type="number" name="reps_${exerciseId}_${setCount}" value="10" /></td>
+                    <td><button type="button" class="delete-set-button btn btn-danger">Delete</button></td>
+                `;
+
+                const deleteButton = newRow.querySelector('.delete-set-button');
+                deleteButton.addEventListener('click', function () {
+                    newRow.remove();
+                });
+
+                tableBody.appendChild(newRow);
             });
-            tableBody.appendChild(newRow);
         });
-    });
+    }
+    assignAddSetButtonEvent();
+
 
     deleteExerciseButtons.forEach(button => {
         button.addEventListener('click', function () {
@@ -98,8 +127,8 @@ document.addEventListener('DOMContentLoaded', function () {
         const workoutData = gatherWorkoutData();
 
         // If a workout id is sent to the function then print it
-        if(workoutId){
-            console.log("The workout id is:",  workoutId)
+        if (workoutId) {
+            console.log("The workout id is:", workoutId)
             console.log("The url is:", url);
         }
 
@@ -131,32 +160,26 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Button click handlers
-    if(saveWorkoutButton){
+    if (saveWorkoutButton) {
         saveWorkoutButton.addEventListener('click', function () {
             sendWorkoutData('save_workout');
         });
     }
 
 
-    if(updateWorkoutButton){
-        if(workoutId){
+    if (updateWorkoutButton) {
+        if (workoutId) {
             updateWorkoutButton.addEventListener('click', function () {
                 console.log("update workout button pressed");
-                console.log("Workout id:" , workoutId);
+                console.log("Workout id:", workoutId);
 
                 const updateWorkoutUrl = `/workouts/update_workout/`;  // Match the URL pattern
                 sendWorkoutData(updateWorkoutUrl, workoutId);
             });
-        }else{
+        } else {
             console.log("There is no workout Id");
         }
     }
-   
-    
-
-
-
-
 
 
 

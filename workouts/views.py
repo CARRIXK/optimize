@@ -178,7 +178,9 @@ def edit_workout(request, id):
             'sets': sets
         })
 
-    return render(request, 'workouts/edit_workout.html', {'workout': workout, 'exercises_with_sets': exercises_with_sets})
+    exercises = ExerciseType.objects.exclude(exercise_image__isnull=True)
+
+    return render(request, 'workouts/edit_workout.html', {'workout': workout, 'exercises_with_sets': exercises_with_sets, 'exercises' : exercises})
     
     # print("excersises with sets:", exercises_with_sets)
     
