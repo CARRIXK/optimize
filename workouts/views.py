@@ -130,8 +130,8 @@ def save_workout(request):
                         
 
                 # If everything works, return success
-                return JsonResponse({'status': 'success', 'message': 'Workout saved sucessfully.'})
-
+                return JsonResponse({'status': 'success', 'redirect_url': '/workouts/'})
+            
         except ExerciseType.DoesNotExist as e:
             return JsonResponse({'status': 'error', 'message': 'Invalid exercise type.'})
 
@@ -250,8 +250,7 @@ def update_workout(request):
                     # Save the set
                     set_form.save()
         
-        print("Sending sucess message to edit workout page...")
-        # return redirect('workouts')  # Redirect to the workouts page    
+        print("Sending sucess message to edit workout page...")  
         return JsonResponse({'status': 'success', 'redirect_url': '/workouts/'})
     # If the request method is not POST
     return JsonResponse({'status': 'error', 'message': 'Invalid request method'})
