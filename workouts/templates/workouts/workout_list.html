@@ -8,29 +8,60 @@
 <h1>My Workouts</h1>
 <a href="{% url 'create_workout' %}" class="btn btn-primary" style="float: right;">+ New Workout</a>
 
-<ul>
+<style>
+  
+  .workout-item {
+      padding: 2%;
+      margin: 2%;
+      background-color: darkgrey;
+      color: white;
+  }
+
+</style>
+
+
   {% for workout in workouts %}
   {% if workout.user == request.user %}
-  <li>
+  <div class="workout-item">
     <h2>{{ workout.title }}</h2>
-    <h3>Workout Id: {{ workout.id }}</h3>
+    <h3>{{ workout.exercises.count }} Exercises</h3>
     <p>Created on: {{ workout.date_created|date:"d M Y" }}</p>
     <a href="#">View Details</a>
 
-    <!-- Start Button -->
-    <a href="#" class="btn btn-success" title="Start your workout">Start Workout</a>
+    <!-- Options Button -->
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#optionsModal{{ workout.id }}">
+      <i class="fas fa-ellipsis-h"></i>
+    </button>
 
-    <!-- Edit Button -->
-    <a href="{% url 'edit_workout' workout.id %}" class="btn btn-warning" title="Edit your workout">Edit</a>
+    <!-- Options Modal -->
+    <div class="modal fade" id="optionsModal{{ workout.id }}" tabindex="-1" role="dialog" aria-labelledby="optionsModalLabel{{ workout.id }}" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+        <h5 class="modal-title" id="optionsModalLabel{{ workout.id }}">Workout Options</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        </div>
+        <div class="modal-body">
+        <!-- Start Button -->
+        <a href="#" class="btn btn-success" title="Start your workout">Start Workout</a>
 
-    <!-- Delete Button -->
-    <button type="button" class="btn btn-danger delete-workout" workout_id="{{ workout.id }}" workout_title="{{ workout.title}}">Delete</button>
-  </li>
+        <!-- Edit Button -->
+        <a href="{% url 'edit_workout' workout.id %}" class="btn btn-warning" title="Edit your workout">Edit</a>
+
+        <!-- Delete Button -->
+        <button type="button" class="btn btn-danger delete-workout" workout_id="{{ workout.id }}" workout_title="{{ workout.title }}">Delete</button>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
   {% endif %}
   {% empty %}
   <p>No workouts found. Click the + button to create one!</p>
   {% endfor %}
-</ul>
+
 
 <!-- Delete Confirmation Modal -->
 <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">

@@ -9,6 +9,7 @@ body {
     color: #4A4A4F;
 }
 
+
 .red-o {
     color: #E84610;
 }
@@ -191,6 +192,13 @@ body {
     right: 50px;
 }
 
+
+
+/* Workout List Styles */
+
+.workout-item {
+    background-color: grey;
+}
 
 
 
