@@ -16,8 +16,8 @@
 </head>
 
 <body>
-    <header class="sticky-header">
-        <input id="workout-id" value="{{workout.id}}"></input>
+    <header class="edit-header">
+        <input type="hidden" id="workout-id" value="{{workout.id}}"></input>
         <input id="workout-title" value="{{ workout.title }}"></input>
     </header>
 
@@ -118,7 +118,7 @@
 
     <div class="sticky-footer">
         <button type="button" class="btn btn-success" id="update-workout-btn">Save Changes</button>
-        <button class=" btn-success" id="add-exercise-btn">Add Excersises</button>
+        <button class=" btn-success" id="add-ex-btn">Add Excersises</button>
 
     </div>
 

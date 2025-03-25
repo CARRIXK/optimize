@@ -16,11 +16,11 @@
 </head>
 
 <body>
-    <header class="sticky-header">
+    <header class="header">
         <h1>Workout Plan for: <input id="workout-title" value="{{ workout_title }}">    </h1>
     </header>
 
-    <div class="workout-exercises">
+    <div class="workout-excersises ">
         {% for exercise in selected_excersises %}
         <div class="exercise" data-id="{{ exercise.exercise_name }}">
             <h2>{{ exercise.exercise_name }}</h2>
@@ -46,14 +46,6 @@
             <button type="button" class="add-set-button btn btn-primary">Add Set</button>
         </div>
 
-        <form id="save_data_form" method="POST" action="{% url 'save_workout' %}">
-            {% csrf_token %}
-
-            <input type="text" name="title" id="workout_title" placeholder="Workout Title"
-                value="{{ workout_title|default:'' }}" required><br>
-            <!-- Button to submit the form -->
-
-        </form>
         {% endfor %}
     </div>
 
@@ -87,134 +79,6 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
     <script src="{% static 'js/set_reps.js' %}"></script>
-
-    <!-- <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const addSetButtons = document.querySelectorAll('.add-set-button');
-            const deleteExerciseButtons = document.querySelectorAll('.delete-exercise-button');
-            let exerciseToDelete = null;
-            const saveWorkoutButton = document.getElementById('save-workout-btn');
-
-
-            addSetButtons.forEach(button => {
-                button.addEventListener('click', function () {
-                    const exerciseDiv = button.closest('.exercise');
-                    const tableBody = exerciseDiv.querySelector('tbody');
-                    const setCount = tableBody.querySelectorAll('tr').length + 1;
-                    const exerciseId = exerciseDiv.getAttribute('data-id');
-
-                    const newRow = document.createElement('tr');
-                    newRow.innerHTML = `
-                        <td>${setCount}</td>
-                        <td><input type="number" name="reps_${exerciseId}_${setCount}" value="10" /></td>
-                        <td><button type="button" class="delete-set-button btn btn-danger">Delete</button></td>
-                    `;
-                    const deleteButton = newRow.querySelector('.delete-set-button');
-                    deleteButton.addEventListener('click', function () {
-                        newRow.remove();
-                    });
-                    tableBody.appendChild(newRow);
-                });
-            });
-
-            deleteExerciseButtons.forEach(button => {
-                button.addEventListener('click', function () {
-                    exerciseToDelete = button.closest('.exercise');
-                    $('#deleteModal').modal('show');
-                });
-            });
-
-            document.getElementById('confirmDeleteButton').addEventListener('click', function () {
-                if (exerciseToDelete) {
-                    exerciseToDelete.remove();
-                    $('#deleteModal').modal('hide');
-                    checkRemainingExercises();
-                }
-            });
-
-            function checkRemainingExercises() {
-                const remainingExercises = document.querySelectorAll('.exercise');
-                if (remainingExercises.length === 0) {
-                    const workoutTitle = "{{ workout_title }}";
-                    window.location.href = `{% url 'create_workout' %}?workout_title=${encodeURIComponent(workoutTitle)}`;
-                }
-            }
-
-
-            // Save workout button click handler
-            saveWorkoutButton.addEventListener('click', function () {
-                const workoutTitle = document.getElementById('workout-title').innerText;  // Assuming you have the title in the <h1> tag
-                const exercises = [];
-                const reps = {};
-
-                console.clear();
-
-                // Collect exercise IDs and reps for each exercise
-                document.querySelectorAll('.exercise').forEach(function (exerciseDiv) {
-                    const exercise_name = exerciseDiv.getAttribute('data-id');
-                    const exerciseReps = [];
-
-                    // Collect the data for the workout and exercise_type (exercise name in this case)
-                    // Collect reps for each set
-                    exerciseDiv.querySelectorAll('input[type="number"]').forEach(function (input, index) {
-                        const setNumber = index + 1;  // Set number starts from 1
-                        const reps = input.value;  // Get the number of reps
-                        exerciseReps.push({ set: setNumber, reps: reps });  // Add set and reps to the array
-                    });
-
-                    // Add the exercise data to the exercises array
-                    exercises.push({
-                        exercise_type: exercise_name,  // exercise_name should be the exercise type ID here
-                        set_reps: exerciseReps  // This should be the array of sets and reps for each exercise
-                    });
-                });
-
-
-
-                // Prepare data to send to the backend
-                const formData = new FormData();
-                formData.append('workout_title', workoutTitle);
-
-                // Append each exercise to the FormData object
-                exercises.forEach((exercise, index) => {
-                    formData.append(`exercise_${index}_exercise_type`, exercise.exercise_type);
-                    formData.append(`exercise_${index}_sets_reps`, JSON.stringify(exercise.set_reps));  // Ensure sets_reps is sent as JSON
-                });
-
-                // Output the data to the console
-                console.log('Workout Title:', workoutTitle);
-                console.log('Exercises data:', exercises);
-
-            
-                $.ajax({
-                    type: 'POST',
-                    url: "{% url 'save_workout' %}",  // Adjust this URL based on your Django URL patterns
-                    data: {
-                        'title': workoutTitle,
-                        'exercise_type': JSON.stringify(exercises),
-                        // 'set_reps': JSON.stringify(setRepsData),  // Sending the reps data as JSON
-                        'csrfmiddlewaretoken': '{{ csrf_token }}'
-                    },
-                    success: function (response) {
-                        if (response.status === 'success') {
-                            alert('Workout saved successfully!');
-                        } else {
-                            alert('Failed to save workout.');
-                        }
-                    },
-                    error: function () {
-                        alert('An error occurred.');
-                    }
-                });
-
-                //submit the save data form
-                // document.getElementById('save_data_form').submit();
-
-            });
-
-
-        });
-    </script> -->
 
 </body>
 

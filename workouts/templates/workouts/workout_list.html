@@ -22,7 +22,13 @@
         <!-- Left Column: Workout Details -->
         <div class="workout-details">
           <h2>{{ workout.title }}</h2>
-          <h3>{{ workout.exercises.count }} Exercises</h3>
+          <h3>
+            {% if workout.exercises.count > 1 %}
+                {{ workout.exercises.count }} Exercises
+            {% else %}
+                {{ workout.exercises.count }} Exercise
+            {% endif %}
+        </h3>
           <p>Created on: {{ workout.date_created|date:"d M Y" }}</p>
       </div>
   

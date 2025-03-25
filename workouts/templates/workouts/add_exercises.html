@@ -16,8 +16,8 @@
 
     <div class="container-fluid">
         <!-- Search bar -->
-        <div class="sticky-search-bar workout-header">
-            <h1>Add excersises to {{workout_title}}</h1>
+        <div class="sticky-search-bar header">
+            <h1>Add excersises to: {{workout_title}}</h1>
             <form method="GET" action="{% url 'add_exercises' workout_title %}" class="mb-4"></form>
             <div class="input-group">
                 <input type="text" name="q" class="form-control" placeholder="Search Exercises"
