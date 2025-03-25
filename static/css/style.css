@@ -166,6 +166,15 @@ body {
 
 /* Custom Styles */
 
+
+:root {
+    --primary-colour: #121212;
+    --secondary-colour: #2E2E2E;
+    --highlight-colour: #00bbff;
+    --description: #BFBFBF;
+    --text-white: #FFFFFF;
+}
+
 .sticky-search-bar {
     position: fixed;
     height: 10%;
@@ -187,6 +196,7 @@ body {
     padding: 10px;
     box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
 }
+
 .sticky-footer .btn {
     position: absolute;
     right: 50px;
@@ -196,9 +206,105 @@ body {
 
 /* Workout List Styles */
 
-.workout-item {
-    background-color: grey;
+.workout-header {
+    background-color: var(--secondary-colour);
+    color: var(--text-white);
+    /* Background color */
+    width: 100vw;
+    /* Full width */
+    height: 15vh;
+    /* 10% of the viewport height */
+    display: flex;
+    /* Use Flexbox */
+    justify-content: space-between;
+    /* Push elements to left and right */
+    align-items: center;
+    /* Vertically center elements */
+    padding: 0 20px;
+    /* Space around content */
+    box-sizing: border-box;
+    /* Prevent width overflow */
+    padding: 2%;
+
+    border-bottom: 2px solid var(--text-white);
 }
+
+.create-workout-btn {
+    background-color: var(--secondary-colour);
+    color: var(--text-white);
+    padding: 12px 24px;
+    /* Increases the size by adding padding */
+    font-size: 1.2rem;
+    /* Increases the font size */
+    border-radius: 8px;
+    /* Optional: Adds rounded corners for a smoother look */
+    cursor: pointer;
+    /* Optional: Changes the cursor on hover */
+    border: 2px solid var(--text-white);
+    /* Ensures there is no border */
+    transition: background-color 0.3s ease;
+    /* Smooth hover transition */
+}
+
+.create-workout-btn:hover {
+    color: var(--highlight-colour);
+    border-color: var(--highlight-colour);
+}
+
+
+.workout-list {
+    height: 100vh;
+    /* Full viewport height */
+    background-color: var(--primary-colour);
+    padding-top: 2%;
+    /* Add padding to the top */
+    padding-bottom: 2%;
+    overflow-y: auto;
+    /* Enable vertical scrolling */
+}
+
+.workout-item {
+    display: flex;
+    justify-content: space-between;
+    /* Splits into two columns */
+    align-items: center;
+    /* Keeps content vertically aligned */
+    padding: 2%;
+    margin: 2%;
+    background-color: var(--secondary-colour);
+    color: white;
+}
+
+/* Left side: Workout details stacked */
+.workout-details {
+    display: flex;
+    flex-direction: column;
+    /* Stacks elements on top of each other */
+    align-items: flex-start;
+    /* Aligns text to the left */
+}
+
+/* Right side: Options button */
+.options-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+
+.options-btn:hover {
+    color: var(--highlight-colour);
+    border-color: var(--highlight-colour);
+}
+
+
+.workout-item h3,
+p {
+    color: var(--description);
+}
+
 
 
 
@@ -209,16 +315,20 @@ body {
     border-collapse: collapse;
     margin-bottom: 20px;
 }
-.custom-table th, td {
+
+.custom-table th,
+td {
     padding: 10px;
     border: 1px solid #ddd;
     text-align: center;
     align-items: center;
     width: 100%;
 }
+
 .custom-table th {
     background-color: #f2f2f2;
 }
+
 .custom-table .exercise-name {
     font-size: 1.2em;
     font-weight: bold;
