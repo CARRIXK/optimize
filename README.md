@@ -49,32 +49,23 @@ Optimize is a web-based fitness app that allows users to create and edit workout
 - [Acknowledgements](#acknowledgements)
 
 # Features
-Dashboard : After logging in, users are directed to the Dashboard Page, which provides an overview of their most recent activities and workouts. The main purpose of this page is to give users quick access to their recent progress and a streamlined way to track their fitness journey.
+* Dashboard : After logging in, users are directed to the Dashboard Page, which provides an overview of their most recent activities and workouts. The main purpose of this page is to give users quick access to their recent progress and a streamlined way to track their fitness journey.
 
-Workouts : The Workouts page is where users can view a list of all the workouts they have created, providing an organized way to manage their fitness routines. Each workout is displayed with its title, number of excersises in that workout and date it was created. Users can interact with any workout by pressing the options button next to it, which opens a modal offering several options: starting the workout, editing the workout, or deleting it. If adjustments are needed, selecting "Edit Workout" allows users to modify the title and add/delete exercises from it. In case a workout is no longer needed, the "Delete" option enables users to remove it from their list. This simple and intuitive interface allows users to easily manage their workouts. 
+* Workouts : The Workouts page is where users can view a list of all the workouts they have created, providing an organized way to manage their fitness routines. Each workout is displayed with its title, number of excersises in that workout and date it was created. Users can interact with any workout by pressing the options button next to it, which opens a modal offering several options: starting the workout, editing the workout, or deleting it. 
 
-Create Workout : Creating a workout on the platform is an easy, customizable process that allows users to design routines tailored to their goals. Users begin by providing a title for their workout, such as "Leg Day" or "Upper Body Strength," then select exercises from a pre-defined list, which includes various movements targeting different muscle groups. After selecting exercises, users add sets and reps for each, determining the number of sets and reps per set. Users can then review and adjust the exercises, sets, and reps before saving the workout to their profile for future use. This process empowers users to create highly personalized workouts, track their progress, and stay on top of their fitness goals.
+* Create Workout : Creating a workout on the platform is an easy, customizable process that allows users to design routines tailored to their goals. Users begin by providing a title for their workout, such as "Leg Day" or "Upper Body Strength," then select exercises from a pre-defined list, which includes various movements targeting different muscle groups. After selecting exercises, users add sets and reps for each, determining the number of sets and reps per set. Users can then review and adjust the exercises, sets, and reps before saving the workout to their profile for future use. This process empowers users to create highly personalized workouts, track their progress, and stay on top of their fitness goals.
 
-iphone12_editor iphone12_instrument
 
-Edit Workout: This page was added late in the project, at the suggestion of my mentor, Celestine Okoro. The page collects and displays all the information associated with a particular loop, including the 5 most recent reviews, a graphic showing the beats of each track, a play/pause button, a volume control and a link to the rating page. Various animations are displayed when the user hits the play button to hear the audio. A visitor to the site does not need to be authenticated to view this page, and it contains a span with a link to the page and a copy button that transfers the link to the visitor's clipboard to facilitate sharing.
-desktop_loop_detail_page
+* Edit Workout: Editing a workout allows users to customize and adjust their exercises to better suit their needs. After selecting a workout to edit, users can add or remove exercises from the workout by selecting exercises from the list or deleting unwanted ones. For each exercise, users can add sets, specifying the number of repetitions . Additionally, if a user adds a new exercise, they can immediately add sets to it, ensuring that the workout is tailored to their specific training goals. .
 
-Loop Rating and Comments : The user, if logged in, can rate and comment on drumloops by other users (the rating link is disabled for a user's own loops - you can't let people rate themselves!). All previous comments on the chosen loop and the respective ratings are shown in a dialog on the left hand side (on top on mobile). A simple form with 2 editable inputs - for the numerical rating and the comment - appears on the right-hand side (below on mobile).
-desktop_review
 
-Messaging : Messaging is handled by two separate processes, both of which write to the same dedicated div just below the navbar. Standard Django messages are dispatched from the backend and displayed as the page is loaded/reloaded. As these messages are embedded in templates, they can only be shown to the user when a page is loaded. For actions that are carried out using POST requests, such as saving the tracks and loop information, JavaScript is used to write confirmation and error messages to the same div on the page. In both cases, a script removes the message again after a short delay.
-messaging_screenshot
+* Future Features: In the future, functionality for starting a workout will be added to allow users to track their progress during the workout. This feature will enable users to begin their workout session directly from the workouts page, marking the start of their training. Once a workout is started, the app will track the completion of each exercise and set, recording important data such as the number of reps performed, the weight lifted, and any other relevant metrics. This tracking will provide users with real-time feedback on their performance, helping them to monitor their progress and adjust their workout intensity as needed. Additionally, the app will save these workout sessions, allowing users to review past workouts, track improvements over time, and make informed decisions about their future training routines.
 
-Future Features
-A useful possible future feature would be the ability to accept an audio sample from the user, save it to media storage, and make it available to all users as one of the instrument choices once it had been approved by an admin or staff member.
-It might also be useful to use the staff feature of the Django User model to allow staff members to approve ratings and comments, without allowing them full admin access to the database.
-The app could be expanded to allow the use of musical instruments as well as drum beats and samples alone.
-Return to top
 
-User Experience
-Design
-Fonts
+# User Experience
+## Design
+
+### Fonts
 The main text font used for ordinary text in the body of the project was 'Kanit', which I obtained from Google Fonts. It's a very legible sans-serif font, whose glyphs have a blocky shape that suits the graffiti theme in the site as a whole.
 wallpoet_sample
 
@@ -84,17 +75,16 @@ wallpoet_sample
 The font used for the site logo is 'Future', which is slightly less readable but looks more like what a graffiti artist would draw with a can of spraypaint. It was sourced from the same site as 'wallpoet' - thanks to PressGangStudios.
 wallpoet_sample
 
-Colour
+### Colour
 The main image, of a large dark hall with columns covered in graffiti, was sourced from pexels - thanks to Paul Basel. As it is dark, I decided to put most of the content inside boxes with an opaque darker overlay, and use white as the font colour throughout to ensure a good contrast between foreground and background. Headings are in yellow or yellow green, which both contrast well against a dark background. For variety, the list of loops on the homepage is black text and gold stars on a light grey background. Here's the basic palette for the site : Colour Palette
 
-Wireframes
+### Wireframes
 I decided to draw the wireframes out by hand for this project, as the free wireframe prototyping services I had used for previous projects take quite a while to set up. In the interests of productivity, I went for the quicker option of pen and paper.
 
 Wireframe of drumloop list view Wireframe of instrument picker modal Wireframe of new drumloop creation form Wireframe of review creation page
 
-Return to top
 
-Development Process
+# Development Process
 Project planning and documentation in GitHub
 GitHub Issues were used to document the development steps undertaken in the project. Two issue templates, for User Epics and User Stories were used. Various labels were employed to enable quick identification of issue type including Bugs, User Epics, User Stories and Style. MoSCoW prioritisation was employed using the labels must-have, should-have and could-have.
 
@@ -131,7 +121,7 @@ Story : Add animations synchronised with audio playback
 Inline JavaScript and event handlers.
 When using Django templates, the fields passed in from the backend are only available within the HTML document itself. It is therefore simpler to write event handlers directly into the document, rather than in external JS files. This means that the HTML and JavaScript are tightly coupled, but this would be necessary in any case in the absence of direct fetch calls to the API.
 
-Data Model
+# Data Model
 Entity-relationship diagram for models
 
 Data validation
@@ -140,146 +130,147 @@ Track model The track model does not have fields that the user can alter through
 Instrument model The instrument model fields are not exposed to the user at any time.
 Review model The review model has a number of fields that are exposed to the user. The comment field has a max length, so the user can only type that many characters. If more characters than are allowed are pasted into the textarea, only the max limit number of characters will actually be saved to the database. The rating field can only be altered in the rating form, and is controlled by a number input with min and max values set. Pasting an out of range value into the input will result in an error on the client side, informing the user of their mistake. The reviewer and drumloop fields are handled by HiddenInput fields in the ReviewForm class, and as such are not exposed to the user at all. The approved field is also not exposed in the form, and is set to false by default. This field can only be set to true by the superuser account.
 User model The default Django User model is used, so validation is handled by the framework.
-Testing
-Manual testing
-Automated testing
-In-app testing
-User story testing
-Validator testing
-Manual Testing
-Feature Testing
-Page	Feature	Action	Effect
-Homepage	Site Logo	Click	Redirects to home page from all pages
-Homepage	Logged In User Display	Log in as existing user	Username appears in navbar
-Homepage	Home link	Click	Redirects to home page from all pages
-Homepage	Logout link	Click	Redirects to confirm signout page
-Homepage	Confirm logout	Click 'ok'	Redirects to home page
-Homepage	Login link	Click	Redirects to Sign In Page
-Homepage	Register link	Click	Redirects to Sign Up Page
-Homepage	All Loops Button	Click	All loops displayed on homepage
-Homepage	My Loops Button	Not logged in	Button is disabled
-Homepage	My Loops Button	Logged in : click	Only user's loops are displayed
-Homepage	Edit Button	Logged out	Not visible
-Homepage	Edit Button	Logged in : click	Visible - redirects to Loop Editor Page
-Homepage	Loop row	Hover on row	Row is highlighted in green
-Homepage	Loop row	Click	Redirects to Loop Detail Page for this selected loop
-Homepage	Call-to-Action New Loop Button	Logged in : click	Redirects to Create New Loop Form
-Homepage	Call-to-Action login button	Logged out : click	Redirects to Login Page
-Homepage	Message on login	Login as user	Successful Signin message appears, clears after 3 seconds
-Homepage	Message on logout	Logout	Successful signout message appears, clears after 3 seconds
-Login Page	Social sign-in button	Click	Redirects to confirm social signin page
-Login Page	Social sign-in continue button	Click	Redirects to Sign in with Google page
-Login Page	Username validation	Enter incorrect username	Error message response - does not specify if username or password failed
-Login Page	Password validation	Enter incorrect password	Error message response - does not specify if username or password failed
-Login Page	Remember me button	Checkbox on	Close browser window and reopen - user still logged in
-Login Page	Sign in button	Click	Redirects to home page, shows successful login message
-Logout Confirm Page	Sign Out button	Click	Redirects to home page, user logged out
-Register Page	Reroute to login page	Click link	Redirects to login page
-Register Page	Username validation	Try using existing username	Error message appears - 'A user with that username already exists'
-Register Page	email validation	Entered invalid email (without '@'	Error message - 'Please enter valid email address' and registration fails
-Register Page	password1	Enter a short password	Error message - 'That password is too short'
-Register Page	password2	Enter different password to password1 field	Error message - 'You must type the same password each time'
-Register Page	Sign Up button	Entered valid form data	Redirects to home page - success message displayed
-Loop Detail Page	Loop name display	No action	Loop name displays correctly
-Loop Detail Page	Creator display	No action	Creator name displays correctly
-Loop Detail Page	Track beat display	No action	All tracks present, all beats present
-Loop Detail Page	Track beat animation	Click play button	Each beat highlighted in time on each track
-Loop Detail Page	Site logo animation	Click play button	Logo grows on every 16th beat, and then slowly shrinks
-Loop Detail Page	Play button	Click	Audio playback and animations begin
-Loop Detail Page	Play button	Hover	Button appearance changes
-Loop Detail Page	Pause button	Click	Audio playback and animations cease
-Loop Detail Page	Play/pause button animation	Click to play	Button icon rotates quickly at beginning of every 16th beat
-Loop Detail Page	Volume Input	Click on up and down buttons on input	Volume immediately goes up and down
-Loop Detail Page	Share link display	No action	current url displayed
-Loop Detail Page	Share link copy button	Click	link successfully copied to clipboard
-Loop Detail Page	Rating button	Click	Redirects to rating page
-Loop Detail Page	Rating button when logged out	No action	Not shown
-Loop Editor Page	Loop name display	No action	Loop name displayed correctly
-Loop Editor Page	Creator display	No action	Creator name displayed correctly
-Loop Editor Page	Tempo control	Click arrow buttons to increase and decrease value	Tempo increases and decreases immediately as audio plays
-Loop Editor Page	Instrument button	Click	Instrument modal shown, current instrument highlighted
-Loop Editor Page	Instrument modal	Click on option	Sample plays once
-Loop Editor Page	Instrument modal dismiss	Click outside modal or close button	Modal is hidden
-Loop Editor Page	Instrument modal save button	Save clicked	Modal hidden, instrument updated
-Loop Editor Page	Instrument change message	No action	Instrument changed message shown, fades after 3 sec
-Loop Editor Page	Track volume control	Adjust slider	Volume of track changes in real time
-Loop Editor Page	Beat toggle	Toggle on	Beat is now heard in playback, beat div highlighted
-Loop Editor Page	Delete track button	Click	Confirm delete track modal shown
-Loop Editor Page	Confirm delete track	Click	Track deleted and confirmation message shown
-Loop Editor Page	Refuse delete track	Click	No change to loop
-Loop Editor Page	Play button	Click	Audio playback and animations begin, icon changes to pause
-Loop Editor Page	Pause button	Click	Audio playback and animations end, icon changes to play
-Loop Editor Page	Loop volume control	Click on up and down arrow buttons	Overall playback volume increases and decreases
-Loop Editor Page	Add new track button	Click	Instrument modal shown, after save clicked, new track appears with chosen instrument
-Loop Editor Page	Delete Loop Button	Click	Confirm delete loop modal appears
-Loop Editor Page	Delete Loop confirm	Click	Redirects to homepage, success message displayed, loop gone
-Loop Editor Page	Delete loop reject	Click	No change to loop
-New Loop Form	Name field	No action	Default name shown
-New Loop Form	Tempo field	Click on arrow buttons	Tempo increases and decreases
-New Loop Form	Let's get looping button	Click	Redirects to Loop Editor page, success message displayed
-New Loop Creation Flow	Default set-up	Create new loop	New loop created with one track, default instrument selected, no beats yet selected
-New Loop Creation Flow	Error	Enter name that already exists	Form displayed again with error shown
-Loop Rating page	Previous comment	No action	Previous comments shown correctly
-Loop Rating page	Previous rating	No action	Previous ratings shown correctly
-Loop Rating page	Previous reviewer	No action	Previous reviewer shown correctly
-Loop Rating page	User rating selector	Click on up and down arrows	Rating ranges from 0 to 5
-Loop Rating page	User rating validation	Click to increase from 5 to 6	No change and red error highlight appears
-Loop Rating page	User comment field	Fill with text	Text appears, comment max length observed
-Loop Rating page	Submit button	Click	Redirects to home page, success message appears
-Responsiveness
-Here's a set of screenshots taken with the Chrome dev tools device toolbar, set to the iPhone 12 Pro. They are, in order, the homepage, loop editor page, instrument chooser page, the review form, and the loop detail page.
+
+# Testing
+* Manual testing
+* Automated testing
+* In-app testing
+* User story testing
+* Validator testing
+
+## Manual Testing
+**Feature Testing**
+
+| Page                  | Feature                         | Action                                         | Effect                                                     |
+|-----------------------|---------------------------------|------------------------------------------------|------------------------------------------------------------|
+| Homepage              | Site Logo                       | Click                                          | Redirects to home page from all pages                      |
+| Homepage              | Logged In User Display          | Log in as existing user                        | Username appears in navbar                                 |
+| Homepage              | Home link                       | Click                                          | Redirects to home page from all pages                      |
+| Homepage              | Logout link                     | Click                                          | Redirects to confirm signout page                          |
+| Homepage              | Confirm logout                  | Click 'ok'                                     | Redirects to home page                                     |
+| Homepage              | Login link                      | Click                                          | Redirects to Sign In Page                                  |
+| Homepage              | Register link                   | Click                                          | Redirects to Sign Up Page                                  |
+| Homepage              | All Loops Button                | Click                                          | All loops displayed on homepage                            |
+| Homepage              | My Loops Button                 | Not logged in                                  | Button is disabled                                          |
+| Homepage              | My Loops Button                 | Logged in : click                              | Only user's loops are displayed                            |
+| Homepage              | Edit Button                     | Logged out                                    | Not visible                                                 |
+| Homepage              | Edit Button                     | Logged in : click                              | Visible - redirects to Loop Editor Page                     |
+| Homepage              | Loop row                        | Hover on row                                   | Row is highlighted in green                                |
+| Homepage              | Loop row                        | Click                                          | Redirects to Loop Detail Page for this selected loop        |
+| Homepage              | Call-to-Action New Loop Button  | Logged in : click                              | Redirects to Create New Loop Form                          |
+| Homepage              | Call-to-Action login button     | Logged out : click                             | Redirects to Login Page                                    |
+| Homepage              | Message on login                | Login as user                                  | Successful Signin message appears, clears after 3 seconds  |
+| Homepage              | Message on logout               | Logout                                         | Successful signout message appears, clears after 3 seconds|
+| Login Page            | Social sign-in button           | Click                                          | Redirects to confirm social signin page                     |
+| Login Page            | Social sign-in continue button  | Click                                          | Redirects to Sign in with Google page                       |
+| Login Page            | Username validation             | Enter incorrect username                       | Error message response - does not specify if username or password failed |
+| Login Page            | Password validation             | Enter incorrect password                       | Error message response - does not specify if username or password failed |
+| Login Page            | Remember me button              | Checkbox on                                    | Close browser window and reopen - user still logged in      |
+| Login Page            | Sign in button                  | Click                                          | Redirects to home page, shows successful login message     |
+| Logout Confirm Page   | Sign Out button                 | Click                                          | Redirects to home page, user logged out                    |
+| Register Page         | Reroute to login page           | Click link                                     | Redirects to login page                                    |
+| Register Page         | Username validation             | Try using existing username                    | Error message appears - 'A user with that username already exists' |
+| Register Page         | email validation                | Entered invalid email (without '@')            | Error message - 'Please enter valid email address' and registration fails |
+| Register Page         | password1                       | Enter a short password                         | Error message - 'That password is too short'               |
+| Register Page         | password2                       | Enter different password to password1 field    | Error message - 'You must type the same password each time'|
+| Register Page         | Sign Up button                  | Entered valid form data                        | Redirects to home page - success message displayed         |
+| Loop Detail Page      | Loop name display               | No action                                      | Loop name displays correctly                               |
+| Loop Detail Page      | Creator display                 | No action                                      | Creator name displays correctly                             |
+| Loop Detail Page      | Track beat display              | No action                                      | All tracks present, all beats present                      |
+| Loop Detail Page      | Track beat animation            | Click play button                              | Each beat highlighted in time on each track                 |
+| Loop Detail Page      | Site logo animation             | Click play button                              | Logo grows on every 16th beat, and then slowly shrinks     |
+| Loop Detail Page      | Play button                     | Click                                          | Audio playback and animations begin                        |
+| Loop Detail Page      | Play button                     | Hover                                          | Button appearance changes                                  |
+| Loop Detail Page      | Pause button                    | Click                                          | Audio playback and animations cease                        |
+| Loop Detail Page      | Play/pause button animation     | Click to play                                  | Button icon rotates quickly at beginning of every 16th beat |
+| Loop Detail Page      | Volume Input                    | Click on up and down buttons on input           | Volume immediately goes up and down                         |
+| Loop Detail Page      | Share link display              | No action                                      | Current url displayed                                      |
+| Loop Detail Page      | Share link copy button          | Click                                          | Link successfully copied to clipboard                       |
+| Loop Detail Page      | Rating button                   | Click                                          | Redirects to rating page                                   |
+| Loop Detail Page      | Rating button when logged out   | No action                                      | Not shown                                                   |
+| Loop Editor Page      | Loop name display               | No action                                      | Loop name displayed correctly                               |
+| Loop Editor Page      | Creator display                 | No action                                      | Creator name displayed correctly                             |
+| Loop Editor Page      | Tempo control                   | Click arrow buttons to increase and decrease value | Tempo increases and decreases immediately as audio plays |
+| Loop Editor Page      | Instrument button               | Click                                          | Instrument modal shown, current instrument highlighted     |
+| Loop Editor Page      | Instrument modal                | Click on option                                | Sample plays once                                           |
+| Loop Editor Page      | Instrument modal dismiss        | Click outside modal or close button            | Modal is hidden                                             |
+| Loop Editor Page      | Instrument modal save button    | Save clicked                                   | Modal hidden, instrument updated                           |
+| Loop Editor Page      | Instrument change message       | No action                                      | Instrument changed message shown, fades after 3 sec        |
+| Loop Editor Page      | Track volume control            | Adjust slider                                  | Volume of track changes in real time                       |
+| Loop Editor Page      | Beat toggle                     | Toggle on                                      | Beat is now heard in playback, beat div highlighted         |
+| Loop Editor Page      | Delete track button             | Click                                          | Confirm delete track modal shown                           |
+| Loop Editor Page      | Confirm delete track            | Click                                          | Track deleted and confirmation message shown               |
+| Loop Editor Page      | Refuse delete track             | Click                                          | No change to loop                                           |
+| Loop Editor Page      | Play button                     | Click                                          | Audio playback and animations begin, icon changes to pause|
+| Loop Editor Page      | Pause button                    | Click                                          | Audio playback and animations end, icon changes to play   |
+| Loop Editor Page      | Loop volume control             | Click on up and down arrow buttons             | Overall playback volume increases and decreases            |
+| Loop Editor Page      | Add new track button            | Click                                          | Instrument modal shown, after save clicked, new track appears with chosen instrument |
+| Loop Editor Page      | Delete Loop Button              | Click                                          | Confirm delete loop modal appears                          |
+| Loop
+
+
+**Responsiveness**
+Here's a set of screenshots taken with the Chrome dev tools device toolbar, set to the iPhone 12 Pro. They are, in order, the Workouts page, Create workout page, Add excersises page, workout set reps page:
 
 iphone12_homepage iphone12_editor iphone12_instrument iphone12_review surfacepro_loop_detail
 
-Here's the same five pages on the Surface Pro 7
+Here's the same five pages on the Surface Pro 7:
 
-surfacepro_homepage surfacepro_editor surfacepro_instrument surfacepro_review surfacepro_loop_detail
+And finally the same five pages on a desktop monitor (1920x1080): 
 
-And finally the same five pages on a desktop monitor (1920x1080)
 
-desktop_homepage desktop_editor desktop_instrument desktop_review desktop_loop_detail_page
+**Browser Compatibility**
+| Feature                                      | Chrome | Firefox | Safari (mobile) |
+|----------------------------------------------|--------|---------|-----------------|
+| Audio playback upon first user interaction  | True   | True    | True            |
+| Fonts render correctly                       | True   | True    | True            |
+| All elements visible                         | True   | True    | True            |
+| Pages are responsive at all screen sizes     | True   | True    | True            |
 
-Browser Compatibility
-Feature	Chrome	Firefox	Safari(mobile)
-Audio playback upon first user interaction	True	True	True
-Fonts render correctly	True	True	True
-All elements visible	True	True	True
-Pages are responsive at all screen sizes	True	True	True
-Lighthouse
+### Lighthouse
 Here are the lighthouse reports for the site's main pages :
 
-Homepage
-homepage
+**Workouts**
 
-Loop Editor Page
-loop_editor_page
+**Create workouts**
 
-Loop Detail Page
-loop_detail_page
+**Add Excersises**
 
-Loop Rating Page
-loop_rating_page
+**Edit workouts**
 
-Code Validation
-Python code :
-All python code is validated by both the Flake8 linter (installed in VSCode) and the external CodeInstitute validator @ https://pep8ci.herokuapp.com/. The sole exceptions are the test classes, some of which contain JavaScript snippets which are more readable if confined to one line.
-JavaScript code :
-All JavaScript code in the project was validated during development with the JSHint plugin for VSCode.
-HTML Validation :
-All HTML files in the project were validated using the W3C Narkup Validation Service. https://validator.w3.org/
-CSS Validation :
-No errors were found when the single CSS file style.css was passed through the W3C Validation Service. https://jigsaw.w3.org/css-validator/
-User Stories
+
+### Code Validation
+
+**Python code** :
+
+* All python code is validated by both the Flake8 linter (installed in VSCode) and the external CodeInstitute validator @ https://pep8ci.herokuapp.com/. The sole exceptions are the test classes, some of which contain JavaScript snippets which are more readable if confined to one line.
+
+**JavaScript code** :
+
+* All JavaScript code in the project was validated during development with the JSHint plugin for VSCode.
+
+**HTML Validation** :
+
+* All HTML files in the project were validated using the W3C Narkup Validation Service. https://validator.w3.org/
+
+**CSS Validation** :
+
+* No errors were found when the single CSS file style.css was passed through the W3C Validation Service. https://jigsaw.w3.org/css-validator/
+
+**User Stories**
 The User Epics and Stories in this project are documented in three GitHub Projects, corresponding to the three iterations that comprised the development work of the project. These can be found here :
 
-Iteration 1
-Iteration 2
-Iteration 3
+*
+*
+*
+
 Alternitively, the Epics and Stories are individually linked here :
 
-Epics and Stories
-Automated Testing
-Testing django views, models and forms.
+* Epics and Stories
+
+## Automated Testing
+
+**Testing django views, models and forms.**
 Automated tests were written for all forms, models and views using the Django testing framework.
 
 Models:
