@@ -3,42 +3,48 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Workout</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
-<body>
-    <h1>Create a New Workout</h1>
 
-    <form method="POST" id="workoutForm">
-        {% csrf_token %}
-    
-        <input type="text" name="workout_title" id="workout_title" placeholder="Workout Title" required><br>
-    
-        <button type="submit">Add Exercises to Workout</button>
-    </form>
+<body>
+    <div class="create-workout-container">
+        <h1>New Workout</h1>
+
+        <form method="POST" id="workoutForm">
+            {% csrf_token %}
+            <input type="text" name="workout_title" id="workout_title" placeholder="Workout Title" required><br>
+            <button type="submit">Add Exercises to Workout</button>
+        </form>
+
+    </div>
+
 
     <script>
-        document.getElementById("workoutForm").addEventListener("submit", function(event) {
+        document.getElementById("workoutForm").addEventListener("submit", function (event) {
             event.preventDefault(); // Prevent normal submission
-            
+
             let workoutTitle = document.getElementById("workout_title").value.trim();
             if (workoutTitle === "") {
                 alert("Please enter a workout title.");
                 return;
             }
-    
+
             // Encode the title to make it URL-safe
             let encodedTitle = encodeURIComponent(workoutTitle);
-    
+
             // Set the form's action dynamically
             this.action = `/workouts/add_exercises/${encodedTitle}/`;
-            
+
             // Submit the form
             this.submit();
         });
     </script>
 
 </body>
+
 </html>
