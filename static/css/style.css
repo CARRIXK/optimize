@@ -177,7 +177,7 @@ body {
 
 .sticky-search-bar {
     position: fixed;
-    height: 10%;
+    height: 10vh;
     top: 0;
     width: 100%;
     z-index: 1000;
@@ -352,6 +352,7 @@ body {
     border: 2px solid #ccc;
     border-radius: 4px;
     background-color: var(--primary-colour);
+    color: var(--text-white);
 }
 
 .create-workout-container button {
@@ -380,6 +381,112 @@ body {
     .create-workout-container input[type="text"], .create-workout-container button {
         width: 100%; /* Full width on smaller screens */
     }
+}
+
+
+/* Add excersises styles */
+
+.exercise-list { 
+    height: 80vh;
+    margin-top: 10%;
+    overflow-y: auto;
+}
+
+.exercise-item {
+    display: flex;
+    justify-content: space-between; /* Distributes space between the columns */
+    align-items: center; /* Keeps content vertically aligned */
+    padding: 2%;
+    border-top: 1px solid var(--text-white);
+    border-bottom: 1px solid var(--text-white);
+    background-color: var(--secondary-colour);
+    color: white;
+}
+
+.image-container {
+    flex: 0 0 25%; /* Image takes up 25% of the width */
+}
+
+.image-container img {
+    width: 100%; /* Ensure the image fills the container */
+    height: auto; /* Maintain aspect ratio */
+}
+
+.exercise-details {
+    flex-grow: 1; /* Takes up remaining space */
+    margin-left: 20px;
+}
+
+.form-check {
+    flex: 0 0 15%; /* Checkbox input takes up 15% of the width */
+    text-align: right; /* Right align checkbox */
+    display: flex;
+    align-items: center; /* Vertically align checkbox and label */
+    justify-content: flex-end; /* Align the checkbox to the right side */
+}
+
+/* Custom style for checkbox */
+.form-check-input {
+    appearance: none; /* Remove default checkbox styling */
+    -webkit-appearance: none; /* For Safari */
+    -moz-appearance: none; /* For Firefox */
+    width: 25px;
+    height: 25px;
+    border: 2px solid var(--primary-colour);
+    border-radius: 50%; /* Make it circular */
+    background-color: var(--secondary-colour);
+    transition: background-color 0.3s, border-color 0.3s;
+    cursor: pointer;
+    position: relative; /* For positioning the checkmark */
+}
+
+/* Style for checked state */
+.form-check-input:checked {
+    background-color: var(--primary-colour); /* When checked, background is primary color */
+}
+
+/* Adding a custom checkmark using ::before */
+.form-check-input:checked::before {
+    content: ''; /* Empty content */
+    position: absolute; /* Positioning the checkmark */
+    top: 5px; /* Move checkmark down */
+    left: 8px; /* Move checkmark to the right */
+    width: 10px; /* Width of the checkmark */
+    height: 10px; /* Height of the checkmark */
+    border: solid white; /* White color for the checkmark */
+    border-width: 0 3px 3px 0; /* Create the checkmark shape */
+    transform: rotate(45deg); /* Rotate to form a checkmark */
+}
+
+/* Optional: Adding hover effect */
+.form-check-input:hover {
+    background-color: var(--highlight-colour);
+    border-color: var(--highlight-colour);
+}
+
+
+
+
+
+
+
+
+#add-ex-btn {
+    width: 30%;
+    padding: 12px;
+    font-size: 1rem;
+    background-color: var(--text-white);
+    color: var(--primary-colour);
+    border: none;
+    border-radius: 4px;
+    border-radius: 50px;  /* Increased border-radius for a more noticeable curve */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#add-ex-btn:hover {
+    background-color: var(--highlight-colour);
+    color: white;
 }
 
 
