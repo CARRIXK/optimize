@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const saveWorkoutButton = document.getElementById('save-workout-btn');
     const updateWorkoutButton = document.getElementById('update-workout-btn');
 
+
     let workoutId = null;
     const workoutIdElement = document.getElementById('workout-id');
     if (workoutIdElement) {
@@ -162,27 +163,60 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Button click handlers
-    if (saveWorkoutButton) {
-        saveWorkoutButton.addEventListener('click', function () {
-            sendWorkoutData('save_workout');
-        });
+    // if (saveWorkoutButton) {
+    //     saveWorkoutButton.addEventListener('click', function () {
+    //         sendWorkoutData('save_workout');
+    //     });
+    // }
+
+
+    function validateWorkoutTitle(title) {
+        const errors = [];
+
+        // Trim whitespace
+        const trimmedTitle = title.trim();
+
+        //  Check title is not empty
+        if (trimmedTitle.length === 0) {
+            errors.push("Workout title is required.");
+        }
+
+        // Check title length
+        if (trimmedTitle.length > 30) {
+            errors.push("Workout title must be 30 characters or fewer.");
+        }
+
+        return {
+            isValid: errors.length === 0,
+            errors: errors
+        };
     }
 
 
     if (updateWorkoutButton) {
         if (workoutId) {
             updateWorkoutButton.addEventListener('click', function () {
+
                 console.log("update workout button pressed");
                 console.log("Workout id:", workoutId);
+                var workoutTitle = document.getElementById('workout-title').value;
+                console.log("Workout title",workoutTitle)
+                // Validate workout data on frontend before sending to backend
+                const result = validateWorkoutTitle(workoutTitle);
 
-                const updateWorkoutUrl = `/workouts/update_workout/`;  // Match the URL pattern
-                sendWorkoutData(updateWorkoutUrl, workoutId);
+                // If workout title is valid send workout data to updateWorkout view
+                if (!result.isValid) {
+                    alert(result.errors.join("\n"));
+                } else {
+                    console.log("Title is valid!");
+                    const updateWorkoutUrl = `/workouts/update_workout/`;  // Match the URL pattern
+                    sendWorkoutData(updateWorkoutUrl, workoutId);
+                }
             });
         } else {
             console.log("There is no workout Id");
         }
     }
-
 
 
 });

@@ -18,7 +18,7 @@
 <body>
     <header class="edit-header">
         <input type="hidden" id="workout-id" value="{{workout.id}}"></input>
-        <input id="workout-title" value="{{ workout.title }}"></input>
+        <input id="workout-title" value="{{ workout.title }}" placeholder="Untitled Workout"></input>
     </header>
 
     <div class="workout-exercises">
@@ -117,7 +117,8 @@
 
 
     <div class="sticky-footer">
-        <button type="button" class="btn btn-success" id="update-workout-btn">Save Changes</button>
+        <button type="button" class="btn btn-success" id="update-workout-btn" onclick="updateWorkout()">Save
+            Changes</button>
         <button class=" btn-success" id="add-ex-btn">Add Excersises</button>
 
     </div>
@@ -131,61 +132,61 @@
     <script>
 
 
-function assignAddSetButtonEvent() {
-        const addSetButtons = document.querySelectorAll('.add-set-button');
+        function assignAddSetButtonEvent() {
+            const addSetButtons = document.querySelectorAll('.add-set-button');
 
-        addSetButtons.forEach(button => {
-            button.addEventListener('click', function () {
-                const exerciseDiv = button.closest('.exercise');
-                const tableBody = exerciseDiv.querySelector('tbody');
-                const setCount = tableBody.querySelectorAll('tr').length + 1;
-                const exerciseId = exerciseDiv.getAttribute('data-id');
+            addSetButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    const exerciseDiv = button.closest('.exercise');
+                    const tableBody = exerciseDiv.querySelector('tbody');
+                    const setCount = tableBody.querySelectorAll('tr').length + 1;
+                    const exerciseId = exerciseDiv.getAttribute('data-id');
 
-                const newRow = document.createElement('tr');
-                newRow.innerHTML = `
+                    const newRow = document.createElement('tr');
+                    newRow.innerHTML = `
                     <td>${setCount}</td>
                     <td><input type="number" name="reps_${exerciseId}_${setCount}" value="10" /></td>
                     <td><button type="button" class="delete-set-button btn btn-danger">Delete</button></td>
                 `;
 
-                const deleteButton = newRow.querySelector('.delete-set-button');
-                deleteButton.addEventListener('click', function () {
-                    newRow.remove();
+                    const deleteButton = newRow.querySelector('.delete-set-button');
+                    deleteButton.addEventListener('click', function () {
+                        newRow.remove();
+                    });
+
+                    tableBody.appendChild(newRow);
                 });
-
-                tableBody.appendChild(newRow);
             });
+        }
+
+
+
+        // JavaScript to open and close the modal
+        document.getElementById("add-ex-btn").addEventListener("click", function () {
+            document.getElementById("exercise-modal").style.display = "block";
         });
-    }
+
+        document.getElementById("close-modal-btn").addEventListener("click", function () {
+            document.getElementById("exercise-modal").style.display = "none";
+        });
 
 
+        document.getElementById("add-exercises-btn").addEventListener("click", function () {
+            // Get all selected exercises from the modal
+            const selectedExercises = document.querySelectorAll('input[name="selected_exercises"]:checked');
 
-    // JavaScript to open and close the modal
-    document.getElementById("add-ex-btn").addEventListener("click", function () {
-        document.getElementById("exercise-modal").style.display = "block";
-    });
+            selectedExercises.forEach(exerciseCheckbox => {
+                // Create the exercise HTML structure dynamically
+                const exerciseName = exerciseCheckbox.value;
+                const exerciseId = exerciseCheckbox.id.replace('exercise', ''); // Extract the exercise ID
+                // const exerciseImage = document.querySelector(`#exercise${exerciseId} img`).src;
 
-    document.getElementById("close-modal-btn").addEventListener("click", function () {
-        document.getElementById("exercise-modal").style.display = "none";
-    });
+                // Create a new exercise div
+                const exerciseDiv = document.createElement("div");
+                exerciseDiv.classList.add("exercise");
+                exerciseDiv.setAttribute("data-id", exerciseName);
 
-
-    document.getElementById("add-exercises-btn").addEventListener("click", function () {
-        // Get all selected exercises from the modal
-        const selectedExercises = document.querySelectorAll('input[name="selected_exercises"]:checked');
-
-        selectedExercises.forEach(exerciseCheckbox => {
-            // Create the exercise HTML structure dynamically
-            const exerciseName = exerciseCheckbox.value;
-            const exerciseId = exerciseCheckbox.id.replace('exercise', ''); // Extract the exercise ID
-            // const exerciseImage = document.querySelector(`#exercise${exerciseId} img`).src;
-
-            // Create a new exercise div
-            const exerciseDiv = document.createElement("div");
-            exerciseDiv.classList.add("exercise");
-            exerciseDiv.setAttribute("data-id", exerciseName);
-
-            exerciseDiv.innerHTML = `
+                exerciseDiv.innerHTML = `
         <h2>${exerciseName}</h2>
 
         <button type="button" class="delete-exercise-button btn btn-danger">Delete Exercise</button>
@@ -208,16 +209,37 @@ function assignAddSetButtonEvent() {
         <button type="button" class="add-set-button btn btn-primary">Add Set</button>
     `;
 
-            // Append the new exercise to the workout exercises section
-            document.querySelector(".workout-exercises").appendChild(exerciseDiv);
+                // Append the new exercise to the workout exercises section
+                document.querySelector(".workout-exercises").appendChild(exerciseDiv);
+            });
+
+
+            assignAddSetButtonEvent();
+            // Close the modal after saving
+            document.getElementById("exercise-modal").style.display = "none";
+
         });
 
 
-        assignAddSetButtonEvent();
-        // Close the modal after saving
-        document.getElementById("exercise-modal").style.display = "none";
+        const input = document.getElementById("workout-title");
+        const saveBtn = document.getElementById("update-workout-btn");
 
-    });
+        // Function to update button disabled state
+        function updateButtonState() {
+            // Trim whitespace and check if input is empty
+            if (input.value.trim() === "") {
+                saveBtn.disabled = true;
+            } else {
+                saveBtn.disabled = false;
+            }
+        }
+
+        // Initialize button state on page load
+        updateButtonState();
+
+        // Listen for input changes and update button state
+        input.addEventListener("input", updateButtonState);
+
     </script>
 
 
