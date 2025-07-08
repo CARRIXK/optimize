@@ -633,6 +633,7 @@ td {
 
 .workout-exercises {
     position: absolute;
+    margin-top: 10vh;
     width: 100%;
     top: 10%;
     bottom: 10%;
@@ -648,7 +649,6 @@ td {
 
 .workout-excersises {
     height: 100vh;
-    /* Full viewport height */
     background-color: var(--primary-colour);
     padding-top: 2%;
     /* Add padding to the top */
@@ -681,16 +681,3 @@ td {
 }
 
 
-
-#workout-title {
-    background-color: var(--primary-colour);
-    color: var(--text-white);
-    padding: 15px; /* Padding around the input for better spacing */
-    border: none; /* Remove default border */
-    border-radius: 8px; /* Optional: Add rounded corners */
-    margin-left: 25%;
-    width: 50%; /* Adjust the width to your desired size */
-    text-align: center; /* Center the text inside the input */
-    font-size: 1.2rem; /* Optional: Increase the font size */
-    border: 1px solid var(--text-white);
-}

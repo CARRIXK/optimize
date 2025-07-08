@@ -22,45 +22,57 @@
 
 <body>
     <header class="edit-header">
-        <h1>Edit Workout</h1>
-        <h1>
-            <img src="{% static 'images/arrow_back.png' %}" alt="Back Button">
-        </h1>
-        <input type="hidden" id="workout-id" value="{{workout.id}}"></input>
-        <input id="workout-title" value="{{ workout.title }}" placeholder="Untitled Workout"></input>
+        <h1 id="back-button" ><img src="{% static 'images/arrow_back.png' %}" alt="Back Button"></h1>
+        <h1 id="page-title" >Edit Workout</h1>
     </header>
 
-    <div class="workout-exercises">
-        {% for exercise in exercises_with_sets %}
-        <div class="exercise" data-id="{{ exercise.exercise_name }}">
-            <h2>{{ exercise_name }}</h2>
-            <img src="{{ exercise_image }}" alt="{{ exercise.exercise_name }}" class="exercise-image" height="50px">
-            <button type="button" class="delete-exercise-button btn btn-danger">Delete Exercise</button>
-            <table class=".custom-table">
-                <thead>
-                    <tr>
-                        <th>Set Number</th>
-                        <th>Reps</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for set in exercise.sets %}
-                    <tr>
-                        <td>{{ set.set_number }}</td>
-                        <td><input type="number" name="reps_{{ exercise.exercise.id }}_{{ set.set_number }}"
-                                value="{{ set.reps }}" /></td>
-                        <td><button type="button" class="delete-set-button btn btn-danger"
-                                data-set-id="{{ set.id }}">Delete</button></td>
-                    </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-            <button type="button" class="add-set-button btn btn-primary">Add Set</button>
-        </div>
+    <input type="hidden" id="workout-id" value="{{workout.id}}"></input>
 
-        {% endfor %}
-    </div>
+    <main>
+
+        <div class="workout-exercises"> 
+            <div class="workout-title-wrapper">
+                <input
+                  id="workout-title"
+                  value="{{ workout.title }}"
+                  placeholder="Untitled Workout"
+                />
+            </div>
+            {% for exercise in exercises_with_sets %}
+            <div class="exercise" data-id="{{ exercise.exercise_name }}">
+                <h2>{{ exercise_name }}</h2>
+                <img src="{{ exercise_image }}" alt="{{ exercise.exercise_name }}" class="exercise-image"
+                    height="50px">
+                <button type="button" class="delete-exercise-button btn btn-danger">Delete Exercise</button>
+                <table class=".custom-table">
+                    <thead>
+                        <tr>
+                            <th>Set Number</th>
+                            <th>Reps</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for set in exercise.sets %}
+                        <tr>
+                            <td>{{ set.set_number }}</td>
+                            <td><input type="number"
+                                    name="reps_{{ exercise.exercise.id }}_{{ set.set_number }}"
+                                    value="{{ set.reps }}" /></td>
+                            <td><button type="button" class="delete-set-button btn btn-danger"
+                                    data-set-id="{{ set.id }}">Delete</button></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <button type="button" class="add-set-button btn btn-primary">Add Set</button>
+            </div>
+            {% endfor %}
+        </div> 
+
+    </main>
+
+
 
     <!-- Delete Confirmation Modal -->
     <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel"

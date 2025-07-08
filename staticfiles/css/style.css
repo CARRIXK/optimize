@@ -175,6 +175,44 @@ body {
     --text-white: #FFFFFF;
 }
 
+/* Universal styles */
+
+#page-title {
+    color: var(--text-white);
+    font-size: 2rem;
+    text-align: center;
+    margin-top: 20px;
+}
+
+#back-button {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.workout-title-wrapper {
+    display: flex;
+    justify-content: center;  /* centers the child horizontally */
+    margin-top: 2rem;         /* optional spacing from the top */
+    margin-bottom: 2rem;
+  }
+  
+  #workout-title {
+    width: 90vw;                        /* 90% of the screen width */
+    max-width: 800px;                   /* optional: prevent it getting too wide on large screens */
+    background-color: var(--primary-colour);
+    color: var(--text-white);
+    padding: 15px;
+    border: 1px solid var(--text-white);
+    border-radius: 8px;
+    font-size: 1.2rem;
+    text-align: center;
+    display: block;                    /* makes margin auto work if needed */
+  }
+
 
 /* Login page styles */
 
@@ -647,14 +685,12 @@ td {
 }
 
 .workout-excersises {
-    height: 100vh;
-    /* Full viewport height */
-    background-color: var(--primary-colour);
-    padding-top: 2%;
-    /* Add padding to the top */
-    padding-bottom: 2%;
-    overflow-y: auto;
-
+    position: absolute;
+    margin-top: 10vh;
+    width: 100%;
+    top: 10%;
+    bottom: 10%;
+    overflow-y: scroll;
 }
 
 
@@ -680,17 +716,3 @@ td {
     color: white;
 }
 
-
-
-#workout-title {
-    background-color: var(--primary-colour);
-    color: var(--text-white);
-    padding: 15px; /* Padding around the input for better spacing */
-    border: none; /* Remove default border */
-    border-radius: 8px; /* Optional: Add rounded corners */
-    margin-left: 25%;
-    width: 50%; /* Adjust the width to your desired size */
-    text-align: center; /* Center the text inside the input */
-    font-size: 1.2rem; /* Optional: Increase the font size */
-    border: 1px solid var(--text-white);
-}
