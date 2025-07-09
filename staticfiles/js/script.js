@@ -1,7 +1,15 @@
-console.log("Life, The Universe and Everything!");
+document.addEventListener('DOMContentLoaded', function () {
 
-document.getElementById("back-button").addEventListener("click", function() {
-    window.history.back();
+    console.log("Life, The Universe and Everything!");
+
+    document.querySelectorAll('.back-btn').forEach(button => {
+        button.addEventListener('click', function () {
+            console.log("Back button clicked");
+            window.history.back();
+        });
+    });
+
 });
+
 
 

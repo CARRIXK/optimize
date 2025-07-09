@@ -292,7 +292,7 @@ p {
     border-top: 2px solid var(--description);
 }
 
-.footer-btn {
+.footer-actions button {
     padding: 12px 24px;
     font-size: 1rem;
     background-color: var(--text-white);
@@ -303,7 +303,7 @@ p {
     transition: background-color 0.3s ease;
 }
 
-.footer-btn:hover {
+.footer-actions button:hover {
     background-color: var(--highlight-colour);
     color: white;
 }

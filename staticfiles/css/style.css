@@ -210,17 +210,14 @@ body {
 }
 
 
-
-
-
-#page-title {
+.page-title {
     color: var(--text-white);
     font-size: 2rem;
     text-align: center;
     margin-top: 20px;
 }
 
-#back-button {
+.back-button {
     position: absolute;
     top: 20px;
     left: 20px;

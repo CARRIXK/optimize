@@ -19,8 +19,8 @@
 
 <body>
     <header class="edit-header">
-        <h1 id="back-button"><img src="{% static 'images/arrow_back.png' %}" alt="Back Button"></h1>
-        <h1 id="page-title">Edit Workout</h1>
+        <h1 class="back-btn"><img src="{% static 'images/arrow_back.png' %}" alt="Back Button"></h1>
+        <h1 class="page-title">Edit Workout</h1>
     </header>
 
     <input type="hidden" id="workout-id" value="{{workout.id}}"></input>
@@ -63,11 +63,11 @@
 
     <footer>
         <div class="footer-actions">
-    
-            <button class="footer-btn" id="add-ex-btn">Add Exercises</button>
-            <button class="footer-btn" id="update-workout-btn" onclick="updateWorkout()">Save Changes</button>
+
+            <button id="add-ex-btn">Add Exercises</button>
+            <button id="update-workout-btn" onclick="updateWorkout()">Save Changes</button>
         </div>
-        
+
     </footer>
 
 
@@ -108,33 +108,6 @@
             <main>
                 <input type="text" id="search-input" placeholder="Search Exercises" class="form-control mb-3">
 
-                <!-- <div class="exercise-list">
-                    {% for exercise in exercises %}
-                    <div class="col-md-4">
-                        <div class="card mb-4">
-                            <div class="card-body">
-                                <h2 class="title">{{ exercise.exercise_name }}</h2>
-                                <h3 class="card-title">{{ exercise.muscle_group }}</h3>
-                                <div class="image-container">
-                                    <div class="image">
-                                        <img src="{{ exercise.exercise_image }}" alt="Exercise Image" style="width: 25%;">
-                                    </div>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="selected_exercises"
-                                        value="{{ exercise.exercise_name }}" id="exercise{{ exercise.id }}">
-                                    <label class="form-check-label" for="exercise{{ exercise.id }}">Select</label>
-                                </div>
-                                <hr />
-                                <p class="card-text text-muted h6">Created on: {{ exercise.created_on }}</p>
-                            </div>
-                        </div>
-                    </div>
-                    {% empty %}
-                    <p>No exercises available.</p>
-                    {% endfor %}
-                </div> -->
-
                 <div class="exercise-list">
                     {% for exercise in exercises %}
                     <div class="exercise-item">
@@ -160,12 +133,9 @@
                 </div>
             </main>
 
-            <!-- Footer -->
-            <div class="sticky-footer">
+            <footer class="footer-actions">
                 <button id="add-exercises-btn">Add Exercises</button>
-            </div>
-
-
+            </footer>
         </div>
     </div>
 
@@ -177,6 +147,8 @@
     <script src="{% static 'js/script.js' %}"></script>
 
     <script>
+
+
         // JavaScript to open and close add excercise modal
         document.getElementById("add-ex-btn").addEventListener("click", function () {
             console.log("Add Exercise button clicked");
