@@ -18,9 +18,11 @@
 </head>
 
 <body>
-    <header class="edit-header">
-        <h1 class="back-btn"><img src="{% static 'images/arrow_back.png' %}" alt="Back Button"></h1>
-        <h1 class="page-title">Edit Workout</h1>
+    <header class="header-actions">
+        <a href="{% url 'workouts' %}" aria-label="Go back">
+            <img src="{% static 'images/arrow_back.svg' %}" alt="Back">
+        </a>
+        <h1>Edit Workout</h1>
     </header>
 
     <input type="hidden" id="workout-id" value="{{workout.id}}"></input>
@@ -61,14 +63,13 @@
         </div>
     </main>
 
-    <footer>
-        <div class="footer-actions">
 
-            <button id="add-ex-btn">Add Exercises</button>
-            <button id="update-workout-btn" onclick="updateWorkout()">Save Changes</button>
-        </div>
-
+    <footer class="footer-actions">
+        <button id="add-ex-btn">Add Exercises</button>
+        <button id="update-workout-btn" onclick="updateWorkout()">Save Changes</button>
     </footer>
+
+
 
 
 
@@ -98,10 +99,10 @@
     <div id="exercise-modal" class="modal" style="display:none;">
         <div class="modal-content">
 
-            <div class="header">
-                <button type="button" class="btn" id="close-modal-btn">
-                    <img src="{% static 'images/close.png' %}" alt="close-button">
-                </button>
+            <div class="header-actions">
+                <a href="#" id="close-modal-btn" role="button" aria-label="Close modal">
+                    <img src="{% static 'images/close.png' %}" alt="">
+                </a>
                 <h1 id="page-title">Excersises</h1>
             </div>
 
