@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
             window.history.back();
         });
     });
-    
+
 
 
 
@@ -18,6 +18,47 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log("Add Exercise button clicked");
         document.getElementById("exercise-modal").style.display = "block";
     });
+
+
+
+    const checkboxes = document.querySelectorAll('.form-check-input');
+    const addExBtn = document.getElementById('add-excersies-btn');
+    const selectedExercisesInput = document.getElementById('selected-exercises');
+
+
+    function updateButtonText() {
+        const checkedCheckboxes = document.querySelectorAll('.form-check-input:checked');
+        const selectedCount = checkedCheckboxes.length;
+
+        // Update all buttons with class "add-excersies-btn"
+        document.querySelectorAll('.add-excersies-btn').forEach(addExBtn => {
+            addExBtn.textContent = `Add Exercises (${selectedCount})`;
+        });
+
+        const selectedExercises = Array.from(checkedCheckboxes)
+            .map(checkbox => checkbox.value);
+
+        // Assuming selectedExercisesInput is a single input element:
+        if (selectedExercisesInput) {
+            selectedExercisesInput.value = JSON.stringify(selectedExercises);
+        }
+
+        console.log(selectedExercises);
+    }
+
+    // Listen for changes on all checkboxes
+    checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', updateButtonText);
+    });
+
+    // Run once after a short delay to initialize
+    setTimeout(updateButtonText, 100);
+
+
+
+
+
+
 
     document.getElementById("close-modal-btn").addEventListener("click", function () {
         document.getElementById("exercise-modal").style.display = "none";
@@ -52,60 +93,86 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
+    // Your existing function to update button text
+    function updateButtonText() {
+        const checkedCheckboxes = document.querySelectorAll('.form-check-input:checked');
+        const selectedCount = checkedCheckboxes.length;
 
-    document.getElementById("add-exercises-btn").addEventListener("click", function () {
+        document.querySelectorAll('.add-excersies-btn').forEach(addExBtn => {
+            addExBtn.textContent = `Add Exercises (${selectedCount})`;
+        });
+
+        const selectedExercises = Array.from(checkedCheckboxes)
+            .map(checkbox => checkbox.value);
+
+        if (selectedExercisesInput) {
+            selectedExercisesInput.value = JSON.stringify(selectedExercises);
+        }
+
+        console.log(selectedExercises);
+    }
+
+    // Function to add exercises from modal selections
+    function addSelectedExercises() {
         // Get all selected exercises from the modal
         const selectedExercises = document.querySelectorAll('input[name="selected_exercises"]:checked');
 
         selectedExercises.forEach(exerciseCheckbox => {
-            // Create the exercise HTML structure dynamically
             const exerciseName = exerciseCheckbox.value;
-            const exerciseId = exerciseCheckbox.id.replace('exercise', ''); // Extract the exercise ID
-            // const exerciseImage = document.querySelector(`#exercise${exerciseId} img`).src;
+            const exerciseId = exerciseCheckbox.id.replace('exercise', '');
 
-            // Create a new exercise div
             const exerciseDiv = document.createElement("div");
             exerciseDiv.classList.add("exercise");
             exerciseDiv.setAttribute("data-id", exerciseName);
 
             exerciseDiv.innerHTML = `
-<h2>${exerciseName}</h2>
+            <h2>${exerciseName}</h2>
+            <button type="button" class="delete-exercise-button btn btn-danger">Delete Exercise</button>
+            <table class="custom-table">
+                <thead>
+                    <tr>
+                        <th>Set Number</th>
+                        <th>Reps</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td><input type="number" name="reps_${exerciseId}_1" value="10" /></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+            <button type="button" class="add-set-button btn btn-primary">Add Set</button>
+        `;
 
-<button type="button" class="delete-exercise-button btn btn-danger">Delete Exercise</button>
-<table class=".custom-table">
-<thead>
-    <tr>
-        <th>Set Number</th>
-        <th>Reps</th>
-        <th></th>
-    </tr>
-</thead>
-<tbody>
-    <tr>
-        <td>1</td>
-        <td><input type="number" name="reps_${exerciseId}_1" value="10" /></td>
-        <td></td>
-    </tr>
-</tbody>
-</table>
-<button type="button" class="add-set-button btn btn-primary">Add Set</button>
-`;
-
-            // Append the new exercise to the workout exercises section
             document.querySelector(".workout-exercises").appendChild(exerciseDiv);
         });
 
-
         assignAddSetButtonEvent();
+
         // Close the modal after saving
         document.getElementById("exercise-modal").style.display = "none";
+    }
 
+    // Hook up event listeners
+    document.querySelectorAll('.add-excersies-btn').forEach(button => {
+        // On button click: add selected exercises
+        button.addEventListener('click', addSelectedExercises);
     });
+
+    // Listen for checkbox changes to update button text count
+    checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', updateButtonText);
+    });
+
+    // Initialize button text on load
+    setTimeout(updateButtonText, 100);
 
 
     const input = document.getElementById("workout-title");
     const saveBtn = document.getElementById("update-workout-btn");
-
 
 
     // Function to update button disabled state

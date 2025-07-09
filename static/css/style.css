@@ -348,6 +348,41 @@ p {
 }
 
 
+/* Workout Title Styles */
+
+.workout-title-wrapper {
+    display: flex;
+    justify-content: center;
+    /* centers horizontally */
+    margin: 20px 0;
+    /* optional vertical spacing */
+}
+
+.workout-title-wrapper input {
+    width: 90%;               /* full width of its container */
+    max-width: 1200px;          /* limits max size on large screens */
+    padding: 12px 20px;        /* comfortable padding inside */
+    font-size: 1.3rem;         /* larger readable text */
+    font-weight: 600;          /* slightly bold for emphasis */
+    text-align: center;        /* center the text inside the input */
+    border: 2px solid var(--primary-colour); /* clean border with your primary color */
+    border-radius: 12px;       /* smooth rounded corners */
+    background-color: var(--background-light, #f9f9f9); /* light background, fallback color */
+    color: var(--primary-colour); /* text color matching primary */
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1); /* subtle shadow for depth */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    outline: none;             /* remove default outline */
+    cursor: text;
+  }
+  
+  .workout-title-wrapper input:focus {
+    border-color: var(--highlight-colour, #ff7f50); /* highlight border on focus */
+    box-shadow: 0 0 8px var(--highlight-colour, #ff7f50);
+    background-color: white;
+  }
+
+
+
 
 /* Workout List Styles */
 
@@ -711,5 +746,3 @@ td {
     overflow-y: auto;
 
 }
-
-
