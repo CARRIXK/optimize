@@ -113,7 +113,7 @@
                     {% for exercise in exercises %}
                     <div class="exercise-item">
                         <!-- Image on the left -->
-                        <div class="image-container">
+                        <div class="image-container" style="border: 1px solid red;">
                             <img src="{{ exercise.exercise_image }}" alt="" style="width: 100%;">
                         </div>
 
@@ -135,7 +135,7 @@
             </main>
 
             <footer class="footer-actions">
-                <button  class="">Add Exercises</button>
+                <button  class="add-excersies-btn" id="add-ex-btn">Add Exercises</button>
             </footer>
         </div>
     </div>

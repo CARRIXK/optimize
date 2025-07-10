@@ -271,8 +271,9 @@ p {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 60px;
-    padding: 0 16px;
+    min-height: 56px;
+    padding: 12px 20px;
+    z-index: 1000;       
     background-color: var(--primary-colour);
     color: var(--text-white);
     border-bottom: 1px solid var(--description);
@@ -298,6 +299,10 @@ p {
 
 }
 
+main {
+    background-color: red;
+  }
+
 
 .sticky-search-bar {
     position: fixed;
@@ -319,7 +324,9 @@ p {
     align-items: center;
     bottom: 0;
     width: 100%;
+    min-height: 60px;
     height: 10%;
+    padding: 10px 20px;
     background-color: var(--primary-colour);
     padding: 10px 20px;
     box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
@@ -360,7 +367,6 @@ p {
 
 .workout-title-wrapper input {
     width: 90%;               /* full width of its container */
-    max-width: 1200px;          /* limits max size on large screens */
     padding: 12px 20px;        /* comfortable padding inside */
     font-size: 1.3rem;         /* larger readable text */
     font-weight: 600;          /* slightly bold for emphasis */
@@ -592,10 +598,10 @@ body {
 /* Add excersises styles */
 
 .exercise-list {
-    height: 80vh;
-    margin-top: 10%;
-    overflow-y: auto;
-}
+    flex: 1 1 auto; /* fill available space in main */
+    height: 100vh;
+    overflow-y: auto; 
+  }
 
 .exercise-item {
     display: flex;
