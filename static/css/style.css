@@ -176,6 +176,11 @@ body {
 }
 
 
+main {
+    width: 100vw;
+}
+
+
 /* Login page styles */
 
 
@@ -273,7 +278,7 @@ p {
     justify-content: space-between;
     min-height: 56px;
     padding: 12px 20px;
-    z-index: 1000;       
+    z-index: 1000;
     background-color: var(--primary-colour);
     color: var(--text-white);
     border-bottom: 1px solid var(--description);
@@ -299,9 +304,6 @@ p {
 
 }
 
-main {
-    background-color: red;
-  }
 
 
 .sticky-search-bar {
@@ -366,26 +368,38 @@ main {
 }
 
 .workout-title-wrapper input {
-    width: 90%;               /* full width of its container */
-    padding: 12px 20px;        /* comfortable padding inside */
-    font-size: 1.3rem;         /* larger readable text */
-    font-weight: 600;          /* slightly bold for emphasis */
-    text-align: center;        /* center the text inside the input */
-    border: 2px solid var(--primary-colour); /* clean border with your primary color */
-    border-radius: 12px;       /* smooth rounded corners */
-    background-color: var(--background-light, #f9f9f9); /* light background, fallback color */
-    color: var(--primary-colour); /* text color matching primary */
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1); /* subtle shadow for depth */
+    width: 90%;
+    /* full width of its container */
+    padding: 12px 20px;
+    /* comfortable padding inside */
+    font-size: 1.3rem;
+    /* larger readable text */
+    font-weight: 600;
+    /* slightly bold for emphasis */
+    text-align: center;
+    /* center the text inside the input */
+    border: 2px solid var(--primary-colour);
+    /* clean border with your primary color */
+    border-radius: 12px;
+    /* smooth rounded corners */
+    background-color: var(--background-light, #f9f9f9);
+    /* light background, fallback color */
+    color: var(--primary-colour);
+    /* text color matching primary */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    /* subtle shadow for depth */
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
-    outline: none;             /* remove default outline */
+    outline: none;
+    /* remove default outline */
     cursor: text;
-  }
-  
-  .workout-title-wrapper input:focus {
-    border-color: var(--highlight-colour, #ff7f50); /* highlight border on focus */
+}
+
+.workout-title-wrapper input:focus {
+    border-color: var(--highlight-colour, #ff7f50);
+    /* highlight border on focus */
     box-shadow: 0 0 8px var(--highlight-colour, #ff7f50);
     background-color: white;
-  }
+}
 
 
 
@@ -457,6 +471,11 @@ main {
 .create-workout-btn:hover {
     color: var(--highlight-colour);
     border-color: var(--highlight-colour);
+}
+
+.search-excersises-input {
+    width: 100%;
+    height: 100%;
 }
 
 
@@ -598,10 +617,11 @@ body {
 /* Add excersises styles */
 
 .exercise-list {
-    flex: 1 1 auto; /* fill available space in main */
+    flex: 1 1 auto;
+    /* fill available space in main */
     height: 100vh;
-    overflow-y: auto; 
-  }
+    overflow-y: auto;
+}
 
 .exercise-item {
     display: flex;
@@ -624,8 +644,6 @@ body {
 .image-container img {
     width: 100%;
     /* Ensure the image fills the container */
-    height: auto;
-    /* Maintain aspect ratio */
 }
 
 .exercise-details {
@@ -634,71 +652,42 @@ body {
     margin-left: 20px;
 }
 
-.form-check {
-    flex: 0 0 15%;
-    /* Checkbox input takes up 15% of the width */
-    text-align: right;
-    /* Right align checkbox */
-    display: flex;
-    align-items: center;
-    /* Vertically align checkbox and label */
-    justify-content: flex-end;
-    /* Align the checkbox to the right side */
-}
+
 
 /* Custom style for checkbox */
-.form-check-input {
+
+
+.circle-checkbox {
     appearance: none;
-    /* Remove default checkbox styling */
     -webkit-appearance: none;
-    /* For Safari */
     -moz-appearance: none;
-    /* For Firefox */
-    width: 25px;
-    height: 25px;
-    border: 2px solid var(--primary-colour);
-    border-radius: 50%;
-    /* Make it circular */
-    background-color: var(--secondary-colour);
-    transition: background-color 0.3s, border-color 0.3s;
+    width: clamp(18px, 1.5vw, 28px);
+    height: clamp(18px, 1.5vw, 28px);
+    font-size: clamp(12px, 1.2vw, 20px);
+    border: 2px solid var(--text-white); /* Dark grey/black outline */
+    border-radius: 50%;      /* Makes it a circle */
+    background-color: transparent; /* Keeps it unfilled */
     cursor: pointer;
-    position: relative;
-    /* For positioning the checkmark */
 }
 
-/* Style for checked state */
-.form-check-input:checked {
+/* When checked: black background + white tick */
+.circle-checkbox:checked {
     background-color: var(--primary-colour);
-    /* When checked, background is primary color */
-}
-
-/* Adding a custom checkmark using ::before */
-.form-check-input:checked::before {
-    content: '';
-    /* Empty content */
+    border-color: var(--primary-colour);
+  }
+  
+  .circle-checkbox:checked::after {
+    content: "✓";
+    color: white;
+    font-size: 14px;
     position: absolute;
-    /* Positioning the checkmark */
-    top: 5px;
-    /* Move checkmark down */
-    left: 8px;
-    /* Move checkmark to the right */
-    width: 10px;
-    /* Width of the checkmark */
-    height: 10px;
-    /* Height of the checkmark */
-    border: solid white;
-    /* White color for the checkmark */
-    border-width: 0 3px 3px 0;
-    /* Create the checkmark shape */
-    transform: rotate(45deg);
-    /* Rotate to form a checkmark */
-}
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -55%);
+    font-weight: bold;
+  }
 
-/* Optional: Adding hover effect */
-.form-check-input:hover {
-    background-color: var(--highlight-colour);
-    border-color: var(--highlight-colour);
-}
+
 
 
 /* Reps and sets styles */

@@ -47,9 +47,6 @@ class Set(models.Model):
 
 
 
-
-
-
 class ExerciseSet(models.Model):
     exercise = models.ForeignKey(Exercise, related_name='excercise_sets', on_delete=models.CASCADE, null=True, blank=True)
     set_number = models.IntegerField()

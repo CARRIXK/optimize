@@ -107,15 +107,16 @@
             </div>
 
             <main>
-                <input type="text" id="search-input" placeholder="Search Exercises" class="form-control mb-3">
+                <!-- <input type="text" class="search-exercises-input form-control mb-3" placeholder="Search Exercises"> -->
 
                 <div class="exercise-list">
                     {% for exercise in exercises %}
                     <div class="exercise-item">
-                        <!-- Image on the left -->
-                        <div class="image-container" style="border: 1px solid red;">
-                            <img src="{{ exercise.exercise_image }}" alt="" style="width: 100%;">
+                        
+                        <div class="image-container">
+                            <img src="{% static 'images/image-coming-soon.png' %}" alt="Exercise Image" />
                         </div>
+
 
                         <!-- Exercise name in the middle -->
                         <div class="exercise-details">
@@ -124,8 +125,7 @@
 
                         <!-- Checkbox input on the far right -->
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="selected_exercises"
-                                value="{{ exercise.exercise_name }}" id="exercise{{ exercise.id }}">
+                            <input class="form-check-input circle-checkbox" type="checkbox" name="selected_exercises" value="{{ exercise.exercise_name }}" id="exercise{{ exercise.id }}">
                             <label class="form-check-label" for="exercise{{ exercise.id }}"></label>
                         </div>
 
@@ -135,7 +135,7 @@
             </main>
 
             <footer class="footer-actions">
-                <button  class="add-excersies-btn" id="add-ex-btn">Add Exercises</button>
+                <button class="add-excersies-btn" id="add-ex-btn">Add Exercises</button>
             </footer>
         </div>
     </div>
