@@ -91,8 +91,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-
-
     // Your existing function to update button text
     function updateButtonText() {
         const checkedCheckboxes = document.querySelectorAll('.form-check-input:checked');
@@ -290,12 +288,26 @@ document.addEventListener("DOMContentLoaded", function () {
     assignAddSetButtonEvent();
 
 
+
+    // Delete exercise button functionality
     deleteExerciseButtons.forEach(button => {
         button.addEventListener('click', function () {
             exerciseToDelete = button.closest('.exercise');
             $('#deleteModal').modal('show');
         });
     });
+
+
+    // Delete set button functionality
+    document.addEventListener('click', function (e) {
+        if (e.target && e.target.classList.contains('delete-set-button')) {
+            const row = e.target.closest('tr'); // Adjust to match your row class
+            if (row) row.remove();
+        }
+    });
+
+
+
 
     document.getElementById('confirmDeleteButton').addEventListener('click', function () {
         if (exerciseToDelete) {
