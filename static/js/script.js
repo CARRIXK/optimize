@@ -125,27 +125,60 @@ document.addEventListener("DOMContentLoaded", function () {
             exerciseDiv.classList.add("exercise");
             exerciseDiv.setAttribute("data-id", exerciseName);
 
+            const saveHTML = ` 
+                 <div class="excersise">
+                    <h2>${exerciseName}</h2>
+                    <button type="button" class="delete-exercise-button btn btn-danger">Delete Exercise</button>
+                    <table class="custom-table">
+                        <thead>
+                            <tr>
+                                <th>Set Number</th>
+                                <th>Reps</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td><input type="number" name="reps_${exerciseId}_1" value="10" /></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <button type="button" class="add-set-button btn btn-primary">Add Set</button>
+                </div>`
+
+
             exerciseDiv.innerHTML = `
-            <h2>${exerciseName}</h2>
-            <button type="button" class="delete-exercise-button btn btn-danger">Delete Exercise</button>
-            <table class="custom-table">
-                <thead>
-                    <tr>
-                        <th>Set Number</th>
-                        <th>Reps</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td><input type="number" name="reps_${exerciseId}_1" value="10" /></td>
-                        <td></td>
-                    </tr>
-                </tbody>
-            </table>
-            <button type="button" class="add-set-button btn btn-primary">Add Set</button>
-        `;
+        
+
+                <div class="excersise-header">
+                     <img class="" src="/static/images/image-coming-soon.png" alt="Exercise Image" />
+                    <h2>${exerciseName}</h2>
+                    <button type="button" class="delete-exercise-button btn btn-danger">Delete Exercise</button>
+                </div>
+             
+                <table class=".custom-table">
+                    <thead>
+                        <tr>
+                            <th>Set Number</th>
+                            <th>Reps</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td><input type="number" name="reps_${exerciseId}_1"
+                                    value="10" /></td>
+                            <td><button type="button" class="delete-set-button btn btn-danger">Delete</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button type="button" class="add-set-button btn btn-primary">Add Set</button>
+                
+            `;
+
 
             document.querySelector(".workout-exercises").appendChild(exerciseDiv);
         });

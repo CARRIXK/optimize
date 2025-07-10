@@ -34,9 +34,12 @@
             </div>
             {% for exercise in exercises_with_sets %}
             <div class="exercise" data-id="{{ exercise.exercise_name }}">
-                <h2>{{ exercise_name }}</h2>
-                <img src="{{ exercise_image }}" alt="{{ exercise.exercise_name }}" class="exercise-image" height="50px">
-                <button type="button" class="delete-exercise-button btn btn-danger">Delete Exercise</button>
+                <div class="excersise-header">
+                    <img class="" src="{% static 'images/image-coming-soon.png' %}" alt="Exercise Image" />
+                    <h2>{{ exercise.exercise_name }}</h2>
+                    <button type="button" class="delete-exercise-button btn btn-danger">Delete Exercise</button>
+                </div>
+
                 <table class=".custom-table">
                     <thead>
                         <tr>

@@ -642,7 +642,7 @@ body {
 }
 
 .image-container img {
-    width: 100%;
+    width: 50%;
     /* Ensure the image fills the container */
 }
 
@@ -740,4 +740,11 @@ td {
     padding-bottom: 2%;
     overflow-y: auto;
 
+}
+
+.excersise-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
 }
