@@ -2,6 +2,21 @@ document.addEventListener("DOMContentLoaded", function () {
 
     console.log("Life, The Universe and Everything!");
 
+    // 🔹 Declare all DOM element references at the top
+    const checkboxes = document.querySelectorAll('.form-check-input');
+    const addExBtn = document.getElementById('add-ex-btn');
+    const selectedExercisesInput = document.getElementById('selected-exercises');
+    const closeModalBtn = document.getElementById("close-modal-btn");
+    const input = document.getElementById("workout-title");
+    const saveBtn = document.getElementById("update-workout-btn");
+    const addSetButtons = document.querySelectorAll('.add-set-button');
+    const deleteExerciseButtons = document.querySelectorAll('.delete-exercise-button');
+    let exerciseToDelete = null;
+    const saveWorkoutButton = document.getElementById('save-workout-btn');
+    const updateWorkoutButton = document.getElementById('update-workout-btn');
+    const workoutTitle = document.getElementById('workout-title').value;
+    let workoutId = null;
+    const openExercisesModelBtn = document.getElementById("open-exercises-model-btn");
 
 
     document.querySelectorAll('back-btn').forEach(button => {
@@ -12,10 +27,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     // JavaScript to open and close add excercise modal
-    const exAddBtn = document.getElementById("add-ex-btn");
-
-    if (exAddBtn) {
-        addExBtn.addEventListener("click", function () {
+    if (openExercisesModelBtn) {
+        openExercisesModelBtn.addEventListener("click", function () {
             console.log("Add Exercise button clicked");
             const modal = document.getElementById("exercise-modal");
             if (modal) {
@@ -24,11 +37,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-
-
-    const checkboxes = document.querySelectorAll('.form-check-input');
-    const addExBtn = document.getElementById('add-excersies-btn');
-    const selectedExercisesInput = document.getElementById('selected-exercises');
 
 
     function updateButtonText() {
@@ -59,9 +67,6 @@ document.addEventListener("DOMContentLoaded", function () {
     // Run once after a short delay to initialize
     setTimeout(updateButtonText, 100);
 
-
-
-    const closeModalBtn = document.getElementById("close-modal-btn");
 
     if (closeModalBtn) {
         closeModalBtn.addEventListener("click", function () {
@@ -197,7 +202,7 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("exercise-modal").style.display = "none";
     }
 
-    // Hook up event listeners
+    // When add exercises button is clicked, add selected exercises to excersises in workout
     document.querySelectorAll('.add-excersies-btn').forEach(button => {
         // On button click: add selected exercises
         button.addEventListener('click', addSelectedExercises);
@@ -211,9 +216,6 @@ document.addEventListener("DOMContentLoaded", function () {
     // Initialize button text on load
     setTimeout(updateButtonText, 100);
 
-
-    const input = document.getElementById("workout-title");
-    const saveBtn = document.getElementById("update-workout-btn");
 
     // Define the function in outer scope
     function updateButtonState() {
@@ -235,15 +237,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-
-    const addSetButtons = document.querySelectorAll('.add-set-button');
-    const deleteExerciseButtons = document.querySelectorAll('.delete-exercise-button');
-    let exerciseToDelete = null;
-    const saveWorkoutButton = document.getElementById('save-workout-btn');
-    const updateWorkoutButton = document.getElementById('update-workout-btn');
-    const workoutTitle = document.getElementById('workout-title').value;
-
-    let workoutId = null;
     const workoutIdElement = document.getElementById('workout-id');
     if (workoutIdElement) {
         workoutId = workoutIdElement.value;

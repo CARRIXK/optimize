@@ -67,10 +67,12 @@ def add_exercise_sets(request):
         # Filter ExerciseType objects based on selected exercise names
         matching_exercises = ExerciseType.objects.filter(exercise_name__in=selected_excersises)
 
+        exercises = ExerciseType.objects.exclude(exercise_image__isnull=True)
         
         context = {
             'selected_excersises': matching_exercises,
             'workout_title': workout_title,
+            'exercises': exercises,  # Pass all exercises to the template
         }
         return render(request, 'workouts/workout_set_reps.html', context)
     
