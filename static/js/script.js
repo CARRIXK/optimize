@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", function () {
     console.log("Life, The Universe and Everything!");
 
 
+
     document.querySelectorAll('back-btn').forEach(button => {
         button.addEventListener('click', function () {
             window.history.back();
@@ -10,14 +11,18 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
 
-
-
-
     // JavaScript to open and close add excercise modal
-    document.getElementById("add-ex-btn").addEventListener("click", function () {
-        console.log("Add Exercise button clicked");
-        document.getElementById("exercise-modal").style.display = "block";
-    });
+    const exAddBtn = document.getElementById("add-ex-btn");
+
+    if (exAddBtn) {
+        addExBtn.addEventListener("click", function () {
+            console.log("Add Exercise button clicked");
+            const modal = document.getElementById("exercise-modal");
+            if (modal) {
+                modal.style.display = "block";
+            }
+        });
+    }
 
 
 
@@ -56,13 +61,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
+    const closeModalBtn = document.getElementById("close-modal-btn");
+
+    if (closeModalBtn) {
+        closeModalBtn.addEventListener("click", function () {
+            const modal = document.getElementById("exercise-modal");
+            if (modal) {
+                modal.style.display = "none";
+            }
+        });
+    }
 
 
-
-
-    document.getElementById("close-modal-btn").addEventListener("click", function () {
-        document.getElementById("exercise-modal").style.display = "none";
-    });
 
     function assignAddSetButtonEvent() {
         const addSetButtons = document.querySelectorAll('.add-set-button');
@@ -205,14 +215,14 @@ document.addEventListener("DOMContentLoaded", function () {
     const input = document.getElementById("workout-title");
     const saveBtn = document.getElementById("update-workout-btn");
 
-
-    // Function to update button disabled state
+    // Define the function in outer scope
     function updateButtonState() {
-        // Trim whitespace and check if input is empty
-        if (input.value.trim() === "") {
-            saveBtn.disabled = true;
-        } else {
-            saveBtn.disabled = false;
+        if (input && saveBtn) {
+            if (input.value.trim() === "") {
+                saveBtn.disabled = true;
+            } else {
+                saveBtn.disabled = false;
+            }
         }
     }
 
@@ -220,7 +230,9 @@ document.addEventListener("DOMContentLoaded", function () {
     updateButtonState();
 
     // Listen for input changes and update button state
-    input.addEventListener("input", updateButtonState);
+    if (input) {
+        input.addEventListener("input", updateButtonState);
+    }
 
 
 
@@ -309,20 +321,20 @@ document.addEventListener("DOMContentLoaded", function () {
     // Input validation for reps
     document.querySelectorAll('.reps-input').forEach(input => {
         input.addEventListener('input', function () {
-          let value = input.value;
-      
-          // Remove non-digits and leading zeros
-          value = value.replace(/[^0-9]/g, '');
-      
-          // Convert to number and prevent zero or empty
-          if (value !== '') {
-            const intValue = parseInt(value);
-            input.value = intValue < 1 ? 1 : intValue;
-          } else {
-            input.value = ''; // Allow empty temporarily
-          }
+            let value = input.value;
+
+            // Remove non-digits and leading zeros
+            value = value.replace(/[^0-9]/g, '');
+
+            // Convert to number and prevent zero or empty
+            if (value !== '') {
+                const intValue = parseInt(value);
+                input.value = intValue < 1 ? 1 : intValue;
+            } else {
+                input.value = ''; // Allow empty temporarily
+            }
         });
-      });
+    });
 
 
 
@@ -459,11 +471,12 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // Button click handlers
-    // if (saveWorkoutButton) {
-    //     saveWorkoutButton.addEventListener('click', function () {
-    //         sendWorkoutData('save_workout');
-    //     });
-    // }
+    if (saveWorkoutButton) {
+        saveWorkoutButton.addEventListener('click', function () {
+            console.log("Save workout button pressed");
+            sendWorkoutData('save_workout');
+        });
+    }
 
 
     if (updateWorkoutButton) {

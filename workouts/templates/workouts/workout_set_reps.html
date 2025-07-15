@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- In your template, ensure the CSRF token is included in the page -->
     <meta name="csrf-token" content="{{ csrf_token }}">
-    <title>Workout Plan</title>
+    <title>New Workout</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
@@ -16,38 +16,53 @@
 </head>
 
 <body>
-    <header class="header">
-        <h1>Workout Plan for: <input id="workout-title" value="{{ workout_title }}">    </h1>
+
+    <header class="header-actions">
+        <a href="{% url 'workouts' %}" aria-label="Go back">
+            <img src="{% static 'images/arrow_back.svg' %}" alt="Back">
+        </a>
+        <h1>New Workout</h1>
     </header>
 
-    <div class="workout-excersises ">
-        {% for exercise in selected_excersises %}
-        <div class="exercise" data-id="{{ exercise.exercise_name }}">
-            <h2>{{ exercise.exercise_name }}</h2>
-            <img src="{{ exercise.exercise_image }}" alt="{{ exercise.exercise_name }}" class="exercise-image"
-                height="50px">
-            <button type="button" class="delete-exercise-button btn btn-danger">Delete Exercise</button>
-            <table class=".custom-table">
-                <thead>
-                    <tr>
-                        <th>Set Number</th>
-                        <th>Reps</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td><input type="number" name="reps_{{ exercise.id }}_1" value="10" /></td>
-                        <td></td>
-                    </tr>
-                </tbody>
-            </table>
-            <button type="button" class="add-set-button btn btn-primary">Add Set</button>
+    <!-- <input id="workout-title" value="{{ workout_title }}"> -->
+
+    <main>
+
+        <div class="workout-title-wrapper">
+            <input id="workout-title" value="{{ workout_title }}" placeholder="Untitled Workout" />
         </div>
 
-        {% endfor %}
-    </div>
+        <div class="workout-excersises">
+            {% for exercise in selected_excersises %}
+            <div class="exercise" data-id="{{ exercise.exercise_name }}">
+                <h2>{{ exercise.exercise_name }}</h2>
+                <img src="{{ exercise.exercise_image }}" alt="{{ exercise.exercise_name }}" class="exercise-image"
+                    height="50px">
+                <button type="button" class="delete-exercise-button btn btn-danger">Delete Exercise</button>
+                <table class=".custom-table">
+                    <thead>
+                        <tr>
+                            <th>Set Number</th>
+                            <th>Reps</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td><input type="number" name="reps_{{ exercise.id }}_1" value="10" /></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button type="button" class="add-set-button btn btn-primary">Add Set</button>
+            </div>
+
+            {% endfor %}
+        </div>
+
+    </main>
+
 
     <!-- Delete Confirmation Modal -->
     <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel"
@@ -75,10 +90,139 @@
         <button type="button" class="btn btn-success" id="save-workout-btn">Save Workout</button>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-    <script src="{% static 'js/set_reps.js' %}"></script>
+    <!-- <script>
+        const saveWorkoutButton = document.getElementById('save-workout-btn');
+
+
+        // Validation functions
+        function validateWorkoutTitle(title) {
+            const errors = [];
+
+            // Trim whitespace
+            const trimmedTitle = title.trim();
+
+            // Required check
+            if (trimmedTitle.length === 0) {
+                errors.push("Workout title is required.");
+            }
+
+            if (trimmedTitle.length > 50) {
+                errors.push("Workout title must be 50 characters or fewer.");
+            }
+
+            // Allowed characters (letters, numbers, spaces, dashes, and apostrophes)
+            const pattern = /^[a-zA-Z0-9\s\-']+$/;
+            if (!pattern.test(trimmedTitle)) {
+                errors.push("Workout title can only contain letters, numbers, spaces, dashes, and apostrophes.");
+            }
+
+            return {
+                isValid: errors.length === 0,
+                errors: errors
+            };
+        }
+
+
+        function gatherWorkoutData() {
+            const workoutTitle = document.getElementById('workout-title').value;
+
+            const exercises = [];
+
+            console.clear();
+
+            document.querySelectorAll('.exercise').forEach(function (exerciseDiv) {
+                const exercise_name = exerciseDiv.getAttribute('data-id');
+                const exerciseReps = [];
+
+                exerciseDiv.querySelectorAll('input[type="number"]').forEach(function (input, index) {
+                    const setNumber = index + 1;
+                    const reps = input.value;
+                    exerciseReps.push({ set: setNumber, reps: reps });
+                });
+
+                exercises.push({
+                    exercise_type: exercise_name,
+                    set_reps: exerciseReps
+                });
+            });
+
+            console.log('Workout Title:', workoutTitle);
+            console.log('Exercises data:', exercises);
+
+            return {
+                title: workoutTitle,
+                exercises: exercises
+            };
+        }
+
+        function sendWorkoutData(url, workoutId = null) {
+            console.log("send workout data function triggered")
+            const workoutData = gatherWorkoutData();
+
+            console.log("Ready to send workout data");
+            console.log("Workout Data:", workoutData);
+
+
+            // If a workout id is sent to the function then print it
+            if (workoutId) {
+                console.log("The workout id is:", workoutId)
+                console.log("The url is:", url);
+            }
+
+            // Validate workout title
+            console.log("Validating workout title:", workoutData.title);
+            const titleValidation = validateWorkoutTitle(workoutData.title);
+            if (!titleValidation.isValid) {
+                console.log("Invalid title:", result.errors);
+            } else {
+                console.log("Title is valid!");
+            }
+
+
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRFToken': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                }
+            });
+
+            $.ajax({
+                type: 'POST',
+                url: url,
+                data: {
+                    'id': workoutId,  // Only included if editing
+                    'title': workoutData.title,
+                    'exercise_type': JSON.stringify(workoutData.exercises),
+                },
+                success: function (response) {
+                    if (response.status === 'success') {
+                        alert(`Workout ${workoutId ? 'updated' : 'saved'} successfully!`);
+                        window.location.href = '/workouts/';  // Redirect to the workouts page
+                    } else {
+                        alert(`Failed to ${workoutId ? 'update' : 'save'} workout.`);
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error updating workout:', error);
+                    alert('Something went wrong. Please try again.');
+                }
+            });
+        }
+
+
+
+        // Button click handlers
+        if (saveWorkoutButton) {
+            saveWorkoutButton.addEventListener('click', function () {
+                console.log("Save Workout button clicked");
+                sendWorkoutData('save_workout');
+            });
+        }
+    </script> -->
+
+
+    <script src="{% static 'js/script.js' %}"></script>
 
 </body>
 

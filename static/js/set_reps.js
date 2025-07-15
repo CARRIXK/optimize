@@ -1,4 +1,7 @@
 document.addEventListener('DOMContentLoaded', function () {
+    console.log("set_reps.js loaded");
+
+
     const addSetButtons = document.querySelectorAll('.add-set-button');
     const deleteExerciseButtons = document.querySelectorAll('.delete-exercise-button');
     let exerciseToDelete = null;
@@ -90,89 +93,89 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
     // Function to gather workout data
-    // function gatherWorkoutData() {
-    //     const workoutTitle = document.getElementById('workout-title').value;
+    function gatherWorkoutData() {
+        const workoutTitle = document.getElementById('workout-title').value;
 
-    //     const exercises = [];
+        const exercises = [];
 
-    //     console.clear();
+        console.clear();
 
-    //     document.querySelectorAll('.exercise').forEach(function (exerciseDiv) {
-    //         const exercise_name = exerciseDiv.getAttribute('data-id');
-    //         const exerciseReps = [];
+        document.querySelectorAll('.exercise').forEach(function (exerciseDiv) {
+            const exercise_name = exerciseDiv.getAttribute('data-id');
+            const exerciseReps = [];
 
-    //         exerciseDiv.querySelectorAll('input[type="number"]').forEach(function (input, index) {
-    //             const setNumber = index + 1;
-    //             const reps = input.value;
-    //             exerciseReps.push({ set: setNumber, reps: reps });
-    //         });
+            exerciseDiv.querySelectorAll('input[type="number"]').forEach(function (input, index) {
+                const setNumber = index + 1;
+                const reps = input.value;
+                exerciseReps.push({ set: setNumber, reps: reps });
+            });
 
-    //         exercises.push({
-    //             exercise_type: exercise_name,
-    //             set_reps: exerciseReps
-    //         });
-    //     });
+            exercises.push({
+                exercise_type: exercise_name,
+                set_reps: exerciseReps
+            });
+        });
 
-    //     console.log('Workout Title:', workoutTitle);
-    //     console.log('Exercises data:', exercises);
+        console.log('Workout Title:', workoutTitle);
+        console.log('Exercises data:', exercises);
 
-    //     return {
-    //         title: workoutTitle,
-    //         exercises: exercises
-    //     };
-    // }
-
-
-
-    // function sendWorkoutData(url, workoutId = null) {
-    //     console.log("send workout data function triggered")
-    //     const workoutData = gatherWorkoutData();
+        return {
+            title: workoutTitle,
+            exercises: exercises
+        };
+    }
 
 
-    //     // If a workout id is sent to the function then print it
-    //     if (workoutId) {
-    //         console.log("The workout id is:", workoutId)
-    //         console.log("The url is:", url);
-    //     }
 
-    //     // Validate workout title
-    //     console.log("Validating workout title:", workoutData.title);
-    //     const titleValidation = validateWorkoutTitle(workoutData.title);
-    //     if (!titleValidation.isValid) {
-    //         console.log("Invalid title:", result.errors);
-    //     } else {
-    //         console.log("Title is valid!");
-    //     }
+    function sendWorkoutData(url, workoutId = null) {
+        console.log("send workout data function triggered")
+        const workoutData = gatherWorkoutData();
 
 
-    //     $.ajaxSetup({
-    //         headers: {
-    //             'X-CSRFToken': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-    //         }
-    //     });
+        // If a workout id is sent to the function then print it
+        if (workoutId) {
+            console.log("The workout id is:", workoutId)
+            console.log("The url is:", url);
+        }
 
-    //     $.ajax({
-    //         type: 'POST',
-    //         url: url,
-    //         data: {
-    //             'id': workoutId,  // Only included if editing
-    //             'title': workoutData.title,
-    //             'exercise_type': JSON.stringify(workoutData.exercises),
-    //         },
-    //         success: function (response) {
-    //             if (response.status === 'success') {
-    //                 alert(`Workout ${workoutId ? 'updated' : 'saved'} successfully!`);
-    //                 window.location.href = '/workouts/';  // Redirect to the workouts page
-    //             } else {
-    //                 alert(`Failed to ${workoutId ? 'update' : 'save'} workout.`);
-    //             }
-    //         },
-    //         error: function (xhr, status, error) {
-    //             console.error('Error updating workout:', error);
-    //             alert('Something went wrong. Please try again.');
-    //         }
-    //     });
-    // }
+        // Validate workout title
+        console.log("Validating workout title:", workoutData.title);
+        const titleValidation = validateWorkoutTitle(workoutData.title);
+        if (!titleValidation.isValid) {
+            console.log("Invalid title:", result.errors);
+        } else {
+            console.log("Title is valid!");
+        }
+
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRFToken': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            }
+        });
+
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: {
+                'id': workoutId,  // Only included if editing
+                'title': workoutData.title,
+                'exercise_type': JSON.stringify(workoutData.exercises),
+            },
+            success: function (response) {
+                if (response.status === 'success') {
+                    alert(`Workout ${workoutId ? 'updated' : 'saved'} successfully!`);
+                    window.location.href = '/workouts/';  // Redirect to the workouts page
+                } else {
+                    alert(`Failed to ${workoutId ? 'update' : 'save'} workout.`);
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error('Error updating workout:', error);
+                alert('Something went wrong. Please try again.');
+            }
+        });
+    }
 
 
     // Validate workout title
@@ -204,36 +207,36 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Button click handlers
-    // if (saveWorkoutButton) {
-    //     saveWorkoutButton.addEventListener('click', function () {
-    //         sendWorkoutData('save_workout');
-    //     });
-    // }
+    if (saveWorkoutButton) {
+        saveWorkoutButton.addEventListener('click', function () {
+            sendWorkoutData('save_workout');
+        });
+    }
 
 
-    // if (updateWorkoutButton) {
-    //     if (workoutId) {
-    //         updateWorkoutButton.addEventListener('click', function () {
-    //             console.log("update workout button pressed my g");
-    //             console.log("Workout id:", workoutId);
+    if (updateWorkoutButton) {
+        if (workoutId) {
+            updateWorkoutButton.addEventListener('click', function () {
+                console.log("update workout button pressed my g");
+                console.log("Workout id:", workoutId);
 
-    //             // Validate workout data on frontend before sending to backend
-    //             console.log("Validating workout data before sending to backend...");
-    //             const titleValidation = validateWorkoutTitle("Chest Day 1");
+                // Validate workout data on frontend before sending to backend
+                console.log("Validating workout data before sending to backend...");
+                const titleValidation = validateWorkoutTitle("Chest Day 1");
 
-    //             if (!titleValidation.isValid) {
-    //                 console.log("Invalid title:", result.errors);
-    //             } else {
-    //                 console.log("Title is valid!");
-    //             }
+                if (!titleValidation.isValid) {
+                    console.log("Invalid title:", result.errors);
+                } else {
+                    console.log("Title is valid!");
+                }
 
 
-    //             // const updateWorkoutUrl = `/workouts/update_workout/`;  // Match the URL pattern
-    //             // sendWorkoutData(updateWorkoutUrl, workoutId);
-    //         });
-    //     } else {
-    //         console.log("There is no workout Id");
-    //     }
-    // }
+                // const updateWorkoutUrl = `/workouts/update_workout/`;  // Match the URL pattern
+                // sendWorkoutData(updateWorkoutUrl, workoutId);
+            });
+        } else {
+            console.log("There is no workout Id");
+        }
+    }
 
 });
