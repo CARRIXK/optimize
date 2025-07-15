@@ -77,7 +77,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 const newRow = document.createElement('tr');
                 newRow.innerHTML = `
         <td>${setCount}</td>
-        <td><input type="number" name="reps_${exerciseId}_${setCount}" value="10" /></td>
+        <td><input class="reps-input" type="number" name="reps_${exerciseId}_${setCount}" value="10" min="1" step="1"/></td>
         <td><button type="button" class="delete-set-button btn btn-danger">Delete</button></td>
     `;
 
@@ -138,7 +138,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         <tbody>
                             <tr>
                                 <td>1</td>
-                                <td><input type="number" name="reps_${exerciseId}_1" value="10" /></td>
+                                <td><input type="number" name="reps_${exerciseId}_1" value="10" min="1" step="1"/></td>
                                 <td></td>
                             </tr>
                         </tbody>
@@ -168,7 +168,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         <tr>
                             <td>1</td>
                             <td><input type="number" name="reps_${exerciseId}_1"
-                                    value="10" /></td>
+                                    value="10" min="1" step="1"/></td>
                             <td><button type="button" class="delete-set-button btn btn-danger">Delete</button></td>
                         </tr>
                     </tbody>
@@ -306,6 +306,23 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
+    // Input validation for reps
+    document.querySelectorAll('.reps-input').forEach(input => {
+        input.addEventListener('input', function () {
+          let value = input.value;
+      
+          // Remove non-digits and leading zeros
+          value = value.replace(/[^0-9]/g, '');
+      
+          // Convert to number and prevent zero or empty
+          if (value !== '') {
+            const intValue = parseInt(value);
+            input.value = intValue < 1 ? 1 : intValue;
+          } else {
+            input.value = ''; // Allow empty temporarily
+          }
+        });
+      });
 
 
 

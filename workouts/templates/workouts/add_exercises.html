@@ -12,58 +12,50 @@
 
 <body>
 
-    <!-- index.html content starts here -->
 
-    <div class="container-fluid">
-        <!-- Search bar -->
-        <div class="sticky-search-bar header">
-            <h1>Add excersises to: {{workout_title}}</h1>
-            <form method="GET" action="{% url 'add_exercises' workout_title %}" class="mb-4"></form>
-            <div class="input-group">
-                <input type="text" name="q" class="form-control" placeholder="Search Exercises"
-                    value="{{ request.GET.q }}">
-                <button class="btn btn-primary" type="submit">Search</button>
-            </div>
-            </form>
-        </div>
+    <header class="header-actions">
+        <a href="{% url 'create_workout' %}" aria-label="Go back">
+            <img src="{% static 'images/arrow_back.svg' %}" alt="Back">
+        </a>
+        <h1>Add excersises to: {{ workout_title }}</h1>
+    </header>
+
+
+    <main>
         <div class="exercise-list">
             {% for exercise in exercises %}
             <div class="exercise-item">
-                    <!-- Image on the left -->
-                    <div class="image-container">
-                        <img src="{{ exercise.exercise_image }}" alt="" style="width: 100%;">
-                    </div>
+                <div class="image-container">
+                    <img src="{% static 'images/image-coming-soon.png' %}" alt="Exercise Image" />
+                </div>
 
-                    <!-- Exercise name in the middle -->
-                    <div class="exercise-details">
-                        <h2 class="title">{{ exercise.exercise_name }}</h2>
-                    </div>
+                <div class="exercise-details">
+                    <h2 class="title">{{ exercise.exercise_name }}</h2>
+                </div>
 
-                    <!-- Checkbox input on the far right -->
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="selected_exercises"
-                            value="{{ exercise.exercise_name }}" id="exercise{{ exercise.id }}">
-                        <label class="form-check-label" for="exercise{{ exercise.id }}"></label>
-                    </div>
-                
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" name="selected_exercises"
+                        value="{{ exercise.exercise_name }}" id="exercise{{ exercise.id }}">
+                    <label class="form-check-label" for="exercise{{ exercise.id }}"></label>
+                </div>
+
             </div>
             {% endfor %}
         </div>
-    </div>
+    </main>
 
 
-
-
-    <!-- Sticky Footer -->
-    <div class="sticky-footer">
+    <footer class="footer-actions">
+        <div></div>
         <form method="POST" action="{% url 'add_exercise_sets' %}" id="exercise-form">
             {% csrf_token %}
             <input type="hidden" name="workout_title" value="{{ workout_title }}">
             <input type="hidden" name="selected_excersises" id="selected-exercises">
-            <!-- Button to submit the form -->
-            <button type="submit" id="add-ex-btn" class="btn btn-success">Add Exercises</button>
         </form>
-    </div>
+        <!-- Button to submit the form -->
+        <button type="submit" id="add-ex-btn" form="exercise-form">Add Exercises</button>
+    </footer>
+
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
