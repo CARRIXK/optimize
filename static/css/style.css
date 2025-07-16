@@ -189,6 +189,10 @@ p {
    color: var(--text-white);
 }
 
+label {
+    color: var(--text-white);
+}
+
 a {
     color: var(--highlight-colour);
     text-decoration: none;
