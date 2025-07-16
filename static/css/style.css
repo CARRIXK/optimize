@@ -189,6 +189,15 @@ p {
    color: var(--text-white);
 }
 
+a {
+    color: var(--highlight-colour);
+    text-decoration: none;
+}
+a:hover {
+    color: var(--highlight-colour);
+    text-decoration: underline;
+}
+
 
 .navbar {
     background-color: var(--secondary-colour);
