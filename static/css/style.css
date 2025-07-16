@@ -200,6 +200,10 @@ p {
     font-weight: bold;
 }
 
+.nav-link.active {
+  color:  var(--text-white) !important;
+}
+
 
 
 /* Login page styles */
