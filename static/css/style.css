@@ -198,6 +198,21 @@ a:hover {
     text-decoration: underline;
 }
 
+.btn {
+    background-color: none;
+    color: var(--highlight-colour);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    color: var(--highlight-colour);
+    text-decoration: underline;
+}
+
 
 .navbar {
     background-color: var(--secondary-colour);
