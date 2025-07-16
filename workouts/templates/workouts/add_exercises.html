@@ -1,22 +1,101 @@
+{% load static %}
 <!-- add_exercises.html -->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Exercises to {{ workout_title }}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
-<body>
-    <h1>Add Exercises to Workout: {{ workout_title }}</h1>
 
-    <h2>Available Exercise Types</h2>
-    <ul>
-        {% for exercise in exercises %}
-            <li>{{ exercise.name }}</li>  <!-- Assuming 'name' is a field in ExerciseType -->
-        {% empty %}
-            <li>No exercises available.</li>
-        {% endfor %}
-    </ul>
+<body>
+
+
+    <header class="header-actions">
+        <a href="{% url 'create_workout' %}" aria-label="Go back">
+            <img src="{% static 'images/arrow_back.svg' %}" alt="Back">
+        </a>
+        <h1>Add excersises to: {{ workout_title }}</h1>
+    </header>
+
+
+    <main>
+            <div class="exercise-list">
+                {% for exercise in exercises %}
+                <div class="exercise-item">
+                    
+                    <div class="image-container">
+                        <img src="{% static 'images/image-coming-soon.png' %}" alt="Exercise Image" />
+                    </div>
+    
+    
+                    <!-- Exercise name in the middle -->
+                    <div class="exercise-details">
+                        <h2 class="title">{{ exercise.exercise_name }}</h2>
+                    </div>
+    
+                    <!-- Checkbox input on the far right -->
+                    <div class="form-check">
+                        <input class="form-check-input circle-checkbox" type="checkbox" name="selected_exercises" value="{{ exercise.exercise_name }}" id="exercise{{ exercise.id }}">
+                        <label class="form-check-label" for="exercise{{ exercise.id }}"></label>
+                    </div>
+    
+                </div>
+                {% endfor %}
+            </div>
+    
+    </main>
+
+
+    <footer class="footer-actions">
+        <div></div>
+        <form method="POST" action="{% url 'add_exercise_sets' %}" id="exercise-form">
+            {% csrf_token %}
+            <input type="hidden" name="workout_title" value="{{ workout_title }}">
+            <input type="hidden" name="selected_excersises" id="selected-exercises">
+        </form>
+        <!-- Button to submit the form -->
+        <button type="submit" id="add-ex-btn" form="exercise-form">Add Exercises</button>
+    </footer>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const checkboxes = document.querySelectorAll('.form-check-input');
+            const addExBtn = document.getElementById('add-ex-btn');
+            const selectedExercisesInput = document.getElementById('selected-exercises');
+
+            function updateButtonText() {
+                const checkedCheckboxes = document.querySelectorAll('.form-check-input:checked');
+                const selectedCount = checkedCheckboxes.length;
+
+                if (addExBtn) {
+                    addExBtn.textContent = `Add Exercises (${selectedCount})`;
+                }
+
+                const selectedExercises = Array.from(checkedCheckboxes)
+                    .map(checkbox => checkbox.value);
+
+                if (selectedExercisesInput) {
+                    selectedExercisesInput.value = JSON.stringify(selectedExercises);
+                }
+
+                console.log(selectedExercises);
+            }
+
+            // Listen for changes
+            checkboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', updateButtonText);
+            });
+
+            // Ensure the browser registers checked state properly before updating the button
+            setTimeout(updateButtonText, 100);
+        });
+    </script>
+
 
 </body>
+
 </html>

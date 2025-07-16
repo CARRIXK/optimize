@@ -1,5 +1,5 @@
 from django import forms
-from .models import Workout, Exercise, ExerciseType, ExerciseSet
+from .models import Workout, Exercise, Set, ExerciseSet
 
 # Form for creating and updating workouts
 class WorkoutForm(forms.ModelForm):
@@ -7,14 +7,18 @@ class WorkoutForm(forms.ModelForm):
         model = Workout
         fields = ['title']
 
-# Form for creating and updating exercises
 class ExerciseForm(forms.ModelForm):
-    workout = forms.ModelChoiceField(queryset=Workout.objects.all(), empty_label="Select a Workout")
-    exercise_type = forms.ModelChoiceField(queryset=ExerciseType.objects.all(), empty_label="Select an Exercise Type")
-    
     class Meta:
         model = Exercise
         fields = ['workout', 'exercise_type']
+
+
+class SetForm(forms.ModelForm):
+    class Meta:
+        model = Set
+        fields = ['exercise', 'set_number', 'reps']
+
+
 
 # Form for creating and updating exercise sets
 class ExerciseSetForm(forms.ModelForm):

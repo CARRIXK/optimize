@@ -1,31 +1,55 @@
 <!-- workouts/templates/workouts/create_workout.html -->
 {% load static %}
 
-<!-- workouts/templates/workouts/create_workout.html -->
-{% load static %}
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Workout</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
+
 <body>
-    <h1>Create a New Workout</h1>
+    <header class="header-actions">
+        <a href="{% url 'workouts' %}" aria-label="Go back">
+            <img src="{% static 'images/arrow_back.svg' %}" alt="Back">
+        </a>
+        <h1>NEW WORKOUT</h1>
+    </header>
 
-    <!-- <input type="text" name="workout_title" id="workout_title" placeholder="Workout Title" required><br> -->
-    <!-- Button to go to the add exercises page -->
-    <!-- <a href="{% url 'add_exercises' %}">
-        <button type="button">Add Exercises to Workout</button>
-    </a> -->
+    <main>
+        <div class="create-workout-container">
+            <form method="POST" id="workoutForm">
+                {% csrf_token %}
+                <input type="text" name="workout_title" id="workout_title" placeholder="Workout Title" required><br>
+                <button type="submit">Add Exercises to Workout</button>
+            </form>
+        </div>
+    </main>
 
-    <form method="POST" action="{% url 'add_exercises' %}">
-        {% csrf_token %}
-        <input type="text" name="workout_title" id="workout_title" placeholder="Workout Title" required><br>
-        <!-- Button to submit the form -->
-        <button type="submit">Add Exercises to Workout</button>
-    </form>
+    <script>
+        document.getElementById("workoutForm").addEventListener("submit", function (event) {
+            event.preventDefault(); // Prevent normal submission
+
+            let workoutTitle = document.getElementById("workout_title").value.trim();
+            if (workoutTitle === "") {
+                alert("Please enter a workout title.");
+                return;
+            }
+
+            // Encode the title to make it URL-safe
+            let encodedTitle = encodeURIComponent(workoutTitle);
+
+            // Set the form's action dynamically
+            this.action = `/workouts/add_exercises/${encodedTitle}/`;
+
+            // Submit the form
+            this.submit();
+        });
+    </script>
 
 </body>
+
 </html>

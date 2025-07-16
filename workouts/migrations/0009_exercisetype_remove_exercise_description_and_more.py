@@ -74,7 +74,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='exercise',
             name='workout',
-            field=models.ForeignKey(default='None Provided', on_delete=django.db.models.deletion.CASCADE, related_name='exercises', to='workouts.workout'),
+            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, related_name='exercises', to='workouts.workout'),
         ),
         migrations.AlterField(
             model_name='exercise',
@@ -99,6 +99,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='exercise',
             name='exercise_type',
-            field=models.ForeignKey(default='None Provided', on_delete=django.db.models.deletion.CASCADE, related_name='exercises', to='workouts.exercisetype'),
+            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, related_name='exercises', to='workouts.exercisetype'),
         ),
     ]

@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils.timezone import now
+from django.contrib.postgres.fields import ArrayField
 
 
 
@@ -21,6 +23,7 @@ class ExerciseType(models.Model):
 
 class Workout(models.Model):
     title = models.CharField(max_length=100)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True) 
     date_created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -28,15 +31,49 @@ class Workout(models.Model):
 
 
 class Exercise(models.Model):
-    workout = models.ForeignKey(Workout, related_name='exercises', on_delete=models.CASCADE, null=True, blank=True) 
-    exercise_type = models.ForeignKey('ExerciseType', related_name='exercises', on_delete=models.CASCADE, null=True, blank=True)
+    workout = models.ForeignKey(Workout, on_delete=models.CASCADE, related_name="exercises", null=True)
+    exercise_type = models.ForeignKey(ExerciseType, on_delete=models.CASCADE, related_name="exercises", null=True)
+
+    
+
+class Set(models.Model):
+    exercise = models.ForeignKey(Exercise, on_delete=models.CASCADE, related_name="sets")
+    set_number = models.PositiveIntegerField(null=True, blank=True)  # Allow nulls for migration ease
+    reps = models.PositiveIntegerField(null=True, blank=True)  # Allow reps to be null
+    weight = models.DecimalField(max_digits=5, decimal_places=2, null=True, blank=True)  # Optional weight
 
     def __str__(self):
-        return f"Exercise {self.exercise_type.name if self.exercise_type else 'Unnamed'}"
+        return f"{self.exercise.exercise_type.exercise_name} - {self.reps} reps"
+
+
+
+class ExerciseSet(models.Model):
+    exercise = models.ForeignKey(Exercise, related_name='excercise_sets', on_delete=models.CASCADE, null=True, blank=True)
+    set_number = models.IntegerField()
+    reps = models.IntegerField()
+    weight = models.FloatField()
+
+    def __str__(self):
+        return f"Set {self.set_number} - {self.reps} reps"
+
+
+class WorkoutSession(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+    title = models.CharField(max_length=200)
+    date = models.DateField(auto_now_add=True)
+    exercises = models.ManyToManyField(Exercise, through='ExerciseLog')
+    total_duration = models.IntegerField()
+    date_completed = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ["-date_completed"]
+
+    def __str__(self):
+        return f"Workout: {self.title} completed by {self.user}"
 
 
 class ExerciseLog(models.Model):
-    workout_session = models.ForeignKey('WorkoutSession', on_delete=models.CASCADE)
+    workout_session = models.ForeignKey(WorkoutSession, on_delete=models.CASCADE)
     exercise = models.ForeignKey(Exercise, on_delete=models.CASCADE, null=True, blank=True)
     sets = models.IntegerField()
     reps = models.IntegerField()

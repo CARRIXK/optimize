@@ -1,27 +1,102 @@
 {% extends "base.html" %}
 
+{% load static %}
+
+
 {% block content %}
 
 {% if user.is_authenticated %}
-<h1>Welcome back {{ user }}!</h1>
+
+<header class="section-header">
+    <div></div>
+    <h1>PROGRESS</h1>
+    <img src="{% static 'images/progress-calendar-icon.svg' %}" alt="Progress Calendar Icon">
+    <!-- This will bring you to past workouts page-->
+</header>
 
 
-<h2>Recent Workouts</h2>
-<ul>
-    {% for workout in workouts %}
-        <li>{{ workout.name }} - {{ workout.date_completed }}</li>
-    {% empty %}
-        <p>No recent workouts logged.</p>
-    {% endfor %}
-</ul>
+<!-- This is inside the main -->
 
-<a href="#">View All Workouts</a>
+<div class="container-fluid px-4 my-4">
+
+  <h1 class="mb-4">Welcome back, {{ user.first_name|default:user.username }}!</h1>
+
+  <!-- Chart Box - Full Width -->
+  <div class="progress-data-container mb-4">
+    <div class="card shadow text-center p-4">
+      <h5 class="mb-3">Workouts This Week</h5>
+      <canvas id="workoutChart"></canvas>
+    </div>
+  </div>
+
+  <!-- Total Workouts Box -->
+  <div class="progress-data-container mb-4">
+    <div class="card shadow text-center p-4">
+      <h6>Total Workouts</h6>
+      <p class="display-6 fw-bold">5</p>
+    </div>
+  </div>
+
+  <!-- Longest Streak Box -->
+  <div class="progress-data-container mb-4">
+    <div class="card shadow text-center p-4">
+      <h6>Longest Streak</h6>
+      <p class="display-6 fw-bold">3 Days</p>
+    </div>
+  </div>
+
+  <!-- Most Active Day Box -->
+  <div class="progress-data-container mb-4">
+    <div class="card shadow text-center p-4">
+      <h6>Most Active Day</h6>
+      <p class="display-6 fw-bold">Wednesday</p>
+    </div>
+  </div>
+
+</div>
+
+
 
 {% else %}
-<p class="text-end m-3">You are not logged in</p>
+<div class="d-flex vh-100 justify-content-center align-items-center">
+  <div class="text-center m-3">
+      <img src="{% static 'images/error.svg' %}" alt="Back">
+    <p>You are not logged in. <a href="{% url 'account_login' %}">Log in here</a>.</p>
+  </div>
+</div>
 {% endif %}
 
 
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Chart.js for the workout chart -->
+
+
+<script>
+    const ctx = document.getElementById('workoutChart').getContext('2d');
+
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+            datasets: [{
+                label: 'Workouts',
+                data: [1, 0, 2, 1, 0, 1, 0], // Dummy workout counts
+                backgroundColor: '#0d6efd',
+                borderRadius: 5,
+                barThickness: 30
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        stepSize: 1
+                    }
+                }
+            }
+        }
+    });
+</script>
+
+
 {% endblock %}
-
-
