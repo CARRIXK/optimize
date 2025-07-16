@@ -200,8 +200,27 @@ p {
     font-weight: bold;
 }
 
+.nav-link:hover {
+    color: var(--highlight-colour);
+}
+
 .nav-link.active {
   color:  var(--text-white) !important;
+}
+
+
+/* Logout page styles */
+
+.btn-signup {
+  background-color: #0d6efd;
+  color: white;
+  border: 2px solid transparent; /* Define a transparent border initially */
+  transition: border-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-signup:hover {
+  border-color: var(--highlight-colour); /* Border changes on hover */
+  color: var(--highlight-colour);        /* Text color also changes */
 }
 
 
