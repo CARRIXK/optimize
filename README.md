@@ -74,33 +74,35 @@ If this section grows too long, you may want to split it off into a separate fil
 
 - HTML
 
-Each page was run locally on a server and then the HTML from the page source was passed through the official WC3 validator 
+Each page was run locally on a server and then the HTML from the page source was passed through the  [Official WC3 validator](https://validator.w3.org/#validate_by_input)
 
 - [x] Login Page
+- [x] Logout page
+- [] Forgot password
 - [x] Progress
 
 - [] Workouts
+- [x] New Workout
+- [x] Add Excersises to new workout
+- [x] Workout set reps
+- [x] Edit Workout 
+
+Errors found:
 
   - This is when a new workout is added to the 'My Workouts section'
   - Error: Attribute workout_id not allowed on element button at this point.
   - Error: Attribute workout_title not allowed on element button at this point.
 
-- [x] New Workout
-- [x] Add Excersises to new workout
-- [x] Workout set reps
-
-- [x] Edit Workout 
-
-
-
-
-
-No errors were returned when passing through the official W3C validator
 - CSS
-No errors were found when passing through the official (Jigsaw) validator
+No errors were found when passing through the 
+[Official W3C (Jigsaw) validator](https://jigsaw.w3.org/css-validator/#validate_by_input)
+
 
 **Unfixed Bugs**
 You will need to mention unfixed bugs and why they were not fixed. This section should include shortcomings of the frameworks or technologies used. Although time can be a big variable to consider, paucity of time and difficulty understanding implementation is not a valid reason to leave bugs unfixed.
+
+- The forgot password functionality throws the following error: [WinError 10061] No connection could be made because the target machine actively refused it
+- When adding excersises to new workout the app crashes. This could be down to improper assignment of workout id. 
 
 # Deployment
 -------
@@ -117,6 +119,8 @@ The live link can be found here - https://code-institute-org.github.io/love-runn
 In this section you need to reference where you got your content, media and extra help from. It is common practice to use code from other repositories and tutorials, however, it is important to be very specific about these sources to avoid plagiarism.
 
 You can break the credits section up into Content and Media, depending on what you have included in your project.
+
+
 
 Content
 The text for the Home page was taken from Wikipedia Article A
