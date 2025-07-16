@@ -296,7 +296,7 @@ p {
     min-height: 56px;
     padding: 12px 20px;
     z-index: 1000;
-    background-color: var(--primary-colour);
+    background-color: var(--secondary-colour);
     color: var(--text-white);
     border-bottom: 1px solid var(--description);
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
