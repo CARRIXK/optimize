@@ -20,9 +20,7 @@ Features
 
 - Register
 
-The landing includes a photograph with text overlay to allow the user to see exactly which location this site would be applicable to.
-This section introduces the user to Love Running with an eye catching animation to grab their attention
-Landing Page
+This page will allow the user to get signed up to Love Running to start their running journey with the community. The user will be able specify if they would like to take part in road, trail or both types of running. The user will be asked to submit their full name and email address.
 
 - Login
 
@@ -30,37 +28,41 @@ The club ethos section will allow the user to see the benefits of joining the Lo
 This user will see the value of signing up for the Love Running meetups. This should encourage the user to consider running as their form of exercise.
 Club Ethos
 
-- Meetup Times section
+- Log out
+
+- Progress
 
 This section will allow the user to see exactly when the meetups will happen, where they will be located and how long the run will be in kilometers.
 This section will be updated as these times change to keep the user up to date.
 Meetup Times
 
-The Footer
+
+- Workouts
+
+- New Workout
+
+
+- Edit workout
+
+
+- Delete Workout
+
+
+- Footer
 
 The footer section includes links to the relevant social media sites for Love Running. The links will open to a new tab to allow easy navigation for the user.
 The footer is valuable to the user as it encourages them to keep connected via social media
-Footer
 
-Gallery
 
-The gallery will provide the user with supporting images to see what the meet ups look like.
-This section is valuable to the user as they will be able to easily identify the types of events the organisation puts together.
-Gallery
+- Features Left to Implement
+Another feature idea
 
-The Sign Up Page
+
+# Testing
+
+-----
 
 This page will allow the user to get signed up to Love Running to start their running journey with the community. The user will be able specify if they would like to take part in road, trail or both types of running. The user will be asked to submit their full name and email address.
-Sign Up
-
-For some/all of your features, you may choose to reference the specific project files that implement them.
-
-In addition, you may also use this section to discuss plans for additional features to be implemented in the future:
-
-Features Left to Implement
-Another feature idea
-Testing
-In this section, you need to convince the assessor that you have conducted enough testing to legitimately believe that the site works well. Essentially, in this part you will want to go over all of your project’s features and ensure that they all work as intended, with the project providing an easy and straightforward way for the users to achieve their goals.
 
 In addition, you should mention in this section how your project looks and works on different browsers and screen sizes.
 
@@ -68,15 +70,40 @@ You should also mention in this section any interesting bugs or problems you dis
 
 If this section grows too long, you may want to split it off into a separate file and link to it from here.
 
-Validator Testing
-HTML
+**Validator Testing**
+
+- HTML
+
+Each page was run locally on a server and then the HTML from the page source was passed through the official WC3 validator 
+
+- [x] Login Page
+- [x] Progress
+
+- [] Workouts
+
+  - This is when a new workout is added to the 'My Workouts section'
+  - Error: Attribute workout_id not allowed on element button at this point.
+  - Error: Attribute workout_title not allowed on element button at this point.
+
+- [x] New Workout
+- [x] Add Excersises to new workout
+- [x] Workout set reps
+
+- [x] Edit Workout 
+
+
+
+
+
 No errors were returned when passing through the official W3C validator
-CSS
+- CSS
 No errors were found when passing through the official (Jigsaw) validator
-Unfixed Bugs
+
+**Unfixed Bugs**
 You will need to mention unfixed bugs and why they were not fixed. This section should include shortcomings of the frameworks or technologies used. Although time can be a big variable to consider, paucity of time and difficulty understanding implementation is not a valid reason to leave bugs unfixed.
 
-Deployment
+# Deployment
+-------
 This section should describe the process you went through to deploy the project to a hosting platform (e.g. GitHub)
 
 The site was deployed to GitHub pages. The steps to deploy are as follows:
@@ -85,7 +112,8 @@ From the source section drop-down menu, select the Master Branch
 Once the master branch has been selected, the page will be automatically refreshed with a detailed ribbon display to indicate the successful deployment.
 The live link can be found here - https://code-institute-org.github.io/love-running-2.0/index.html
 
-Credits
+# Credits
+--------
 In this section you need to reference where you got your content, media and extra help from. It is common practice to use code from other repositories and tutorials, however, it is important to be very specific about these sources to avoid plagiarism.
 
 You can break the credits section up into Content and Media, depending on what you have included in your project.
