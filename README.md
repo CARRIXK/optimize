@@ -1,6 +1,8 @@
 # optimize
 ---
 
+This is the new version of the read me
+
 [Source code can be found here](https://github.com/CARRIXK/optimize)
 
 [The live project can be viewed here](https://optimize-800f80d21807.herokuapp.com/)
