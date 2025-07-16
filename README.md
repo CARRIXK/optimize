@@ -55,7 +55,33 @@ The footer is valuable to the user as it encourages them to keep connected via s
 
 
 - Features Left to Implement
-Another feature idea
+
+- Start workout
+
+The Start Workout feature will allow users to select a saved workout from the My Workouts section and actively log their progress in real time. Users will be able to:
+
+  - View each exercise in the selected workout.
+
+  - Record the number of sets, reps, and weight used for each exercise.
+
+  - Track the total duration of the workout, which will automatically be recorded when the workout begins and ends.
+
+This feature is designed to help users track performance over time and stay accountable by logging detailed workout data.
+
+
+- Progress Tracking
+
+Once a workout is completed, the results are automatically reflected in the Progress section of the app. This section provides users with a quick overview of their training habits and milestones through the following metrics:
+
+- Workouts This Week – A bar chart showing workout activity across the current week (Monday to Sunday).
+
+ - Total Workouts – Displays the cumulative number of completed workouts.
+
+ - Longest Streak – Highlights the longest number of consecutive workout days.
+
+ - Most Active Day – Indicates the day of the week the user is most consistently active.
+
+Additionally, users can tap the calendar icon in the top-right corner to view their full workout history, including past workout sessions and performance logs.
 
 
 # Testing
