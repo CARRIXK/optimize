@@ -1,7 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
 
-    console.log("Life, The Universe and Everything!");
-
     // 🔹 Declare all DOM element references at the top
     const checkboxes = document.querySelectorAll('.form-check-input');
     const addExBtn = document.getElementById('add-ex-btn');
@@ -17,6 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const workoutTitle = document.getElementById('workout-title').value;
     let workoutId = null;
     const openExercisesModelBtn = document.getElementById("open-exercises-model-btn");
+    const workoutExercises = document.querySelector('.workout-exercises');
 
 
     document.querySelectorAll('back-btn').forEach(button => {
@@ -32,6 +31,11 @@ document.addEventListener("DOMContentLoaded", function () {
             console.log("Add Exercise button clicked");
             const modal = document.getElementById("exercise-modal");
             if (modal) {
+                // Unselect all checked inputs inside the modal
+                const selectedInputs = modal.querySelectorAll('input[type="checkbox"]:checked, input[type="radio"]:checked');
+                selectedInputs.forEach(input => {
+                    input.checked = false;
+                });
                 modal.style.display = "block";
             }
         });
@@ -125,6 +129,29 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log(selectedExercises);
     }
 
+
+
+
+    function attachDeleteListeners() {
+        const deleteButtons = document.querySelectorAll(".delete-exercise-button");
+        deleteButtons.forEach(button => {
+            button.addEventListener("click", function () {
+                const deleteModal = new bootstrap.Modal(document.getElementById("deleteModal"));
+                deleteModal.show();
+
+                // Optional: Store reference to the clicked element
+                const exerciseDiv = button.closest(".exercise-block"); // wrap each in a div with this class
+                const confirmBtn = document.getElementById("confirmDeleteButton");
+
+                confirmBtn.onclick = function () {
+                    if (exerciseDiv) exerciseDiv.remove();
+                    deleteModal.hide();
+                };
+            });
+        });
+    }
+
+
     // Function to add exercises from modal selections
     function addSelectedExercises() {
         // Get all selected exercises from the modal
@@ -194,6 +221,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
             document.querySelector(".workout-exercises").appendChild(exerciseDiv);
+            attachDeleteListeners();
         });
 
         assignAddSetButtonEvent();
@@ -207,6 +235,14 @@ document.addEventListener("DOMContentLoaded", function () {
         // On button click: add selected exercises
         button.addEventListener('click', addSelectedExercises);
     });
+
+
+
+
+
+
+
+
 
     // Listen for checkbox changes to update button text count
     checkboxes.forEach(checkbox => {
@@ -295,12 +331,39 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     // Delete exercise button functionality
-    deleteExerciseButtons.forEach(button => {
-        button.addEventListener('click', function () {
-            exerciseToDelete = button.closest('.exercise');
-            $('#deleteModal').modal('show');
+    // deleteExerciseButtons.forEach(button => {
+    //     button.addEventListener('click', function () {
+    //         exerciseToDelete = button.closest('.exercise');
+    //         console.log("Exercise to delete:", exerciseToDelete);
+    //         $('#deleteModal').modal('show');
+    //     });
+    // });
+
+    if (workoutExercises) {
+        workoutExercises.addEventListener("click", function (event) {
+            if (event.target.classList.contains("delete-exercise-button")) {
+                // Always set a fresh reference
+                exerciseToDelete = event.target.closest(".exercise");
+                console.log("Exercise to delete:", exerciseToDelete);
+                if (exerciseToDelete) {
+                    $('#deleteModal').modal('show');
+                }
+            }
         });
-    });
+    }
+
+    // Confirm deletion – use one single event listener
+    if (confirmDeleteButton) {
+        confirmDeleteButton.addEventListener("click", function () {
+            if (exerciseToDelete) {
+                exerciseToDelete.remove();
+                exerciseToDelete = null; // Reset reference
+                $('#deleteModal').modal('hide');
+            }
+        });
+    }
+
+
 
 
     // Delete set button functionality
@@ -335,19 +398,9 @@ document.addEventListener("DOMContentLoaded", function () {
         if (exerciseToDelete) {
             exerciseToDelete.remove();
             $('#deleteModal').modal('hide');
-            checkRemainingExercises();
         }
     });
 
-    function checkRemainingExercises() {
-        const remainingExercises = document.querySelectorAll('.exercise');
-        if (remainingExercises.length === 0) {
-            const workoutTitle = "workout-title";
-            // window.location.href = `'create_workout'?workout_title=${encodeURIComponent(workoutTitle)}`;
-            // const createUrl = `create_workout/${workoutIdToDelete}/`;
-            // window.location.href = createUrl;
-        }
-    }
 
 
     // Function to gather workout data

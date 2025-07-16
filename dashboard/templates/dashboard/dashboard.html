@@ -1,27 +1,45 @@
 {% extends "base.html" %}
 
+
 {% block content %}
 
-{% if user.is_authenticated %}
-<h1>Welcome back {{ user }}!</h1>
+    {% if user.is_authenticated %}
+
+    <header class="header-actions">
+        <h1>Progress</h1>
+
+    </header>
+
+    <h1 class="mb-4">Welcome back, {{ user.first_name|default:user.username }}!</h1>
 
 
-<h2>Recent Workouts</h2>
-<ul>
-    {% for workout in workouts %}
-        <li>{{ workout.name }} - {{ workout.date_completed }}</li>
-    {% empty %}
-        <p>No recent workouts logged.</p>
-    {% endfor %}
-</ul>
+    <h2 class="mb-3">Recent Workouts</h2>
 
-<a href="#">View All Workouts</a>
+    {% if workouts %}
+    <div class="row row-cols-1 row-cols-md-2 g-3">
+        {% for workout in workouts %}
+        <div class="col">
+            <div class="card shadow-sm h-100">
+                <div class="card-body">
+                    <h5 class="card-title">{{ workout.name }}</h5>
+                    <p class="card-text text-muted">Completed: {{ workout.date_completed }}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p>No recent workouts logged.</p>
+    {% endif %}
 
-{% else %}
-<p class="text-end m-3">You are not logged in</p>
-{% endif %}
+    <div class="mt-4">
+        <a href="" class="btn btn-primary">View All Workouts</a>
+    </div>
 
+    {% else %}
+    <div class="text-end m-3">
+        <p>You are not logged in. <a href="{% url 'login' %}">Log in here</a>.</p>
+    </div>
+    {% endif %}
 
 {% endblock %}
-
-

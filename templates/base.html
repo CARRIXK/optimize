@@ -41,7 +41,7 @@
 <body class="d-flex flex-column h-100 main-bg">
 
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-white">
+    <nav class="navbar navbar-expand-lg" style="background-color: secondary-colour;">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">
                 <img src="{% static 'images/logo.png' %}" alt="Site Logo" class="navbar-logo" style="height: 30px;">
@@ -52,30 +52,36 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarText">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                
+
                     {% if user.is_authenticated %}
-                    <li class="nav-item">
-                        <a class="nav-link {% if request.path == home_url %}active{% endif %}" aria-current="page"
-                            href="{% url 'dashboard' %}">Home</a>
+                    <li class="nav-item text-center">
+                        <a class="nav-link d-flex flex-column align-items-center {% if request.path == home_url %}active{% endif %}"
+                            href="{% url 'dashboard' %}" aria-current="page">
+                            <img src="{% static 'images/progress-icon.svg' %}" alt="Progress" width="24" height="24"
+                                class="mb-1">
+                            <span>Progress</span>
+                        </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link {% if request.path == home_url %}active{% endif %}" aria-current="page"
-                            href="{% url 'workouts' %}">Workouts</a>
+
+                    <li class="nav-item text-center">
+                        <a class="nav-link d-flex flex-column align-items-center {% if request.path == home_url %}active{% endif %}"
+                            href="{% url 'workouts' %}" aria-current="page">
+                            <img src="{% static 'images/workouts-icon.svg' %}" alt="Workouts" width="24" height="24"
+                                class="mb-1">
+                            <span>Workouts</span>
+                        </a>
                     </li>
-                    <li class="nav-item">
-                        <a
-                          class="nav-link
-                          {% if request.path == user_profile_url %}active{%endif%}"
-                          aria-current="page"
-                          href="{% url 'user_profile' %}"
-                          >Profile</a
-                        >
-                      </li>
-                    <li class="nav-item">
-                        <a class="nav-link {% if request.path == logout_url %}active{% endif %}" aria-current="page"
-                            href="{% url 'account_logout' %}">Logout</a>
+
+                    <li class="nav-item text-center">
+                        <a class="nav-link d-flex flex-column align-items-center {% if request.path == logout_url %}active{% endif %}"
+                            href="{% url 'account_logout' %}" aria-current="page">
+                            <img src="{% static 'images/logout-icon.svg' %}" alt="Logout" width="24" height="24"
+                                class="mb-1">
+                            <span>Logout</span>
+                        </a>
                     </li>
-                 
+
+
                     {% else %}
                     <li class="nav-item">
                         <a class="nav-link {% if request.path == signup_url %}active{% endif %}" aria-current="page"
@@ -88,7 +94,7 @@
                     {% endif %}
 
                 </ul>
-                
+
             </div>
         </div>
     </nav>
@@ -118,13 +124,13 @@
         </p>
     </footer>
 
-    
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous">
         </script>
-        
+
     <script src="{% static 'js/script.js' %}"></script>
 </body>
 

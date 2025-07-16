@@ -1,5 +1,5 @@
 body {
-    background-color: #F9FAFC;
+    background-color: var(--primary-colour);
 }
 
 .brand {
@@ -27,7 +27,7 @@ body {
 }
 
 .main-bg {
-    background-color: #F9FAFC;
+    background-color: var(--primary-colour);
 }
 
 .card {
@@ -178,7 +178,20 @@ body {
 
 main {
     width: 100vw;
+    background-color: var(--primary-colour);
 }
+
+
+.navbar {
+    background-color: var(--secondary-colour);
+    color: var(--text-white);
+}
+
+.nav-link {
+    color: var(--text-white);
+    font-weight: bold;
+}
+
 
 
 /* Login page styles */
