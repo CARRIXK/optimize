@@ -268,6 +268,12 @@ a:hover {
   color: var(--highlight-colour);        /* Text color also changes */
 }
 
+/* modal buttons */
+.modal-body .btn {
+  color: white;
+}
+
+
 
 
 /* Login page styles */
@@ -843,4 +849,8 @@ td {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 10px;
+}
+
+.exercise .btn {
+    color: var(--text-white);
 }
