@@ -7,11 +7,13 @@
 
 {% if user.is_authenticated %}
 
-<header class="header-actions">
+<header class="section-header">
+    <div></div>
     <h1>PROGRESS</h1>
     <img src="{% static 'images/progress-calendar-icon.svg' %}" alt="Progress Calendar Icon">
     <!-- This will bring you to past workouts page-->
 </header>
+
 
 <!-- This is inside the main -->
 
@@ -20,7 +22,7 @@
   <h1 class="mb-4">Welcome back, {{ user.first_name|default:user.username }}!</h1>
 
   <!-- Chart Box - Full Width -->
-  <div class="mb-4">
+  <div class="progress-data-container mb-4">
     <div class="card shadow text-center p-4">
       <h5 class="mb-3">Workouts This Week</h5>
       <canvas id="workoutChart"></canvas>
@@ -28,7 +30,7 @@
   </div>
 
   <!-- Total Workouts Box -->
-  <div class="mb-4">
+  <div class="progress-data-container mb-4">
     <div class="card shadow text-center p-4">
       <h6>Total Workouts</h6>
       <p class="display-6 fw-bold">5</p>
@@ -36,7 +38,7 @@
   </div>
 
   <!-- Longest Streak Box -->
-  <div class="mb-4">
+  <div class="progress-data-container mb-4">
     <div class="card shadow text-center p-4">
       <h6>Longest Streak</h6>
       <p class="display-6 fw-bold">3 Days</p>
@@ -44,7 +46,7 @@
   </div>
 
   <!-- Most Active Day Box -->
-  <div class="mb-4">
+  <div class="progress-data-container mb-4">
     <div class="card shadow text-center p-4">
       <h6>Most Active Day</h6>
       <p class="display-6 fw-bold">Wednesday</p>

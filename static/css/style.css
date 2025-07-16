@@ -185,6 +185,10 @@ h1, h2, h3, h4, h5, h6 {
     color: var(--text-white);
 }
 
+p {
+   color: var(--text-white);
+}
+
 
 .navbar {
     background-color: var(--secondary-colour);
@@ -380,6 +384,10 @@ p {
   max-height: 150px;
 }
 
+.progress-data-container {
+    background-color: var(--secondary-colour);
+}
+
 
 /* Workout Title Styles */
 
@@ -430,7 +438,7 @@ p {
 
 /* Workout List Styles */
 
-.workout-header {
+.section-header {
     background-color: var(--secondary-colour);
     color: var(--text-white);
     /* Background color */
