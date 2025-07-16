@@ -273,6 +273,10 @@ a:hover {
   color: white;
 }
 
+.modal-dialog .btn {
+  color: var(--text-white);
+}
+
 
 
 
