@@ -370,6 +370,13 @@ p {
 }
 
 
+/* Progress styles */
+
+#workoutChart {
+  max-height: 150px;
+}
+
+
 /* Workout Title Styles */
 
 .workout-title-wrapper {

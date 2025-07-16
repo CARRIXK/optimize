@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let exerciseToDelete = null;
     const saveWorkoutButton = document.getElementById('save-workout-btn');
     const updateWorkoutButton = document.getElementById('update-workout-btn');
-    const workoutTitle = document.getElementById('workout-title').value;
+    const workoutTitle = document.getElementById('workout-title');
     let workoutId = null;
     const openExercisesModelBtn = document.getElementById("open-exercises-model-btn");
     const workoutExercises = document.querySelector('.workout-exercises');

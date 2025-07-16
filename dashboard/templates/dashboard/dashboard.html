@@ -1,45 +1,97 @@
 {% extends "base.html" %}
 
+{% load static %}
+
 
 {% block content %}
 
-    {% if user.is_authenticated %}
+{% if user.is_authenticated %}
 
-    <header class="header-actions">
-        <h1>Progress</h1>
+<header class="header-actions">
+    <h1>PROGRESS</h1>
+    <img src="{% static 'images/progress-calendar-icon.svg' %}" alt="Progress Calendar Icon">
+    <!-- This will bring you to past workouts page-->
+</header>
 
-    </header>
+<!-- This is inside the main -->
 
-    <h1 class="mb-4">Welcome back, {{ user.first_name|default:user.username }}!</h1>
+<div class="container-fluid px-4 my-4">
 
+  <h1 class="mb-4">Welcome back, {{ user.first_name|default:user.username }}!</h1>
 
-    <h2 class="mb-3">Recent Workouts</h2>
-
-    {% if workouts %}
-    <div class="row row-cols-1 row-cols-md-2 g-3">
-        {% for workout in workouts %}
-        <div class="col">
-            <div class="card shadow-sm h-100">
-                <div class="card-body">
-                    <h5 class="card-title">{{ workout.name }}</h5>
-                    <p class="card-text text-muted">Completed: {{ workout.date_completed }}</p>
-                </div>
-            </div>
-        </div>
-        {% endfor %}
+  <!-- Chart Box - Full Width -->
+  <div class="mb-4">
+    <div class="card shadow text-center p-4">
+      <h5 class="mb-3">Workouts This Week</h5>
+      <canvas id="workoutChart"></canvas>
     </div>
-    {% else %}
-    <p>No recent workouts logged.</p>
-    {% endif %}
+  </div>
 
-    <div class="mt-4">
-        <a href="" class="btn btn-primary">View All Workouts</a>
+  <!-- Total Workouts Box -->
+  <div class="mb-4">
+    <div class="card shadow text-center p-4">
+      <h6>Total Workouts</h6>
+      <p class="display-6 fw-bold">5</p>
     </div>
+  </div>
 
-    {% else %}
-    <div class="text-end m-3">
-        <p>You are not logged in. <a href="{% url 'login' %}">Log in here</a>.</p>
+  <!-- Longest Streak Box -->
+  <div class="mb-4">
+    <div class="card shadow text-center p-4">
+      <h6>Longest Streak</h6>
+      <p class="display-6 fw-bold">3 Days</p>
     </div>
-    {% endif %}
+  </div>
+
+  <!-- Most Active Day Box -->
+  <div class="mb-4">
+    <div class="card shadow text-center p-4">
+      <h6>Most Active Day</h6>
+      <p class="display-6 fw-bold">Wednesday</p>
+    </div>
+  </div>
+
+</div>
+
+
+
+{% else %}
+<div class="text-end m-3">
+    <p>You are not logged in. <a href="{% url 'login' %}">Log in here</a>.</p>
+</div>
+{% endif %}
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Chart.js for the workout chart -->
+
+
+<script>
+    const ctx = document.getElementById('workoutChart').getContext('2d');
+
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+            datasets: [{
+                label: 'Workouts',
+                data: [1, 0, 2, 1, 0, 1, 0], // Dummy workout counts
+                backgroundColor: '#0d6efd',
+                borderRadius: 5,
+                barThickness: 30
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        stepSize: 1
+                    }
+                }
+            }
+        }
+    });
+</script>
+
 
 {% endblock %}
