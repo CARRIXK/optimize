@@ -18,9 +18,15 @@ Features
   - Featured on Progress, Workouts, login and register sections, the full responsive navigation bar includes links to the progress, Workouts and logout and login (when user in not logged in).  
   - This section will allow the user to easily navigate from through the main areas of the app
 
+  ![alt text](image-1.png)
+
+  ![alt text](image-2.png)
+
 - Register
 
 This page will allow the user to get signed up to Love Running to start their running journey with the community. The user will be able specify if they would like to take part in road, trail or both types of running. The user will be asked to submit their full name and email address.
+
+![alt text](image-3.png)
 
 - Login
 
@@ -28,7 +34,12 @@ The club ethos section will allow the user to see the benefits of joining the Lo
 This user will see the value of signing up for the Love Running meetups. This should encourage the user to consider running as their form of exercise.
 Club Ethos
 
+![alt text](image.png)
+
 - Log out
+
+![alt text](image-4.png)
+
 
 - Progress
 
@@ -36,10 +47,17 @@ This section will allow the user to see exactly when the meetups will happen, wh
 This section will be updated as these times change to keep the user up to date.
 Meetup Times
 
+![alt text](image-5.png)
+
 
 - Workouts
 
+![alt text](image-6.png)
+
 - New Workout
+
+
+![alt text](image-7.png)
 
 
 - Edit workout
@@ -55,6 +73,10 @@ The footer is valuable to the user as it encourages them to keep connected via s
 
 
 - Features Left to Implement
+
+- Search excersise functionality
+
+- Filter excersises by body part
 
 - Start workout
 

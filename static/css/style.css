@@ -241,7 +241,7 @@ a:hover {
 
 /* Make the navbar toggler (hamburger icon) white */
 .navbar-toggler {
-  border-color: rgba(255, 255, 255, 0.5); /* Optional: white border */
+  border-color: var(--text-white);/* Optional: white border */
 }
 
 .navbar-toggler-icon {
