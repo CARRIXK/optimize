@@ -24,13 +24,11 @@
         <h1>New Workout</h1>
     </header>
 
-    <!-- <input id="workout-title" value="{{ workout_title }}"> -->
-
-    <main>
+    
         <div class="workout-exercises">
 
             <div class="workout-title-wrapper">
-                <input id="workout-title" value="{{ workout_title }}" placeholder="Untitled Workout" />
+                <input id="workout-title" value="{{ workout_title }}" placeholder="Untitled Workout">
             </div>
 
 
@@ -40,7 +38,7 @@
                 <div class="exercise" data-id="{{ exercise.exercise_name }}">
 
                     <div class="excersise-header">
-                        <img class="" src="{% static 'images/image-coming-soon.png' %}" alt="Exercise Image" />
+                        <img class="" src="{% static 'images/image-coming-soon.png' %}" alt="Exercise Image">
                         <h2>{{ exercise.exercise_name }}</h2>
                         <button type="button" class="delete-exercise-button btn btn-danger">Delete Exercise</button>
                     </div>
@@ -57,7 +55,7 @@
                         <tbody>
                             <tr>
                                 <td>1</td>
-                                <td><input type="number" name="reps_{{ exercise.id }}_1" value="10" /></td>
+                                <td><input type="number" name="reps_{{ exercise.id }}_1" value="10"></td>
                                 <td></td>
                             </tr>
                         </tbody>
@@ -68,7 +66,7 @@
                 {% endfor %}
             </div>
         </div>
-    </main>
+    
 
 
     <footer class="footer-actions">
@@ -88,7 +86,7 @@
                 <h1 id="page-title">Excersises</h1>
             </div>
 
-            <main>
+            
                 <!-- <input type="text" class="search-exercises-input form-control mb-3" placeholder="Search Exercises"> -->
 
                 <div class="exercise-list">
@@ -96,7 +94,7 @@
                     <div class="exercise-item">
 
                         <div class="image-container">
-                            <img src="{% static 'images/image-coming-soon.png' %}" alt="Exercise Image" />
+                            <img src="{% static 'images/image-coming-soon.png' %}" alt="Exercise Image">
                         </div>
 
 
@@ -107,15 +105,14 @@
 
                         <!-- Checkbox input on the far right -->
                         <div class="form-check">
-                            <input class="form-check-input circle-checkbox" type="checkbox" name="selected_exercises"
-                                value="{{ exercise.exercise_name }}" id="exercise{{ exercise.id }}">
+                            <input class="form-check-input circle-checkbox" type="checkbox" name="selected_exercises" value="{{ exercise.exercise_name }}" id="exercise{{ exercise.id }}">
                             <label class="form-check-label" for="exercise{{ exercise.id }}"></label>
                         </div>
 
                     </div>
                     {% endfor %}
                 </div>
-            </main>
+            
 
             <footer class="footer-actions">
                 <button class="add-excersies-btn">Add Exercises</button>
