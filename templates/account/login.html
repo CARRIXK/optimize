@@ -15,35 +15,46 @@
       {% get_providers as socialaccount_providers %}
 
       {% if socialaccount_providers %}
-        <p class="text-center">
-          {% blocktrans with site.name as site_name %}
-            Please sign in with one of your existing third party accounts.
-            Or, <a href="{{ signup_url }}">register</a> for a {{ site_name }} account and sign in below:
-          {% endblocktrans %}
-        </p>
+      <p class="text-center">
+        {% blocktrans with site.name as site_name %}
+        Please sign in with one of your existing third party accounts.
+        Or, <a href="{{ signup_url }}">register</a> for a {{ site_name }} account and sign in below:
+        {% endblocktrans %}
+      </p>
 
-        <div class="mb-3 text-center">
-          <ul class="list-inline">
-            {% include "socialaccount/snippets/provider_list.html" with process="login" %}
-          </ul>
-          <div class="text-muted my-3">{% trans 'or' %}</div>
-        </div>
+      <div class="mb-3 text-center">
+        <ul class="list-inline">
+          {% include "socialaccount/snippets/provider_list.html" with process="login" %}
+        </ul>
+        <div class="text-muted my-3">{% trans 'or' %}</div>
+      </div>
 
-        {% include "socialaccount/snippets/login_extra.html" %}
+      {% include "socialaccount/snippets/login_extra.html" %}
 
       {% else %}
-        <p class="text-center">
-          {% blocktrans %}If you have not created an account yet, then please
-          <a href="{{ signup_url }}">register</a> first.{% endblocktrans %}
-        </p>
+      <p class="text-center">
+        {% blocktrans %}If you have not created an account yet, then please
+        <a href="{{ signup_url }}">register</a> first.{% endblocktrans %}
+      </p>
       {% endif %}
 
       <form method="POST" action="{% url 'account_login' %}">
         {% csrf_token %}
-        {{ form.as_p }}
+        <div class="form-group">
+          {{ form.login.label_tag }}
+          {{ form.login }}
+          {{ form.login.errors }}
+        </div>
+
+        <div class="form-group">
+          {{ form.password.label_tag }}
+          {{ form.password }}
+          {{ form.password.errors }}
+        </div>
+
 
         {% if redirect_field_value %}
-          <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
         {% endif %}
 
         <div class="d-flex justify-content-between align-items-center mt-3">
@@ -57,4 +68,3 @@
 </div>
 
 {% endblock content %}
-

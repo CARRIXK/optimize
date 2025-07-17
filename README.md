@@ -7,7 +7,88 @@
 Optimize is a web-based fitness app that allows users to create and edit workouts tailored to their needs. Users can build personalized workout routines by adding exercises and specifying sets with reps for each. Whether you're tracking strength progress, designing structured training plans, or simply organizing your workouts, Optimize provides a streamlined and intuitive interface to make workout planning effortless.
 
 
-Features
+# UX Design Process
+
+
+
+
+## 1. Wireframes
+
+
+**Login Wireframe**
+
+![alt text](image-23.png)
+
+
+**Register WireFrame**
+
+![alt text](image-24.png)
+
+**Logout Wireframe**
+![alt text](image-31.png)
+
+**Progress Wireframe**
+
+![alt text](image-25.png)
+
+**Workouts Wireframe**
+
+![alt text](image-26.png)
+
+**New Workout Step 1**
+![alt text](image-27.png)
+**New Workout Step 2**
+![alt text](image-28.png)
+
+**New Workout Step 3**
+![alt text](image-29.png)
+
+**Workout Options Modal Wireframe**
+![alt text](image-32.png)
+
+**Edit Workout Wireframe**
+![alt text](image-33.png)
+
+**Add Excersises to Edit Workout Wireframe**
+![alt text](image-34.png)
+
+**Delete Workout Comfirmation Modal**
+![alt text](image-35.png)
+
+
+## 2. Site Map Diagram
+
+![alt text](image-36.png)
+
+
+## Visual Design: Colour Scheme and Typography
+
+### Colours  
+The site uses a dark-themed colour palette for a sleek and modern aesthetic. This choice was made to create a visually calming environment, reduce eye strain in low-light settings, and enhance focus on content. The following CSS variables define the primary colour scheme:
+
+- `--primary-colour: #121212` – Serves as the main background. The deep black tone improves contrast and reduces visual fatigue during prolonged usage.
+- `--secondary-colour: #2E2E2E` – Used on containers such as cards and section blocks to subtly separate content layers without being jarring.
+- `--highlight-colour: #00bbff` – Chosen for its vibrant yet non-aggressive tone. It’s used for links, buttons, and hover states to guide user attention and support intuitive navigation.
+- `--description: #BFBFBF` – A soft grey tone used for secondary text such as descriptions and helper text, helping to create a clear visual hierarchy without diminishing readability.
+- `--text-white: #FFFFFF` – The default text colour against the dark background, ensuring sharp, readable contrast across all content areas.
+
+This colour scheme helps establish a consistent, modern design language that aligns with common accessibility practices and improves user experience on both desktop and mobile.
+
+### Typography  
+- **Font used throughout the site**: `'Inter', sans-serif`
+
+Inter was deliberately chosen for its high legibility, especially on digital interfaces. The font's clean lines and open letterforms enhance the readability of headings and body text alike. 
+
+Using a single font family simplifies the design and keeps the visual experience cohesive. This also ensures optimal rendering on various screen sizes and devices. 
+
+By pairing a modern typeface with high-contrast colours, the design supports clear content delivery and strengthens usability across the site.
+
+
+
+
+
+
+## Features
 --------
 
 
