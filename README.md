@@ -10,33 +10,78 @@ Optimize is a web-based fitness app that allows users to create and edit workout
 # UX Design Process
 
 
+
+
 ## 1. Wireframes
-- Initial layout sketches or wireframes that outline the basic structure of the app or pages.
-- Explanation of how the wireframes helped plan the user interface and user flow.
 
 
+**Login Wireframe**
 
-## 2. Mockups
-- Detailed visual designs showing colors, typography, buttons, and UI elements.
-- Description of how mockups refined the design before development.
+![alt text](image-23.png)
 
-## 3. Diagrams
-- User flow diagrams or charts illustrating how users navigate the app (e.g., registration and login processes).
-- Explanation of how these diagrams ensured smooth and logical user interactions.
 
-## 4. Design Reasoning & Changes
-- Documentation of key design decisions and why they were made (e.g., simplifying forms, button placement).
-- Notes on any design changes during development, including reasons such as user feedback or technical constraints.
+**Register WireFrame**
 
-## 5. Demonstrate Implementation
-- Evidence showing how the final implemented app matches the designs (screenshots or descriptions).
-- Explanation of any differences between design and implementation, and why they occurred.
+![alt text](image-24.png)
 
-## 6. Organized and Clear Presentation
-- Present all information clearly and logically within the README file.
-- Use headings and sections to separate wireframes, mockups, diagrams, design decisions, and final implementation.
-- Keep the documentation concise yet complete to demonstrate the full UX process from concept to delivery.
+**Logout Wireframe**
+![alt text](image-31.png)
 
+**Progress Wireframe**
+
+![alt text](image-25.png)
+
+**Workouts Wireframe**
+
+![alt text](image-26.png)
+
+**New Workout Step 1**
+![alt text](image-27.png)
+**New Workout Step 2**
+![alt text](image-28.png)
+
+**New Workout Step 3**
+![alt text](image-29.png)
+
+**Workout Options Modal Wireframe**
+![alt text](image-32.png)
+
+**Edit Workout Wireframe**
+![alt text](image-33.png)
+
+**Add Excersises to Edit Workout Wireframe**
+![alt text](image-34.png)
+
+**Delete Workout Comfirmation Modal**
+![alt text](image-35.png)
+
+
+## 2. Site Map Diagram
+
+![alt text](image-36.png)
+
+
+## Visual Design: Colour Scheme and Typography
+
+### Colours  
+The site uses a dark-themed colour palette for a sleek and modern aesthetic. This choice was made to create a visually calming environment, reduce eye strain in low-light settings, and enhance focus on content. The following CSS variables define the primary colour scheme:
+
+- `--primary-colour: #121212` – Serves as the main background. The deep black tone improves contrast and reduces visual fatigue during prolonged usage.
+- `--secondary-colour: #2E2E2E` – Used on containers such as cards and section blocks to subtly separate content layers without being jarring.
+- `--highlight-colour: #00bbff` – Chosen for its vibrant yet non-aggressive tone. It’s used for links, buttons, and hover states to guide user attention and support intuitive navigation.
+- `--description: #BFBFBF` – A soft grey tone used for secondary text such as descriptions and helper text, helping to create a clear visual hierarchy without diminishing readability.
+- `--text-white: #FFFFFF` – The default text colour against the dark background, ensuring sharp, readable contrast across all content areas.
+
+This colour scheme helps establish a consistent, modern design language that aligns with common accessibility practices and improves user experience on both desktop and mobile.
+
+### Typography  
+- **Font used throughout the site**: `'Inter', sans-serif`
+
+Inter was deliberately chosen for its high legibility, especially on digital interfaces. The font's clean lines and open letterforms enhance the readability of headings and body text alike. 
+
+Using a single font family simplifies the design and keeps the visual experience cohesive. This also ensures optimal rendering on various screen sizes and devices. 
+
+By pairing a modern typeface with high-contrast colours, the design supports clear content delivery and strengthens usability across the site.
 
 
 
