@@ -24,69 +24,161 @@ Features
 
 - Register
 
-This page will allow the user to get signed up to Love Running to start their running journey with the community. The user will be able specify if they would like to take part in road, trail or both types of running. The user will be asked to submit their full name and email address.
+Users can easily create an account by filling out a simple registration form. During the sign-up process, they are required to provide:
+
+- Username
+
+- Email address
+
+- Password
+
+This information is securely handled and stored, allowing users to log in and access personalized features within the app. The registration process is user-friendly and ensures only authenticated users can track and manage their workouts.
 
 ![alt text](image-3.png)
 
 - Login
 
-The club ethos section will allow the user to see the benefits of joining the Love Running meetups, as well as the benefits of running overall.
-This user will see the value of signing up for the Love Running meetups. This should encourage the user to consider running as their form of exercise.
-Club Ethos
+Registered users can log in by entering their username and password on the login page. If a user hasn’t signed up yet, they can easily navigate to the registration page via a clearly visible link.
+
+Features of the login page include:
+
+- Username and password authentication
+
+- Redirect link to registration if the user doesn't have an account
+
+- Secure login using Django’s built-in authentication system
+
+Once logged in, users are granted access to personalized sections of the app, such as workout tracking and progress metrics.
 
 ![alt text](image.png)
 
 - Log out
 
+Users can log out of their account by clicking the logout icon in the navigation bar. This action takes them to a confirmation page, where they are asked to confirm whether they want to end their session.
+
+Key points:
+
+- Logout is easily accessible from any page via the nav bar icon
+
+- Users are shown a confirmation message before logging out
+
+- Once confirmed, the user is securely logged out and notified they are no longer logged in with a link to the login page
+
+This helps ensure users don’t accidentally log out and improves overall user experience and security.
+
 ![alt text](image-4.png)
+![alt text](image-20.png)
 
 
 - Progress
 
-This section will allow the user to see exactly when the meetups will happen, where they will be located and how long the run will be in kilometers.
-This section will be updated as these times change to keep the user up to date.
-Meetup Times
+The Progress section is currently only populated with static dummy data. In future iterayions it will provide users with an overview of their workout activity and habits. It visually displays their performance over time and motivates them to stay consistent.
+
+Key features:
+
+- Workouts This Week (Bar Chart):
+A visual graph showing which days (Monday to Sunday) the user has completed workouts. Helps highlight active vs. inactive days.
+
+- Total Workouts:
+Displays the cumulative number of workouts completed.
+
+- Longest Streak:
+Shows the highest number of consecutive days the user has logged workouts.
+
+- Most Active Day:
+Highlights the day of the week the user most frequently works out.
+
+- Workout History:
+Users can also click the calendar icon in the top-right to view a detailed log of their previous workouts, including dates and workout details.
+
+This section helps users measure their consistency and identify patterns, supporting long-term fitness goals.
 
 ![alt text](image-5.png)
 
 
-- Workouts
+- Workouts Page
+
+On the Workouts page, logged-in users can:
+
+- View a list of workouts they have created.
+
+- Click the plus button to start creating a new workout.
+
+- Press the ⋯ (three dots) button on any workout to view available actions:
+
+  - Start Workout
+
+  - Edit
+
+  - Delete
+
+This page gives users full control over managing their custom workout plans.
 
 ![alt text](image-6.png)
 
 - New Workout
 
+1. After a user clicks the plus button on the Workouts page, they are taken to the page shown below. Here, the user is prompted to enter a title for the workout (e.g., "Push Day", "Cardio Routine").
 
 ![alt text](image-7.png)
 
+2. After giving the workout a title, users are taken to the Add Exercises page.
+
+- This page displays a scrollable list of exercises, each with a checkbox.
+
+- Users can select multiple exercises to include in their workout.
+
+- The "Add Exercises" button dynamically updates to show the number of exercises selected (e.g., “Add 3 Exercises”), helping users keep track of their selection in real time.
 ![alt text](image-8.png)
-![alt text](image-9.png)
-![alt text](image-10.png)
+
+3. After selecting exercises, users are brought to a review page where they can:
+
+- View all selected exercises in a clean, organized layout.
+
+- Add sets and specify the number of reps for each exercise using input fields.
+
+- Delete any exercise they no longer want included in the workout.
+
+- Add more exercises at any time with the "Add Exercises" button which shows a similar display to the previous page.
+
+![alt text](image-22.png)
+
+Breaking the workout creation into three clear steps—naming the workout, selecting exercises from a scrollable list, and reviewing with options to add sets, reps, or modify exercises—provides a smooth and intuitive user experience. This approach prevents overwhelm, keeps the process organized, and allows users to easily build and customize workouts with confidence and efficiency.
 
 
 - Edit workout
 
-![alt text](image-11.png)
-![alt text](image-12.png)
+After clicking the "..." button on a workout, a modal appears presenting options including Start Workout, Edit, and Delete. Selecting the Edit button takes the user to a workout editor where they can easily manage their workout by adding new exercises, deleting existing ones, and adjusting the number of sets and reps for each exercise. This streamlined interface allows for quick and flexible customization of workouts.
+
+
+![alt text](image-15.png)
+![alt text](image-16.png)
 
 
 - Delete Workout
 
-![alt text](image-13.png)
-![alt text](image-14.png)
+Similarly, clicking the Delete button opens a confirmation modal asking the user to confirm the deletion of the workout. Once confirmed, the workout is permanently removed from the database, ensuring that accidental deletions are prevented while providing a clear and straightforward way to manage workout records.
+
+![alt text](image-17.png)
+![alt text](image-18.png)
 
 
 - Footer
 
-The footer section includes links to the relevant social media sites for Love Running. The links will open to a new tab to allow easy navigation for the user.
-The footer is valuable to the user as it encourages them to keep connected via social media
+The footer section includes links to the relevant social media sites for Optimize. The links currently do not take the user anywhere as the social media sites have not been set up. The footer shows the business name and dynamically updates the current year automatically for accuracy.
+
+![alt text](image-19.png)
 
 
-- Features Left to Implement
+**Features Left to Implement**
 
 - Search excersise functionality
 
 - Filter excersises by body part
+
+- Make workout creation and update messages more user friendly instead of a message box
+
+- Add actual images for each workout
 
 - Start workout
 
@@ -120,10 +212,19 @@ Additionally, users can tap the calendar icon in the top-right corner to view th
 
 -----
 
-This page will allow the user to get signed up to Love Running to start their running journey with the community. The user will be able specify if they would like to take part in road, trail or both types of running. The user will be asked to submit their full name and email address.
+**Manual Testing**
 
+This section documents the manual testing procedures used to validate the functionality, usability, responsiveness, and data management of the Optimize fitness application. Testing was performed manually across all core pages using a browser and developer tools. The application uses HTML, CSS, JavaScript, and Python (Django). Each feature was tested based on defined expected outcomes.
+
+You can find the detailed manual testing documentation here:  
+[Optimize Manual Testing Documentation](manual_testing.docx)
+                 |
+---
+
+## Responsivity Testing
 In addition, you should mention in this section how your project looks and works on different browsers and screen sizes.
 
+## Bugs
 You should also mention in this section any interesting bugs or problems you discovered during your testing, even if you haven't addressed them yet.
 
 If this section grows too long, you may want to split it off into a separate file and link to it from here.
@@ -162,15 +263,18 @@ You will need to mention unfixed bugs and why they were not fixed. This section 
 - The forgot password functionality throws the following error: [WinError 10061] No connection could be made because the target machine actively refused it
 - When adding excersises to new workout the app crashes. This could be down to improper assignment of workout id. 
 
+## Summary of Testing Results
+
+- All manual tests were conducted on both backend and frontend.
+- Expected outcomes matched actual results.
+- No major issues found.
+
 # Deployment
 -------
-This section should describe the process you went through to deploy the project to a hosting platform (e.g. GitHub)
 
-The site was deployed to GitHub pages. The steps to deploy are as follows:
-In the GitHub repository, navigate to the Settings tab
-From the source section drop-down menu, select the Master Branch
-Once the master branch has been selected, the page will be automatically refreshed with a detailed ribbon display to indicate the successful deployment.
-The live link can be found here - https://code-institute-org.github.io/love-running-2.0/index.html
+Git was initialized in the project folder using git init because the project was not tracked. A new Heroku app was created with heroku create, which added the Heroku remote to the Git repository. All project files were added to staging using git add -A and committed with the message “Initial commit for Heroku deployment.” The code was pushed to Heroku using git push heroku main. A Procfile was created in the project root to tell Heroku how to start the app. Dependencies were listed correctly in requirements.txt or package.json. Necessary environment variables were set through the Heroku dashboard. After pushing, Heroku built and deployed the app, which was accessed via the given URL. Optional steps include adding a database, logging, and CI/CD integration.
+
+
 
 # Credits
 --------
@@ -179,8 +283,20 @@ In this section you need to reference where you got your content, media and extr
 You can break the credits section up into Content and Media, depending on what you have included in your project.
 
 
+**Libraries and Programs Used**
 
-Content
+* Heroku
+* Heroku was used to deploy the project
+* Git
+* Version control was implemented using Git through the Github terminal.
+* Github
+* Github was used to store the projects after being pushed from Git and its cloud service Github Pages was used to serve the project on the web. GitHub Projects was used to track the User Stories.
+* Visual Studio Code
+
+
+
+**Content**
+
 The text for the Home page was taken from Wikipedia Article A
 Instructions on how to implement form validation on the Sign Up page was taken from Specific YouTube Tutorial
 The icons in the footer were taken from Font Awesome
@@ -188,6 +304,17 @@ Media
 The photos used on the home and sign up page are from This Open Source site
 The images used for the gallery page were taken from this other open source site
 Congratulations on completing your Readme, you have made another big stride in the direction of being a developer!
+
+**Use of AI Tools to help with the development process**
+
+During the development of this project, I strategically leveraged AI tools to assist in generating key portions of the codebase, such as form validation logic, UI component structuring, and dynamic event handling. This approach helped accelerate development while ensuring alignment with the project’s functional requirements. The AI-generated code was carefully reviewed and integrated to enhance maintainability and user experience, contributing to a more efficient and effective workflow. AI tools played a valuable role in identifying and resolving bugs throughout the development process. When encountering errors or unexpected behavior, I used AI assistance to quickly analyze code snippets, pinpoint issues such as event listener misconfigurations and null reference errors, and suggest effective solutions. This collaboration streamlined debugging, reducing downtime and improving code reliability.AI tools helped enhance both the performance and user experience of the application by recommending more efficient code patterns and UI improvements. Suggestions such as event delegation for dynamic elements and responsive design best practices were implemented, resulting in smoother interactions and faster load times without compromising usability. Integrating AI tools into the development process significantly improved efficiency by accelerating coding, debugging, and optimization tasks. AI’s assistance allowed more focus on design and user experience, reducing time spent on routine coding challenges and enabling faster iteration cycles. Overall, AI enhanced workflow fluidity and project outcomes without disrupting creative control.
+
+
+# Need to write about Unit tests
+
+
+
+
 
 Other General Project Advice
 Below you will find a couple of extra tips that may be helpful when completing your project. Remember that each of these projects will become part of your final portfolio so it’s important to allow enough time to showcase your best work!
@@ -310,61 +437,13 @@ And finally the same five pages on a desktop monitor (1920x1080):
 | All elements visible                         |    |     |             |
 | Pages are responsive at all screen sizes     |   |     |             |
 
-### Lighthouse
-Here are the lighthouse reports for the site's main pages :
-
-**Workouts**
-
-**Create workouts**
-
-**Add Excersises**
-
-**Edit workouts**
-
-
-### Code Validation
-
-**Python code** :
-
-* Python code is yet to be validated by both the Flake8 linter (installed in VSCode) and the external CodeInstitute validator @ https://pep8ci.herokuapp.com/.
-
-**JavaScript code** :
 
 
 
-**HTML Validation** :
 
 
 
-**CSS Validation** :
-
-
-**User Stories**
 
 
 
-## Automated Testing
-
-**Testing django views, models and forms.**
- 
-
-# Bugs
-
-
-Return to top
-
-# Libraries and Programs Used
-
-* Heroku
-* Heroku was used to deploy the project
-* Git
-* Version control was implemented using Git through the Github terminal.
-* Github
-* Github was used to store the projects after being pushed from Git and its cloud service Github Pages was used to serve the project on the web. GitHub Projects was used to track the User Stories.
-* Visual Studio Code
-
-# Credits
-
-
-# Acknowledgements
 
