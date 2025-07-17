@@ -293,22 +293,123 @@ Additionally, users can tap the calendar icon in the top-right corner to view th
 
 -----
 
-**Manual Testing**
+## Manual Testing
 
-This section documents the manual testing procedures used to validate the functionality, usability, responsiveness, and data management of the Optimize fitness application. Testing was performed manually across all core pages using a browser and developer tools. The application uses HTML, CSS, JavaScript, and Python (Django). Each feature was tested based on defined expected outcomes.
-
-You can find the detailed manual testing documentation here:  
-[Optimize Manual Testing Documentation](manual_testing.docx)
+This section documents the manual testing procedures used to validate the functionality, usability, responsiveness, and data management of the Optimize fitness application. Testing was performed manually across all core pages using a browser and developer tools. Each feature was tested based on defined expected outcomes.
                  |
----
+
+### Manual Tests Cases - User Authentication
+
+| Test Description | Expected Result | Actual Result |
+| --- | --- | --- |
+| Registration successful; user added to database | New user is added to database | Worked as expected |
+| Register with a username that already exists | Registration fails; error shown and user not added again | Worked as expected |
+| Register with empty fields | Registration fails; user sees validation error | Worked as expected |
+| Register with a password that’s too short | Registration fails; user sees password validation message | Worked as expected |
+| Log in with correct username and password | Login successful; user redirected to progress section | Worked as expected |
+| Log in with correct username but incorrect password | Login fails; user sees error message | Worked as expected |
+| Log in with non-existent username | Login fails; user gets error message | Worked as expected |
+| Attempt login with empty fields | Login fails; user sees validation errors | Worked as expected |
+| Log in and remain authenticated across session | User stays logged in when navigating through pages | Worked as expected |
+| Log out from account | User is logged out and redirected to login or home page | Worked as expected |
+
+### Manual Tests Cases- Navigation Bar
+
+| Test Description | Expected Result | Actual Result |
+| --- | --- | --- |
+| Verify that the Login link appears when the user is not logged in | The navigation bar displays a Login link and hides Progress, Workouts, and Logout links | Worked as expected |
+| Verify that clicking the Login link redirects to the login page | The browser navigates to the login page (/accounts/login/) | Worked as expected |
+| Verify that the Progress, Workouts, and Logout links appear when the user is logged in | The navigation bar displays links to Progress, Workouts, and Logout, and hides the Login link | Worked as expected |
+| Verify that clicking the Progress link while logged in navigates to the progress page | The progress page (/progress/) loads successfully | Worked as expected |
+| Verify that clicking the Workouts link while logged in navigates to the workouts page | The workouts page (/workouts/) loads successfully | Worked as expected |
+| Verify that clicking the Logout link logs the user out | User is logged out and redirected to the homepage or login page, and only the Login link is visible | Worked as expected |
+| Verify that navigation bar is consistent across multiple pages | The navigation bar appears with the same layout and links on all pages | Worked as expected |
+| Verify that the navigation bar adapts correctly on mobile view (if responsive) | Navigation bar collapses or adjusts layout, and links are accessible via mobile menu | Worked as expected |
+
+### Manual Tests Cases – Progress Page
+
+| Test Description | Expected Result | Actual Result |
+| --- | --- | --- |
+| Verify that the progress page loads for a logged-in user | Page loads successfully and displays dummy progress data (charts, stats, etc.) | Worked as expected |
+| Verify redirection when accessing progress page while logged out | User is redirected to the login page | Worked as expected |
+| Verify that the “Workouts This Week” bar chart is visible | Bar chart appears showing static workout data across Monday to Sunday | Worked as expected |
+| Verify that the "Total Workouts" stat is displayed | A visible number is shown (e.g., “Total Workouts: 12”) — static value for now | Worked as expected |
+| Verify that the "Longest Streak" stat is displayed | Static number is displayed (e.g., “Longest Streak: 4 days”) | Worked as expected |
+| Verify that the "Most Active Day" is displayed | A day of the week is shown (e.g., “Most Active Day: Wednesday”) — static value | Worked as expected |
+| Verify that the calendar icon appears in the top-right corner | Calendar icon is visible and clickable | Worked as expected |
+| Verify that clicking the calendar icon opens workout history view | A modal or new view opens with dummy workout history log (dates + details) | Worked as expected |
+| Verify that visual elements are responsive (desktop/mobile) | All graphs, text, and icons adjust properly across screen sizes | Worked as expected |
+| Verify navigation works from progress page | Navbar is present and links like Workouts, Logout, etc. function normally | Worked as expected |
+
+### Manual Test Cases – Workouts Page
+
+| Test Description | Expected Result | Actual Result |
+| --- | --- | --- |
+| Verify that the Workouts page loads for a logged-in user | The page loads successfully and displays a list of user-created workouts | Worked as expected |
+| Verify redirection when accessing the Workouts page while logged out | User is redirected to the login page | Worked as expected |
+| Verify that the list of workouts is displayed | All workouts created by the user are visible on the page in a readable format | Worked as expected |
+| Verify that the plus (+) button is visible | A floating or clearly visible + button appears on the screen for adding a workout | Worked as expected |
+| Verify that clicking the plus (+) button redirects to the workout creation page | User is taken to a form/page where they can enter a new workout | Worked as expected |
+| Verify that the three dots (⋯) menu appears on each workout card | Each workout entry has a menu or button with ⋯ to open additional actions | Worked as expected |
+| Verify that clicking the ⋯ button shows the expected options | Options shown are: Start Workout, Edit, and Delete | Worked as expected |
+| Verify that clicking Edit redirects to the edit form for the selected workout | User is taken to a form pre-filled with the workout’s current data | Worked as expected |
+| Verify that clicking Delete removes the workout | The workout is removed from the list after confirming on the modal | Worked as expected |
+| Verify that deleted workouts no longer appear on page refresh | Refreshing the page does not bring back deleted workouts | Worked as expected |
+| Verify responsive layout and interaction on mobile view | Workouts page and buttons are functional and properly laid out on smaller screens | Worked as expected |
+| Verify navigation bar works correctly on Workouts page | Nav bar links (e.g., Progress, Logout) are present and functional | Worked as expected |
+
+### Manual Test Cases – New Workout
+
+| Test Description | Expected Result | Actual Result |
+| --- | --- | --- |
+| User clicks "+" button on the Workouts page | User is navigated to the workout naming page | Worked as expected |
+| User enters a title (e.g., “Push Day”) and submits | User is redirected to the exercise selection page with a list of checkboxes | Worked as expected |
+| Exercises are displayed in a scrollable list | The user can scroll through the list and check multiple exercises | Worked as expected |
+| User can select multiple exercises | The “Add Exercises” button updates dynamically to reflect the number selected (e.g., “Add 3 Exercises”) | Worked as expected |
+| User clicks “Add Exercises” | User is taken to the review page displaying the selected exercises | Worked as expected |
+| Review page displays all selected exercises with set/rep input fields | Each exercise displays editable fields to input sets and reps | Worked as expected |
+| User inputs valid sets and reps (e.g., 3 sets of 12 reps) | Inputs are accepted and retained | Worked as expected |
+| User can delete an excersise | Exercise is removed from the workout list | Worked as expected |
+| User clicks “Add Exercises” again on review page | User is returned to the exercise list with checkboxes (already-selected exercises can be re-added or updated) | Worked as expected |
+| User tries to proceed without entering a workout title | User is shown an error or prevented from moving forward (validation message appears) | Worked as expected |
+| After editing workout and saving, return to workouts page | New workout appears in the workouts list with title and assigned exercises | Worked as expected |
+
+### Manual Test Cases – Edit Workout
+
+| Test Description | Expected Result | Actual Result |
+| --- | --- | --- |
+| User clicks edit workout on workout options modal button on the Workouts page | The slected workout and its excerises are displayed ready to be edited | Worked as expected |
+| User enters a title (e.g., “Push Day”) and saves | Edited title persists in database | Worked as expected |
+| Exercises are displayed in a scrollable list | The user can scroll through the list and check multiple exercises | Worked as expected |
+| User selects multiple exercises | The “Add Exercises” button updates dynamically to reflect the number selected (e.g., “Add 3 Exercises”) | Worked as expected |
+| User clicks “Add Exercises” | User is taken back to workout editor with new workouts added to the list | Worked as expected |
+| Edit workout page displays all selected exercises with set/rep input fields | Each exercise displays editable fields to input sets and reps | Worked as expected |
+| User clicks delete excersise button | Exercise is removed from the workout list | Worked as expected |
+| User tries to proceed without entering a workout title | User is shown an error or prevented from moving forward (validation message appears) | Worked as expected |
+| After editing workout and saving, return to workouts page | New workout appears in the workouts list with title and assigned exercises | Worked as expected |
+
+### Manual Test cases – Footer
+
+| Test Description | Expected Result | Actual Result |
+| --- | --- | --- |
+| Check that footer displays the business name "Optimize" | The footer should contain the text "Optimize" | Worked as expected |
+| Verify that the current year is displayed dynamically | The footer should automatically display the current year (e.g., "© Optimize 2025") | Worked as expected |
+| Test if footer is present and visible on all required pages | Footer should be visible at the bottom of all main pages | Worked as expected |
+| Verify that social media icons/links are displayed | Footer should include placeholder icons/links for social media (e.g., Facebook, Instagram, X, LinkedIn) | Worked as expected |
+| Check that social media links currently do not navigate anywhere | Clicking any social media icon/link should have no effect (links are inactive/placeholders) | Worked as expected |
+| Test responsiveness of footer on mobile devices | Footer content should adjust correctly to smaller screen sizes without overlapping or breaking layout | Worked as expected |
+
+
 
 ## Responsivity Testing
-In addition, you should mention in this section how your project looks and works on different browsers and screen sizes.
 
-## Bugs
-You should also mention in this section any interesting bugs or problems you discovered during your testing, even if you haven't addressed them yet.
+The site was built with a mobile-first approach using **flexbox** and **CSS media queries** to ensure responsiveness across devices.
 
-If this section grows too long, you may want to split it off into a separate file and link to it from here.
+- The **Progress** and **Workout** sections adapt well to various screen sizes, including mobile devices.  
+-  However, the **Exercise section** – specifically the areas for **editing sets and reps** – is **not fully responsive** on smaller screens. On devices with narrower viewports, input fields and controls may overflow or misalign.
+
+**Planned Improvement:** Future updates will include layout adjustments (e.g., using `flex-wrap` or stacked layouts) to enhance the user experience on phones and tablets in all sections.
+
 
 **Validator Testing**
 
@@ -339,7 +440,6 @@ No errors were found when passing through the
 
 
 **Unfixed Bugs**
-You will need to mention unfixed bugs and why they were not fixed. This section should include shortcomings of the frameworks or technologies used. Although time can be a big variable to consider, paucity of time and difficulty understanding implementation is not a valid reason to leave bugs unfixed.
 
 - The forgot password functionality throws the following error: [WinError 10061] No connection could be made because the target machine actively refused it
 - When adding excersises to new workout the app crashes. This could be down to improper assignment of workout id. 
@@ -456,67 +556,6 @@ Getting started with your Portfolio Projects can be daunting, planning your proj
   - [Running the App in Your Local Environment](#running-the-app-in-your-local-environment)
 - [Credits](#credits)
 - [Acknowledgements](#acknowledgements)
-
-# Features
-* Dashboard : After logging in, users are directed to the Dashboard Page, which provides an overview of their most recent activities and workouts. The main purpose of this page is to give users quick access to their recent progress and a streamlined way to track their fitness journey.
-
-* Workouts : The Workouts page is where users can view a list of all the workouts they have created, providing an organized way to manage their fitness routines. Each workout is displayed with its title, number of excersises in that workout and date it was created. Users can interact with any workout by pressing the options button next to it, which opens a modal offering several options: starting the workout, editing the workout, or deleting it. 
-
-* Create Workout : Creating a workout on the platform is an easy, customizable process that allows users to design routines tailored to their goals. Users begin by providing a title for their workout, such as "Leg Day" or "Upper Body Strength," then select exercises from a pre-defined list, which includes various movements targeting different muscle groups. After selecting exercises, users add sets and reps for each, determining the number of sets and reps per set. Users can then review and adjust the exercises, sets, and reps before saving the workout to their profile for future use. This process empowers users to create highly personalized workouts, track their progress, and stay on top of their fitness goals.
-
-
-* Edit Workout: Editing a workout allows users to customize and adjust their exercises to better suit their needs. After selecting a workout to edit, users can add or remove exercises from the workout by selecting exercises from the list or deleting unwanted ones. For each exercise, users can add sets, specifying the number of repetitions . Additionally, if a user adds a new exercise, they can immediately add sets to it, ensuring that the workout is tailored to their specific training goals. .
-
-
-* Future Features: In the future, functionality for starting a workout will be added to allow users to track their progress during the workout. This feature will enable users to begin their workout session directly from the workouts page, marking the start of their training. Once a workout is started, the app will track the completion of each exercise and set, recording important data such as the number of reps performed, the weight lifted, and any other relevant metrics. This tracking will provide users with real-time feedback on their performance, helping them to monitor their progress and adjust their workout intensity as needed. Additionally, the app will save these workout sessions, allowing users to review past workouts, track improvements over time, and make informed decisions about their future training routines.
-
-
-# User Experience
-## Design
-
-### Fonts
-
-
-### Colour
-
-
-### Wireframes
-
-
-# Development Process
-
-
-# Data Model
-
-
-# Testing
-* Manual testing
-* Automated testing
-* In-app testing
-* User story testing
-* Validator testing
-
-## Manual Testing
-**Feature Testing**
-
-
-**Responsiveness**
-Here's screenshots taken with the Chrome dev tools device toolbar, set to the iPhone 12 Pro. They are, in order, the Workouts page, Create workout page, Add excersises page, workout set reps page:
-
-iphone12_homepage iphone12_editor iphone12_instrument iphone12_review surfacepro_loop_detail
-
-Here's the same five pages on the Surface Pro 7:
-
-And finally the same five pages on a desktop monitor (1920x1080): 
-
-
-**Browser Compatibility**
-| Feature                                      | Chrome | Firefox | Safari (mobile) |
-|----------------------------------------------|--------|---------|-----------------|
-| Audio playback upon first user interaction  |    |     |             |
-| Fonts render correctly                       |    |     |             |
-| All elements visible                         |    |     |             |
-| Pages are responsive at all screen sizes     |   |     |             |
 
 
 
