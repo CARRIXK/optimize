@@ -7,7 +7,43 @@
 Optimize is a web-based fitness app that allows users to create and edit workouts tailored to their needs. Users can build personalized workout routines by adding exercises and specifying sets with reps for each. Whether you're tracking strength progress, designing structured training plans, or simply organizing your workouts, Optimize provides a streamlined and intuitive interface to make workout planning effortless.
 
 
-Features
+# UX Design Process
+
+
+## 1. Wireframes
+- Initial layout sketches or wireframes that outline the basic structure of the app or pages.
+- Explanation of how the wireframes helped plan the user interface and user flow.
+
+
+
+## 2. Mockups
+- Detailed visual designs showing colors, typography, buttons, and UI elements.
+- Description of how mockups refined the design before development.
+
+## 3. Diagrams
+- User flow diagrams or charts illustrating how users navigate the app (e.g., registration and login processes).
+- Explanation of how these diagrams ensured smooth and logical user interactions.
+
+## 4. Design Reasoning & Changes
+- Documentation of key design decisions and why they were made (e.g., simplifying forms, button placement).
+- Notes on any design changes during development, including reasons such as user feedback or technical constraints.
+
+## 5. Demonstrate Implementation
+- Evidence showing how the final implemented app matches the designs (screenshots or descriptions).
+- Explanation of any differences between design and implementation, and why they occurred.
+
+## 6. Organized and Clear Presentation
+- Present all information clearly and logically within the README file.
+- Use headings and sections to separate wireframes, mockups, diagrams, design decisions, and final implementation.
+- Keep the documentation concise yet complete to demonstrate the full UX process from concept to delivery.
+
+
+
+
+
+
+
+## Features
 --------
 
 
