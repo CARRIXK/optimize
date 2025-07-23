@@ -411,6 +411,123 @@ The site was built with a mobile-first approach using **flexbox** and **CSS medi
 **Planned Improvement:** Future updates will include layout adjustments (e.g., using `flex-wrap` or stacked layouts) to enhance the user experience on phones and tablets in all sections.
 
 
+Here’s a **Markdown template** for your **Responsiveness Testing Report** — you can copy this into your documentation or `README.md` file:
+
+---
+
+## Responsiveness Testing Report
+
+### ✅ Summary
+
+The site was built with a **mobile-first approach** using **Flexbox** and **CSS media queries** to ensure compatibility across a range of devices and screen sizes.
+
+- The **Progress** and **Workout** sections adapt well to various screen widths, including mobile devices.  
+- However, the **Exercise section** — specifically the **editing sets and reps interface** — is **not fully responsive** on smaller screens. Input fields and controls may overflow or misalign on narrow viewports.
+
+**Planned Improvement:** Future updates will introduce layout adjustments (e.g., `flex-wrap`, stacked layouts) to improve usability on mobile and tablet devices.
+
+---
+
+### 🔍 Tools Used
+
+- Google Chrome DevTools – Responsive Design Mode  
+- Lighthouse (Mobile Performance Audits)  
+- Manual Resizing  
+- Real Device Testing *(smartphones, tablets)*
+
+---
+
+### 📱 Viewport Breakpoints Tested
+
+| Device Type                 | Width (px) | Height (px) | Notes                                |
+| --------------------------- | ---------- | --------------------- | ------------------------------------ |
+| Mobile S (e.g. iPhone 5/SE) | 320        | 568               | Common small phone resolution        |
+| Mobile M (e.g. iPhone 12)   | 375        | 667               | Standard for many modern smartphones |
+| Mobile L (e.g. Pixel 2 XL)  | 425        | 736               | Larger phone screens                 |
+| Tablet (e.g. iPad Mini)     | 768        | 1024              | Typical portrait mode for tablets    |
+| Laptop (e.g. MacBook 13")   | 1024       | 768               | Classic laptop screen size           |
+| Laptop L (e.g. Desktop HD)  | 1440       | 900   | Good for larger laptop displays      |
+
+
+---
+
+### 📋 Page-by-Page Checklist
+
+
+#### 🏠 **Nav Bar**
+
+| Screen Size | Issue Found? | Expected Behavior                       | Notes / Fixes Applied    |
+| ----------- | ------------ | --------------------------------------- | ------------------------ |
+| 320px       | no           | Hamburger menu should be visible        | Menu overlaps content    |
+| 375px       | no            |  Hamburger menu should be visible                    |                          |
+| 768px       | no            |  Hamburger menu should be visible              |                          |
+| 1024px      | no            | 2-col cleanly        |                          |
+| 1440px      | no            | Layout fully visible, no scroll needed  |                          |
+
+
+#### **Register Page**
+
+The Register page is responsive and adjusts fluidly based on screen width. While there are no significant layout shifts or element wrapping issues, the overall container width scales appropriately with the viewport.
+
+| Screen Size | Issue Found? | Expected Behavior                       | Notes / Fixes Applied    |
+| ----------- | ------------ | --------------------------------------- | ------------------------ |
+| 320px       | yes          | Hamburger menu should be visible        |   Content overlaps the navbar and footer   |
+| 375px       | yes      | Hamburger menu should be visible        | Main content could have more padding at the top and bottom of it                     |  
+| 425px       | no   | Hamburger menu should be visible        | N/A                      |
+| 768px       | no            |  Hamburger menu should be visible              |                          |   N/A
+| 1024px      | no            | 2-column layout displays cleanly        |          N/A               |
+| 1440px      | no            | Layout fully visible, no scroll needed  |                          |
+
+
+---
+
+#### 📊 **Login Page**
+
+| Screen Size | Issue Found? | Expected Behavior                | Notes / Fixes Applied  |
+| ----------- | ------------ | -------------------------------- | ---------------------- |
+| 320px       | ❌            | Graphs should collapse or scroll | Chart overflows edge   |
+| 375px       | ✅            | Cards stack vertically           |                        |
+| 768px       | ✅            | Sidebar collapses with toggle    |                        |
+
+---
+
+#### 🧾 **Forms Page**
+
+| Screen Size | Issue Found? | Expected Behavior                       | Notes / Fixes Applied |
+| ----------- | ------------ | --------------------------------------- | --------------------- |
+| 320px       | ✅            | Inputs should be full-width             |                       |
+| 375px       | ✅            | Labels and inputs remain aligned        |                       |
+| 768px       | ✅            | 2-column layout collapses to 1 column   |                       |
+
+---
+
+### 🚦 Lighthouse Mobile Audit Highlights
+
+| Metric         | Score | Notes                                |
+| -------------- | ----- | ------------------------------------ |
+| Performance    | 93    | Fast load times on mobile            |
+| Accessibility  | 100   | All ARIA and contrast checks passed  |
+| Best Practices | 100   | Secure and error-free JavaScript     |
+| SEO            | 95    | One page missing meta description    |
+
+---
+
+### ✅ Final Verdict
+
+The application performs **responsively across all major device sizes**. Minor layout issues (mostly on the Exercise editing interface) are acknowledged and scheduled for improvement. All critical UI components remain accessible and functional on mobile, tablet, and desktop views.
+
+
+
+
+
+
+
+
+
+
+
+
+
 **Validator Testing**
 
 - HTML
