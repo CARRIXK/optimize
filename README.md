@@ -403,12 +403,198 @@ This section documents the manual testing procedures used to validate the functi
 
 ## Responsivity Testing
 
-The site was built with a mobile-first approach using **flexbox** and **CSS media queries** to ensure responsiveness across devices.
+### Summary
+
+The site was built with a **mobile-first approach** using **Flexbox** and **CSS media queries** to ensure compatibility across a range of devices and screen sizes.
 
 - The **Progress** and **Workout** sections adapt well to various screen sizes, including mobile devices.  
 -  However, the **Exercise section** – specifically the areas for **editing sets and reps** – is **not fully responsive** on smaller screens. On devices with narrower viewports, input fields and controls may overflow or misalign.
 
+
+
+### Viewport Breakpoints Tested 
+
+| Device Type | Width (px) | Height (px) | Notes |
+| --- | --- | --- | --- |
+| Mobile S (e.g. iPhone 5/SE) | 320 | 568 | Common small phone resolution |
+| Mobile M (e.g. iPhone 12) | 375 | 667 | Standard for many modern smartphones |
+| Mobile L (e.g. Pixel 2 XL) | 425 | 736 | Larger phone screens |
+| Tablet (e.g. iPad Mini) | 768 | 1024 | Typical portrait mode for tablets |
+| Laptop (e.g. MacBook 13") | 1024 | 768 | Classic laptop screen size |
+| Laptop L (e.g. Desktop HD) | 1440 | 900 | Good for larger laptop displays |
+
+### Navbar  
+
+| Screen Size | Issue Found? | Expected Behaviour | Notes / Fixes Applied |
+| --- | --- | --- | --- |
+| 320px | no | Hamburger menu should be visible. When clicked it shows nav items stacked | N/A |
+| 375px | no | Hamburger menu should be visible. When clicked it shows nav items stacked | N/A |
+| 425px | no | Hamburger menu should be visible. When clicked it shows nav items stacked | N/A |
+| 768px | no | Hamburger menu should be visible. When clicked it shows nav items stacked | N/A |
+| 1024px | no | Nav bar displays logo, register and login nav items | N/A |
+| 1440px | no | Nav bar displays logo, register and login nav items | N/A |
+
+## Register Page 
+
+| Screen Size | Issue Found? | Expected Behaviour | Notes / Fixes Applied |
+| --- | --- | --- | --- |
+| 320px | yes | Hamburger menu should be visible | Content overlaps the navbar and footer |
+| 375px | yes | Hamburger menu should be visible | Main content could have more padding at the top and bottom of it |
+| 425px | no | Hamburger menu should be visible | N/A |
+| 768px | no | Hamburger menu should be visible | N/A |
+| 1024px | no | Nav bar displays logo, register and login nav items | N/A |
+| 1440px | no | Nav bar displays logo, register and login nav items | N/A |
+
+### Login Page 
+
+| Screen Size | Issue Found? | Expected Behavior | Notes / Fixes Applied |
+| --- | --- | --- | --- |
+| 320px | no | Hamburger menu should be visible | N/A |
+| 375px | no | Hamburger menu should be visible | N/A |
+| 425px | no | Hamburger menu should be visible | N/A |
+| 768px | no | Hamburger menu should be visible | N/A |
+| 1024px | no | Nav bar displays logo, register and login nav items | N/A |
+| 1440px | no | Nav bar displays logo, register and login nav items | N/A |
+
+### Logout Page 
+
+| Screen Size | Issue Found? | Expected Behavior | Notes / Fixes Applied |
+| --- | --- | --- | --- |
+| 320px | no | Hamburger menu should be visible | N/A |
+| 375px | No | Hamburger menu should be visible | N/A |
+| 425px | no | Hamburger menu should be visible | N/A |
+| 768px | no | Hamburger menu should be visible | N/A |
+| 1024px | no | Nav bar displays logo, progress, workouts and logout nav items | N/A |
+| 1440px | no | Nav bar displays logo, progress, workouts and logout nav items | N/A |
+
+### Progress 
+
+| Screen Size | Issue Found? | Expected Behaviour | Notes / Fixes Applied |
+| --- | --- | --- | --- |
+| 320px | no | Hamburger menu should be visible | N/A |
+| 375px | no | Hamburger menu should be visible | N/A |
+| 425px | no | Hamburger menu should be visible | N/A |
+| 768px | no | Hamburger menu should be visible | N/A |
+| 1024px | no | Nav bar displays logo, progress, workouts and logout nav items | N/A |
+| 1440px | no | Nav bar displays logo, progress, workouts and logout nav items | N/A |
+
+### Workouts Page 
+
+| Screen Size | Issue Found? | Expected Behaviour | Notes / Fixes Applied |
+| --- | --- | --- | --- |
+| 320px | no | Hamburger menu should be visible | N/A |
+| 375px | no | Hamburger menu should be visible | N/A |
+| 425px | no | Hamburger menu should be visible | N/A |
+| 768px | no | Hamburger menu should be visible | N/A |
+| 1024px | no | Nav bar displays logo, progress, workouts and logout nav items | N/A |
+| 1440px | no | Nav bar displays logo, progress, workouts and logout nav items | N/A |
+
+## New Workout – Title page 
+
+| Screen Size | Issue Found? | Expected Behaviour | Notes / Fixes Applied |
+| --- | --- | --- | --- |
+| 320px | No | Back button and page title at the top of page.  Input for workout title and button to add exercises below in the centre of page. | N/A |
+| 375px | no | Back button and page title at the top of page.  Input for workout title and button to add excersises below in the center of page. | N/A |
+| 425px | no | Back button and page title at the top of page.  Input for workout title and button to add exercises below in the center of page. | N/A |
+| 768px | no | Back button and page title at the top of page.  Input for workout title and button to add excersises below in the centre of page. | N/A |
+| 1024px | no | Back button and page title at the top of page.  Input for workout title and button to add excersises below in the centre of page. | N/A |
+| 1440px | no | Back button and page title at the top of page.  Input for workout title and button to add excersises below in the centre of page. | N/A |
+
+### New Workout – Add excersises 
+
+| Screen Size | Issue Found? | Expected Behaviour | Notes / Fixes Applied |
+| --- | --- | --- | --- |
+| 320px | Yes | Workout list shows with back button at top left of header. Footer buttons have responsive text content | Back button overlapps page title. Add exercises button doent scale down effectively. |
+| 375px | no | Workout list shows with back button at top left of header. Footer buttons have responsive text content | Add exercises button doesn't scale down effectively. |
+| 425px | no | Workout list shows with back button at top left of header. Footer buttons have responsive text content | Add exercises button doesn't scale down effectively. |
+| 768px | no | Workout list shows with back button at top left of header. Footer buttons have responsive text content | Add exercises button doesn't scale down effectively. |
+| 1024px | no | Workout list shows with back button at top left of header. Footer buttons have responsive text content | N/A |
+| 1440px | no | Workout list shows with back button at top left of header. Footer buttons have responsive text content | N/A |
+
+### New Workout – Review created workout page 
+
+| Screen Size | Issue Found? | Expected Behaviour | Notes / Fixes Applied |
+| --- | --- | --- | --- |
+| 320px | yes | Workout title displayed at the top. Added exercises in the middle spanning the full width of screen. save exercises buttons in the footer | Added exercises do not for the width of the screen and require scrolling along to access delete set buttons. Add exercises and save exercises button text not scaled down effectively |
+| 375px | yes | Workout title displayed at the top. Added exercises in the middle spanning the full width of screen. save exercises buttons in the footer | Added exercises do not for the width of the screen and require scrolling along to access delete set buttons. Add exercises and save exercises button text not scaled down effectively |
+| 425px | yes | Workout title displayed at the top. Added exercises in the middle spanning the full width of screen. save exercises buttons in the footer | Added exercises do not for the width of the screen and require scrolling along to access delete set buttons. Add exercises and save exercises button text not scaled down effectively |
+| 768px | no | Workout title displayed at the top. Added exercises in the middle spanning the full width of screen. save exercises buttons in the footer | N/A |
+| 1024px | no | Workout title displayed at the top. Added exercises in the middle spanning the full width of screen. save exercises buttons in the footer | N/A |
+| 1440px | no | Workout title displayed at the top. Added exercises in the middle spanning the full width of screen. save exercises buttons in the footer | N/A |
+
+### Edit Workout 
+
+| Screen Size | Issue Found? | Expected Behaviour | Notes / Fixes Applied |
+| --- | --- | --- | --- |
+| 320px | yes | Workout title displayed at the top. Added exercises in the middle spanning the full width of screen. save exercises buttons in the footer | Added exercises do not for the width of the screen and require scrolling along to access delete set buttons. Add exercises and save exercises button text not scaled down effectively |
+| 375px | yes | Workout title displayed at the top. Added exercises in the middle spanning the full width of screen. save exercises buttons in the footer | Added exercises do not for the width of the screen and require scrolling along to access delete set buttons. Add exercises and save exercises button text not scaled down effectively |
+| 425px | yes | Workout title displayed at the top. Added exercises in the middle spanning the full width of screen. save exercises buttons in the footer | Added exercises do not for the width of the screen and require scrolling along to access delete set buttons. Add exercises and save exercises button text not scaled down effectively |
+| 768px | no | Workout title displayed at the top. Added exercises in the middle spanning the full width of screen. save exercises buttons in the footer | N/A |
+| 1024px | no | Workout title displayed at the top. Added exercises in the middle spanning the full width of screen. save exercises buttons in the footer | N/A |
+| 1440px | no | Workout title displayed at the top. Added exercises in the middle spanning the full width of screen. save exercises buttons in the footer | N/A |
+
+### Edit workout – Add exercises 
+
+| Screen Size | Issue Found? | Expected Behavior | Notes / Fixes Applied |
+| --- | --- | --- | --- |
+| 320px | Yes | Workout list shows with back button at top left of header. Footer buttons have responsive text content | Add exercises button does not scale down effectively |
+| 375px | Yes | Workout list shows with back button at top left of header. Footer buttons have responsive text content | Add exercises button does not scale down effectively |
+| 425px | Yes | Workout list shows with back button at top left of header. Footer buttons have responsive text content | Add exercises button does not scale down effectively |
+| 768px | no | Workout list shows with back button at top left of header. Footer buttons have responsive text content | N/A |
+| 1024px | no | Workout list shows with back button at top left of header. Footer buttons have responsive text content | N/A |
+| 1440px | no | Workout list shows with back button at top left of header. Footer buttons have responsive text content | N/A |
+
+### Delete workout 
+
+| Screen Size | Issue Found? | Expected Behaviour | Notes / Fixes Applied |
+| --- | --- | --- | --- |
+| 320px | no | Delete exercise modal shows with all text visible and action buttons present | N/A |
+| 375px | no | Delete exercise modal shows with all text visible and action buttons present | N/A |
+| 425px | no | Delete exercise modal shows with all text visible and action buttons present | N/A |
+| 768px | no | Delete exercise modal shows with all text visible and action buttons present | N/A |
+| 1024px | no | Delete exercise modal shows with all text visible and action buttons present | N/A |
+| 1440px | no | Delete exercise modal shows with all text visible and action buttons present | N/A |
+
+### Footer 
+
+| Screen Size | Issue Found? | Expected Behaviour | Notes / Fixes Applied |
+| --- | --- | --- | --- |
+| 320px | no | Footer shows name, year, and social links in responsive manner | N/A |
+| 375px | no | Footer shows name, year, and social links in responsive manner | N/A |
+| 425px | no | Footer shows name, year, and social links in responsive manner | N/A |
+| 768px | no | Footer shows name, year, and social links in responsive manner | N/A |
+| 1024px | no | Footer shows name, year, and social links in responsive manner | N/A |
+| 1440px | no | Footer shows name, year, and social links in responsive manner | N/A |
+
+
+
+### Final Verdict
+
+The application performs **responsively across all major device sizes**. Minor layout issues (mostly on the Exercise editing interface) are acknowledged and scheduled for improvement. All critical UI components remain accessible and functional on mobile, tablet, and desktop views.
+
+
 **Planned Improvement:** Future updates will include layout adjustments (e.g., using `flex-wrap` or stacked layouts) to enhance the user experience on phones and tablets in all sections.
+
+
+**Python Unit Tests**
+
+
+These tests cover the core models and views related to workouts, exercises, and sets in the application.
+
+### Test Results
+
+- Total tests run: 7  
+- Passed: 3  
+- Failed: 2  
+- Errors: 2  
+
+The test suite ran in 7.577 seconds.
+
+---
+
+**Notes:**  
+- Failures relate to model `__str__` methods not returning expected string values.  
+- Errors relate to missing URL pattern `'workout_list'` in views tests.
 
 
 **Validator Testing**
@@ -488,7 +674,7 @@ Congratulations on completing your Readme, you have made another big stride in t
 
 **Use of AI Tools to help with the development process**
 
-During the development of this project, I strategically leveraged AI tools to assist in generating key portions of the codebase, such as form validation logic, UI component structuring, and dynamic event handling. This approach helped accelerate development while ensuring alignment with the project’s functional requirements. The AI-generated code was carefully reviewed and integrated to enhance maintainability and user experience, contributing to a more efficient and effective workflow. AI tools played a valuable role in identifying and resolving bugs throughout the development process. When encountering errors or unexpected behavior, I used AI assistance to quickly analyze code snippets, pinpoint issues such as event listener misconfigurations and null reference errors, and suggest effective solutions. This collaboration streamlined debugging, reducing downtime and improving code reliability.AI tools helped enhance both the performance and user experience of the application by recommending more efficient code patterns and UI improvements. Suggestions such as event delegation for dynamic elements and responsive design best practices were implemented, resulting in smoother interactions and faster load times without compromising usability. Integrating AI tools into the development process significantly improved efficiency by accelerating coding, debugging, and optimization tasks. AI’s assistance allowed more focus on design and user experience, reducing time spent on routine coding challenges and enabling faster iteration cycles. Overall, AI enhanced workflow fluidity and project outcomes without disrupting creative control.
+During the development of this project, I strategically leveraged AI tools to assist in generating key portions of the codebase, such as form validation logic, UI component structuring, and dynamic event handling. This approach helped accelerate development while ensuring alignment with the project’s functional requirements. The AI-generated code was carefully reviewed and integrated to enhance maintainability and user experience, contributing to a more efficient and effective workflow. AI tools played a valuable role in identifying and resolving bugs throughout the development process. When encountering errors or unexpected behavior, I used AI assistance to quickly analyze code snippets, pinpoint issues such as event listener misconfigurations and null reference errors, and suggest effective solutions. This collaboration streamlined debugging, reducing downtime and improving code reliability.AI tools helped enhance both the performance and user experience of the application by recommending more efficient code patterns and UI improvements. Suggestions such as event delegation for dynamic elements and responsive design best practices were implemented, resulting in smoother interactions and faster load times without compromising usability. Integrating AI tools into the development process significantly improved efficiency by accelerating coding, debugging, and optimization tasks. AI’s assistance allowed more focus on design and user experience, reducing time spent on routine coding challenges and enabling faster iteration cycles. Overall, AI enhanced workflow fluidity and project outcomes without disrupting creative control.GitHub Copilot was used to write the Python unit tests which were inserted into the tests.py file.
 
 
 # Need to write about Unit tests

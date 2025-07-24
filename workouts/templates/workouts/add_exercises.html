@@ -22,42 +22,47 @@
 
 
     <main>
-            <div class="exercise-list">
-                {% for exercise in exercises %}
-                <div class="exercise-item">
-                    
-                    <div class="image-container">
-                        <img src="{% static 'images/image-coming-soon.png' %}" alt="Exercise Image">
-                    </div>
-    
-    
-                    <!-- Exercise name in the middle -->
-                    <div class="exercise-details">
-                        <h2 class="title">{{ exercise.exercise_name }}</h2>
-                    </div>
-    
-                    <!-- Checkbox input on the far right -->
-                    <div class="form-check">
-                        <input class="form-check-input circle-checkbox" type="checkbox" name="selected_exercises" value="{{ exercise.exercise_name }}" id="exercise{{ exercise.id }}">
-                        <label class="form-check-label" for="exercise{{ exercise.id }}"></label>
-                    </div>
-    
+        <div class="exercise-list">
+            {% for exercise in exercises %}
+            <div class="exercise-item">
+
+                <div class="image-container">
+                    <img src="{% static 'images/image-coming-soon.png' %}" alt="Exercise Image">
                 </div>
-                {% endfor %}
+
+
+                <!-- Exercise name in the middle -->
+                <div class="exercise-details">
+                    <h2 class="title">{{ exercise.exercise_name }}</h2>
+                </div>
+
+                <!-- Checkbox input on the far right -->
+                <div class="form-check">
+                    <input class="form-check-input circle-checkbox" type="checkbox" name="selected_exercises"
+                        value="{{ exercise.exercise_name }}" id="exercise{{ exercise.id }}">
+                    <label class="form-check-label" for="exercise{{ exercise.id }}"></label>
+                </div>
+
             </div>
-    
+            {% endfor %}
+        </div>
+
     </main>
 
 
-    <footer class="footer-actions">
-        <div></div>
-        <form method="POST" action="{% url 'add_exercise_sets' %}" id="exercise-form">
+    <footer class="footer-actions d-flex align-items-center p-3 border-top">
+        
+
+        <form method="POST" action="{% url 'add_exercise_sets' %}" id="exercise-form" class="mb-0">
             {% csrf_token %}
             <input type="hidden" name="workout_title" value="{{ workout_title }}">
             <input type="hidden" name="selected_excersises" id="selected-exercises">
         </form>
-        <!-- Button to submit the form -->
-        <button type="submit" id="add-ex-btn" form="exercise-form" style="margin-right: 5%;">Add Exercises</button>
+
+        <button type="submit" id="add-ex-btn" form="exercise-form" class="btn btn-primary ms-auto me-5" style="margin-right: 15%;">
+            Add Exercises
+        </button>
+
     </footer>
 
 
