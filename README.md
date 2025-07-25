@@ -625,6 +625,77 @@ No errors were found when passing through the
 [Official W3C (Jigsaw) validator](https://jigsaw.w3.org/css-validator/#validate_by_input)
 
 
+
+
+## Lighthouse Tests
+
+
+### Login
+**Desktop**
+![alt text](image-40.png)
+**Mobile**
+![alt text](image-42.png)
+
+
+### Register
+**Desktop**
+![alt text](image-41.png)
+**Mobile**
+![alt text](image-43.png)
+
+
+### Progress
+**Desktop**
+![alt text](image-37.png)
+**Mobile**
+![alt text](image-44.png)
+
+
+### Workouts
+**Desktop**
+![alt text](image-38.png)
+**Mobile**
+![alt text](image-45.png)
+
+### New Workout - Title
+**Desktop**
+![alt text](image-47.png)
+**Mobile**
+![alt text](image-48.png)
+
+### New Workout - Add excersises
+**Desktop**
+![alt text](image-49.png)
+**Mobile**
+![alt text](image-50.png)
+
+### New Workout - Review workout
+**Desktop**
+![alt text](image-51.png)
+**Mobile**
+![alt text](image-52.png)
+
+
+### Edit Workout
+**Desktop**
+![alt text](image-51.png)
+**Mobile**
+![alt text](image-52.png)
+
+### Logout
+**Desktop**
+![alt text](image-39.png)
+**Mobile**
+![alt text](image-46.png)
+
+
+
+
+
+
+
+
+
 **Unfixed Bugs**
 
 - The forgot password functionality throws the following error: [WinError 10061] No connection could be made because the target machine actively refused it
@@ -675,12 +746,6 @@ Congratulations on completing your Readme, you have made another big stride in t
 **Use of AI Tools to help with the development process**
 
 During the development of this project, I strategically leveraged AI tools to assist in generating key portions of the codebase, such as form validation logic, UI component structuring, and dynamic event handling. This approach helped accelerate development while ensuring alignment with the project’s functional requirements. The AI-generated code was carefully reviewed and integrated to enhance maintainability and user experience, contributing to a more efficient and effective workflow. AI tools played a valuable role in identifying and resolving bugs throughout the development process. When encountering errors or unexpected behavior, I used AI assistance to quickly analyze code snippets, pinpoint issues such as event listener misconfigurations and null reference errors, and suggest effective solutions. This collaboration streamlined debugging, reducing downtime and improving code reliability.AI tools helped enhance both the performance and user experience of the application by recommending more efficient code patterns and UI improvements. Suggestions such as event delegation for dynamic elements and responsive design best practices were implemented, resulting in smoother interactions and faster load times without compromising usability. Integrating AI tools into the development process significantly improved efficiency by accelerating coding, debugging, and optimization tasks. AI’s assistance allowed more focus on design and user experience, reducing time spent on routine coding challenges and enabling faster iteration cycles. Overall, AI enhanced workflow fluidity and project outcomes without disrupting creative control.GitHub Copilot was used to write the Python unit tests which were inserted into the tests.py file.
-
-
-# Need to write about Unit tests
-
-
-
 
 
 Other General Project Advice
