@@ -7,12 +7,46 @@
 Optimize is a web-based fitness app that allows users to create and edit workouts tailored to their needs. Users can build personalized workout routines by adding exercises and specifying sets with reps for each. Whether you're tracking strength progress, designing structured training plans, or simply organizing your workouts, Optimize provides a streamlined and intuitive interface to make workout planning effortless.
 
 
+# Table of Contents
+- [UX Design Process](#ux-design-process)
+  - [Wireframes](#wireframes)
+  - [Site Map Diagram](#site-map-diagram)
+  - [Visual Design: Colour Scheme and Typography](#visual-design-colour-scheme-and-typography)
+- [Features](#features)
+  - [Navigation Bar](#navigation-bar)
+  - [Register](#register)
+  - [Login](#login)
+  - [Log out](#log-out)
+  - [Progress](#progress)
+  - [Workouts Page](#workouts-page)
+  - [New Workout](#new-workout)
+  - [Edit workout](#edit-workout)
+  - [Delete Workout](#delete-workout)
+  - [Footer](#footer)
+  - [Features Left to Implement](#features-left-to-implement)
+- [Project Planning](#project-planning)
+- [Testing](#testing)
+  - [Manual Testing](#manual-testing)
+  - [Responsivity Testing](#responsivity-testing)
+  - [Automated Testing](#automated-testing)
+  - [Validator Testing](#validator-testing)
+  - [Lighthouse Tests](#lighthouse-tests)
+  - [Unfixed Bugs and Responsivity Issues](#unfixed-bugs-and-responsivity-issues)
+  - [Summary of Testing Results](#summary-of-testing-results)
+- [Deployment](#deployment)
+- [Credits](#credits)
+  - [Libraries and Programs Used](#libraries-and-programs-used)
+
+
+
 # UX Design Process
 
+-----
 
 
+## Wireframes
 
-## 1. Wireframes
+As part of the Develop stage of the XU Design Process, I created wireframes to visualize the layout and structure of the fitness app before starting development. Using Balsamiq, I was able to quickly create low-fidelity mockups that focused on usability, navigation, and content placement. These wireframes served as a blueprint for the final design and ensured a clear user journey
 
 
 **Login Wireframe**
@@ -56,7 +90,7 @@ Optimize is a web-based fitness app that allows users to create and edit workout
 ![alt text](image-35.png)
 
 
-## 2. Site Map Diagram
+## Site Map Diagram
 
 ![alt text](image-36.png)
 
@@ -88,13 +122,11 @@ By pairing a modern typeface with high-contrast colours, the design supports cle
 
 
 
-## Features
+# Features
 --------
 
 
-### Existing Features
-
-- Navigation Bar
+## Navigation Bar
 
   - Featured on Progress, Workouts, login and register sections, the full responsive navigation bar includes links to the progress, Workouts and logout and login (when user in not logged in).  
   - This section will allow the user to easily navigate from through the main areas of the app
@@ -103,7 +135,7 @@ By pairing a modern typeface with high-contrast colours, the design supports cle
 
   ![alt text](image-2.png)
 
-- Register
+## Register
 
 Users can easily create an account by filling out a simple registration form. During the sign-up process, they are required to provide:
 
@@ -117,7 +149,7 @@ This information is securely handled and stored, allowing users to log in and ac
 
 ![alt text](image-3.png)
 
-- Login
+## Login
 
 Registered users can log in by entering their username and password on the login page. If a user hasn’t signed up yet, they can easily navigate to the registration page via a clearly visible link.
 
@@ -133,7 +165,7 @@ Once logged in, users are granted access to personalized sections of the app, su
 
 ![alt text](image.png)
 
-- Log out
+## Log out
 
 Users can log out of their account by clicking the logout icon in the navigation bar. This action takes them to a confirmation page, where they are asked to confirm whether they want to end their session.
 
@@ -151,7 +183,7 @@ This helps ensure users don’t accidentally log out and improves overall user e
 ![alt text](image-20.png)
 
 
-- Progress
+## Progress
 
 The Progress section is currently only populated with static dummy data. In future iterayions it will provide users with an overview of their workout activity and habits. It visually displays their performance over time and motivates them to stay consistent.
 
@@ -177,7 +209,7 @@ This section helps users measure their consistency and identify patterns, suppor
 ![alt text](image-5.png)
 
 
-- Workouts Page
+## Workouts Page
 
 On the Workouts page, logged-in users can:
 
@@ -197,7 +229,7 @@ This page gives users full control over managing their custom workout plans.
 
 ![alt text](image-6.png)
 
-- New Workout
+## New Workout
 
 1. After a user clicks the plus button on the Workouts page, they are taken to the page shown below. Here, the user is prompted to enter a title for the workout (e.g., "Push Day", "Cardio Routine").
 
@@ -227,7 +259,7 @@ This page gives users full control over managing their custom workout plans.
 Breaking the workout creation into three clear steps—naming the workout, selecting exercises from a scrollable list, and reviewing with options to add sets, reps, or modify exercises—provides a smooth and intuitive user experience. This approach prevents overwhelm, keeps the process organized, and allows users to easily build and customize workouts with confidence and efficiency.
 
 
-- Edit workout
+## Edit workout
 
 After clicking the "..." button on a workout, a modal appears presenting options including Start Workout, Edit, and Delete. Selecting the Edit button takes the user to a workout editor where they can easily manage their workout by adding new exercises, deleting existing ones, and adjusting the number of sets and reps for each exercise. This streamlined interface allows for quick and flexible customization of workouts.
 
@@ -236,7 +268,7 @@ After clicking the "..." button on a workout, a modal appears presenting options
 ![alt text](image-16.png)
 
 
-- Delete Workout
+## Delete Workout
 
 Similarly, clicking the Delete button opens a confirmation modal asking the user to confirm the deletion of the workout. Once confirmed, the workout is permanently removed from the database, ensuring that accidental deletions are prevented while providing a clear and straightforward way to manage workout records.
 
@@ -244,50 +276,59 @@ Similarly, clicking the Delete button opens a confirmation modal asking the user
 ![alt text](image-18.png)
 
 
-- Footer
+## Footer
 
 The footer section includes links to the relevant social media sites for Optimize. The links currently do not take the user anywhere as the social media sites have not been set up. The footer shows the business name and dynamically updates the current year automatically for accuracy.
 
 ![alt text](image-19.png)
 
 
-**Features Left to Implement**
+## Features Left to Implement
 
-- Search excersise functionality
+### **Start Workout**
+The **Start Workout** feature allows users to select a saved workout from the **My Workouts** section and actively log their progress in real time. Users can:
 
-- Filter excersises by body part
-
-- Make workout creation and update messages more user friendly instead of a message box
-
-- Add actual images for each workout
-
-- Start workout
-
-The Start Workout feature will allow users to select a saved workout from the My Workouts section and actively log their progress in real time. Users will be able to:
-
-  - View each exercise in the selected workout.
-
-  - Record the number of sets, reps, and weight used for each exercise.
-
-  - Track the total duration of the workout, which will automatically be recorded when the workout begins and ends.
+- View each exercise in the selected workout.
+- Record the number of sets, reps, and weight used for each exercise.
+- Track the total duration of the workout, which automatically starts when the workout begins and stops when it ends.
 
 This feature is designed to help users track performance over time and stay accountable by logging detailed workout data.
 
+### **Progress Tracking**
+Once a workout is completed, the results are automatically reflected in the **Progress** section of the app. This section provides users with a quick overview of their training habits and milestones through the following metrics:
 
-- Progress Tracking
-
-Once a workout is completed, the results are automatically reflected in the Progress section of the app. This section provides users with a quick overview of their training habits and milestones through the following metrics:
-
-- Workouts This Week – A bar chart showing workout activity across the current week (Monday to Sunday).
-
- - Total Workouts – Displays the cumulative number of completed workouts.
-
- - Longest Streak – Highlights the longest number of consecutive workout days.
-
- - Most Active Day – Indicates the day of the week the user is most consistently active.
+- **Workouts This Week** – A bar chart showing workout activity across the current week (Monday to Sunday).
+- **Total Workouts** – Displays the cumulative number of completed workouts.
+- **Longest Streak** – Highlights the longest number of consecutive workout days.
+- **Most Active Day** – Indicates the day of the week the user is most consistently active.
 
 Additionally, users can tap the calendar icon in the top-right corner to view their full workout history, including past workout sessions and performance logs.
 
+
+### **Planned Features**
+- Search exercise functionality.
+- Filter exercises by body part.
+- Make workout creation and update messages more user-friendly (instead of simple message boxes).
+- Add actual images for each workout.
+
+---
+
+# Project Planning and Development Process
+The project was planned and managed using Agile methodologies, supported by GitHub tools and workflows.
+
+**Planning**:
+User stories and tasks were created as GitHub Issues to define requirements clearly. A project board was set up to organize tasks into columns like To Do, In Progress, and Done, helping track progress visually. Milestones marked key phases and releases.
+
+**Development**:
+Features and fixes were developed on a separate branch, keeping the main branch stable. Pull requests facilitated code reviews before merging changes. Regular commits with descriptive messages documented progress incrementally.
+
+**Agile Practices**:
+Iterative development cycles allowed continuous feedback and improvement. Frequent testing and integration ensured high code quality and adaptability to changing requirements.
+
+This combined planning and development approach improved collaboration, transparency, and the overall quality of the project.
+
+
+---
 
 # Testing
 
@@ -295,8 +336,8 @@ Additionally, users can tap the calendar icon in the top-right corner to view th
 
 ## Manual Testing
 
-This section documents the manual testing procedures used to validate the functionality, usability, responsiveness, and data management of the Optimize fitness application. Testing was performed manually across all core pages using a browser and developer tools. Each feature was tested based on defined expected outcomes.
-                 |
+This section documents the manual testing procedures used to validate the functionality, usability, responsiveness, and data management of the Optimize fitness application. Testing was performed manually across all core pages with each feature being tested based on defined expected outcomes.
+                 
 
 ### Manual Tests Cases - User Authentication
 
@@ -399,17 +440,11 @@ This section documents the manual testing procedures used to validate the functi
 | Check that social media links currently do not navigate anywhere | Clicking any social media icon/link should have no effect (links are inactive/placeholders) | Worked as expected |
 | Test responsiveness of footer on mobile devices | Footer content should adjust correctly to smaller screen sizes without overlapping or breaking layout | Worked as expected |
 
+--- 
 
+### Responsivity Testing
 
-## Responsivity Testing
-
-### Summary
-
-The site was built with a **mobile-first approach** using **Flexbox** and **CSS media queries** to ensure compatibility across a range of devices and screen sizes.
-
-- The **Progress** and **Workout** sections adapt well to various screen sizes, including mobile devices.  
--  However, the **Exercise section** – specifically the areas for **editing sets and reps** – is **not fully responsive** on smaller screens. On devices with narrower viewports, input fields and controls may overflow or misalign.
-
+To ensure the fitness app delivers a seamless experience across all devices, extensive responsivity testing was conducted. A mobile-first approach was followed, utilizing Chrome Browser DevTools to simulate various screen sizes and devices.
 
 
 ### Viewport Breakpoints Tested 
@@ -434,7 +469,7 @@ The site was built with a **mobile-first approach** using **Flexbox** and **CSS 
 | 1024px | no | Nav bar displays logo, register and login nav items | N/A |
 | 1440px | no | Nav bar displays logo, register and login nav items | N/A |
 
-## Register Page 
+### Register Page 
 
 | Screen Size | Issue Found? | Expected Behaviour | Notes / Fixes Applied |
 | --- | --- | --- | --- |
@@ -461,7 +496,7 @@ The site was built with a **mobile-first approach** using **Flexbox** and **CSS 
 | Screen Size | Issue Found? | Expected Behavior | Notes / Fixes Applied |
 | --- | --- | --- | --- |
 | 320px | no | Hamburger menu should be visible | N/A |
-| 375px | No | Hamburger menu should be visible | N/A |
+| 375px | no | Hamburger menu should be visible | N/A |
 | 425px | no | Hamburger menu should be visible | N/A |
 | 768px | no | Hamburger menu should be visible | N/A |
 | 1024px | no | Nav bar displays logo, progress, workouts and logout nav items | N/A |
@@ -489,7 +524,7 @@ The site was built with a **mobile-first approach** using **Flexbox** and **CSS 
 | 1024px | no | Nav bar displays logo, progress, workouts and logout nav items | N/A |
 | 1440px | no | Nav bar displays logo, progress, workouts and logout nav items | N/A |
 
-## New Workout – Title page 
+### New Workout – Title page 
 
 | Screen Size | Issue Found? | Expected Behaviour | Notes / Fixes Applied |
 | --- | --- | --- | --- |
@@ -504,10 +539,10 @@ The site was built with a **mobile-first approach** using **Flexbox** and **CSS 
 
 | Screen Size | Issue Found? | Expected Behaviour | Notes / Fixes Applied |
 | --- | --- | --- | --- |
-| 320px | Yes | Workout list shows with back button at top left of header. Footer buttons have responsive text content | Back button overlapps page title. Add exercises button doent scale down effectively. |
-| 375px | no | Workout list shows with back button at top left of header. Footer buttons have responsive text content | Add exercises button doesn't scale down effectively. |
-| 425px | no | Workout list shows with back button at top left of header. Footer buttons have responsive text content | Add exercises button doesn't scale down effectively. |
-| 768px | no | Workout list shows with back button at top left of header. Footer buttons have responsive text content | Add exercises button doesn't scale down effectively. |
+| 320px | yes | Workout list shows with back button at top left of header. Footer buttons have responsive text content | Back button overlapps page title. Add exercises button doent scale down effectively. |
+| 375px | yes | Workout list shows with back button at top left of header. Footer buttons have responsive text content | Add exercises button doesn't scale down effectively. |
+| 425px | yes | Workout list shows with back button at top left of header. Footer buttons have responsive text content | Add exercises button doesn't scale down effectively. |
+| 768px | yes | Workout list shows with back button at top left of header. Footer buttons have responsive text content | Add exercises button doesn't scale down effectively. |
 | 1024px | no | Workout list shows with back button at top left of header. Footer buttons have responsive text content | N/A |
 | 1440px | no | Workout list shows with back button at top left of header. Footer buttons have responsive text content | N/A |
 
@@ -568,20 +603,24 @@ The site was built with a **mobile-first approach** using **Flexbox** and **CSS 
 
 
 
-### Final Verdict
+### Summary
 
 The application performs **responsively across all major device sizes**. Minor layout issues (mostly on the Exercise editing interface) are acknowledged and scheduled for improvement. All critical UI components remain accessible and functional on mobile, tablet, and desktop views.
 
+**Planned Improvement**: Future updates will focus on resolving all responsiveness issues identified during testing, ensuring the app performs seamlessly across all devices and screen
 
-**Planned Improvement:** Future updates will include layout adjustments (e.g., using `flex-wrap` or stacked layouts) to enhance the user experience on phones and tablets in all sections.
+--- 
+
+## Automated Testing
+
+---
 
 
-**Python Unit Tests**
-
+### Python Unit Tests
 
 These tests cover the core models and views related to workouts, exercises, and sets in the application.
 
-### Test Results
+**Test Results**
 
 - Total tests run: 7  
 - Passed: 3  
@@ -590,18 +629,19 @@ These tests cover the core models and views related to workouts, exercises, and 
 
 The test suite ran in 7.577 seconds.
 
----
 
 **Notes:**  
 - Failures relate to model `__str__` methods not returning expected string values.  
 - Errors relate to missing URL pattern `'workout_list'` in views tests.
 
+--- 
 
-**Validator Testing**
 
-- HTML
+## Validator Testing
 
-Each page was run locally on a server and then the HTML from the page source was passed through the  [Official WC3 validator](https://validator.w3.org/#validate_by_input)
+### HTML
+
+Each page was run locally on a server and then the HTML from the page source was passed through the  [Official WC3 validator](https://validator.w3.org/#validate_by_input). Pages marked with a tick in the validation list indicate that no errors were found.
 
 - [x] Login Page
 - [x] Logout page
@@ -614,20 +654,20 @@ Each page was run locally on a server and then the HTML from the page source was
 - [x] Workout set reps
 - [x] Edit Workout 
 
-Errors found:
+**Errors found**:
 
   - This is when a new workout is added to the 'My Workouts section'
   - Error: Attribute workout_id not allowed on element button at this point.
   - Error: Attribute workout_title not allowed on element button at this point.
 
-- CSS
-No errors were found when passing through the 
-[Official W3C (Jigsaw) validator](https://jigsaw.w3.org/css-validator/#validate_by_input)
+### CSS
+No errors were found when passing through the  [Official W3C (Jigsaw) validator](https://jigsaw.w3.org/css-validator/#validate_by_input)
 
-
-
+---
 
 ## Lighthouse Tests
+
+To ensure the fitness app delivers a high-quality user experience, performance and best practice audits were conducted using Google Lighthouse. Testing was performed on both mobile and desktop versions of the app to verify responsiveness and speed across different devices. The results guided optimizations that enhanced load times, usability, and overall user satisfaction as well as highlighing areas for future improvement. 
 
 
 ### Login
@@ -689,124 +729,136 @@ No errors were found when passing through the
 ![alt text](image-46.png)
 
 
+---
 
+## **Unfixed Bugs a45nd Responsivity Issues**
 
+### Bugs
+- **Forgot Password Functionality:**  
+  Attempts to reset passwords currently fail with the error:  
+  `[WinError 10061] No connection could be made because the target machine actively refused it.`  
+  This seems related to the backend email service connection and will be investigated further.
 
+- **Adding Exercises to New Workout:**  
+  The app crashes when adding exercises to a newly created workout. This may be caused by improper assignment or handling of the workout ID.
 
+### Responsivity Issues
+- Buttons and form elements overlap or become too small on smaller screen sizes (e.g., mobile devices under 375px width).  
+- The workout log page layout does not adjust optimally on tablets, causing horizontal scrolling.  
+- Certain charts in the Progress section do not resize correctly and appear distorted on narrow screens.  
+- The navigation menu could benefit from a more accessible hamburger toggle for mobile devices.
 
+---
 
+**These issues will be prioritized in upcoming development cycles to improve usability and app stability across all devices.**
 
-**Unfixed Bugs**
-
-- The forgot password functionality throws the following error: [WinError 10061] No connection could be made because the target machine actively refused it
-- When adding excersises to new workout the app crashes. This could be down to improper assignment of workout id. 
+---
 
 ## Summary of Testing Results
 
-- All manual tests were conducted on both backend and frontend.
-- Expected outcomes matched actual results.
+- All manual tests were conducted on both backend and frontend.  
+- Expected outcomes matched actual results.  
 - No major issues found.
+
 
 # Deployment
 -------
 
-Git was initialized in the project folder using git init because the project was not tracked. A new Heroku app was created with heroku create, which added the Heroku remote to the Git repository. All project files were added to staging using git add -A and committed with the message “Initial commit for Heroku deployment.” The code was pushed to Heroku using git push heroku main. A Procfile was created in the project root to tell Heroku how to start the app. Dependencies were listed correctly in requirements.txt or package.json. Necessary environment variables were set through the Heroku dashboard. After pushing, Heroku built and deployed the app, which was accessed via the given URL. Optional steps include adding a database, logging, and CI/CD integration.
+1. Git was initialized in the project folder using git init because the project was not previously tracked.
+
+2. A new Heroku app was created by running heroku create, which also added the Heroku remote repository to Git.
+
+3. All project files were staged with git add -A and committed with the message:
+"Initial commit for Heroku deployment."
+
+4. The code was pushed to Heroku using git push heroku main. This triggered Heroku to build and deploy the app from the main branch.
+
+5. A Procfile was created in the project root directory to specify how Heroku should start the Django application.
+
+6. All dependencies required by the project were listed in requirements.txt to ensure Heroku installs them during deployment.
+
+7. Necessary environment variables, including SECRET_KEY and DATABASE_URL, were configured through the Heroku dashboard or CLI.
+
+8. Database migrations were run on Heroku using heroku run python manage.py migrate to apply the latest schema changes.
+
+9. Static files were collected using heroku run python manage.py collectstatic --noinput to prepare them for production.
+
+10. The application was verified by opening it in a web browser with heroku open, confirming it deployed and ran successfully.
+
 
 
 
 # Credits
 --------
-In this section you need to reference where you got your content, media and extra help from. It is common practice to use code from other repositories and tutorials, however, it is important to be very specific about these sources to avoid plagiarism.
-
-You can break the credits section up into Content and Media, depending on what you have included in your project.
 
 
-**Libraries and Programs Used**
+## Libraries and Programs Used
 
-* Heroku
-* Heroku was used to deploy the project
-* Git
-* Version control was implemented using Git through the Github terminal.
-* Github
-* Github was used to store the projects after being pushed from Git and its cloud service Github Pages was used to serve the project on the web. GitHub Projects was used to track the User Stories.
-* Visual Studio Code
+### Backend Frameworks and Libraries
+- Django – The primary Python web framework used for building the app
 
+- gunicorn – Python WSGI HTTP server for running Django in production on Heroku
+
+- psycopg2 or psycopg2-binary – PostgreSQL database adapter for Python
+
+- django-heroku – Simplifies Heroku deployment configuration for Django apps
+
+- whitenoise – For serving static files efficiently in production
+
+- django-crispy-forms –  For enhanced form rendering
+
+- django-allauth – (If used) For authentication and social login
+
+
+### Frontend Libraries and Tools
+
+- Bootstrap – CSS framework for responsive, mobile-first styling
+
+- jQuery – For DOM manipulation and AJAX requests
+
+- Font Awesome – Icon library for scalable vector icons
+
+### Development Tools and Utilities
+
+- Python – Programming language for backend development
+
+- pip – Python package installer
+
+- virtualenv or venv – For creating isolated Python environments
+
+- Git – Version control system to track changes and deploy code
+
+- Heroku CLI – Command line tool to manage Heroku apps and deployments
+
+- PostgreSQL – Relational database used in production on Heroku
+
+- SQLite – local development database
+
+- VS Code –  IDE for development
+
+- GitHub – Hosting service for Git repositories
 
 
 **Content**
 
-The text for the Home page was taken from Wikipedia Article A
-Instructions on how to implement form validation on the Sign Up page was taken from Specific YouTube Tutorial
-The icons in the footer were taken from Font Awesome
-Media
-The photos used on the home and sign up page are from This Open Source site
-The images used for the gallery page were taken from this other open source site
-Congratulations on completing your Readme, you have made another big stride in the direction of being a developer!
+
+- The textual content, descriptions, and guidance throughout the application were written and developed by the project author.
+
+- Exercise data used in the app was sourced from the Gym Exercises Dataset available on [Kaggle](https://www.kaggle.com/datasets/ambarishdeb/gym-exercises-dataset)
+
+
+**Media**
+- Icons used throughout the project were sourced from Font Awesome under their free license.
+
+- Image for excersises was sourced from [pixabay](https://pixabay.com/)
+
+- All other media assets were either created by the author or are royalty-free resources cited in their respective folders.
+
 
 **Use of AI Tools to help with the development process**
 
-During the development of this project, I strategically leveraged AI tools to assist in generating key portions of the codebase, such as form validation logic, UI component structuring, and dynamic event handling. This approach helped accelerate development while ensuring alignment with the project’s functional requirements. The AI-generated code was carefully reviewed and integrated to enhance maintainability and user experience, contributing to a more efficient and effective workflow. AI tools played a valuable role in identifying and resolving bugs throughout the development process. When encountering errors or unexpected behavior, I used AI assistance to quickly analyze code snippets, pinpoint issues such as event listener misconfigurations and null reference errors, and suggest effective solutions. This collaboration streamlined debugging, reducing downtime and improving code reliability.AI tools helped enhance both the performance and user experience of the application by recommending more efficient code patterns and UI improvements. Suggestions such as event delegation for dynamic elements and responsive design best practices were implemented, resulting in smoother interactions and faster load times without compromising usability. Integrating AI tools into the development process significantly improved efficiency by accelerating coding, debugging, and optimization tasks. AI’s assistance allowed more focus on design and user experience, reducing time spent on routine coding challenges and enabling faster iteration cycles. Overall, AI enhanced workflow fluidity and project outcomes without disrupting creative control.GitHub Copilot was used to write the Python unit tests which were inserted into the tests.py file.
+During the development of this project, I strategically leveraged AI tools to assist in generating key portions of the codebase, such as form validation logic, UI component structuring, and dynamic event handling. This approach helped accelerate development while ensuring alignment with the project’s functional requirements. The AI-generated code was carefully reviewed and integrated to enhance maintainability and user experience, contributing to a more efficient and effective workflow. AI tools played a valuable role in identifying and resolving bugs throughout the development process. When encountering errors or unexpected behavior, I used AI assistance to quickly analyze code snippets, pinpoint issues such as event listener misconfigurations and null reference errors, and suggest effective solutions. This collaboration streamlined debugging, reducing downtime and improving code reliability. AI tools helped enhance both the performance and user experience of the application by recommending more efficient code patterns and UI improvements. Suggestions such as event delegation for dynamic elements and responsive design best practices were implemented, resulting in smoother interactions and faster load times without compromising usability. Integrating AI tools into the development process significantly improved efficiency by accelerating coding, debugging, and optimization tasks. AI’s assistance allowed more focus on design and user experience, reducing time spent on routine coding challenges and enabling faster iteration cycles. Overall, AI enhanced workflow fluidity and project outcomes without disrupting creative control.GitHub Copilot was used to write the Python unit tests which were inserted into the tests.py file.
 
-
-Other General Project Advice
-Below you will find a couple of extra tips that may be helpful when completing your project. Remember that each of these projects will become part of your final portfolio so it’s important to allow enough time to showcase your best work!
-
-One of the most basic elements of keeping a healthy commit history is with the commit message. When getting started with your project, read through this article by Chris Beams on How to Write a Git Commit Message
-
-Make sure to keep the messages in the imperative mood
-When naming the files in your project directory, make sure to consider meaningful naming of files, point to specific names and sections of content.
-
-For example, instead of naming an image used ‘image1.png’ consider naming it ‘landing_page_img.png’. This will ensure that there are clear file paths kept.
-Do some extra research on good and bad coding practices, there are a handful of useful articles to read, consider reviewing the following list when getting started:
-
-Writing Your Best Code
-HTML & CSS Coding Best Practices
-Google HTML/CSS Style Guide
-Getting started with your Portfolio Projects can be daunting, planning your project can make it a lot easier to tackle, take small steps to reach the final outcome and enjoy the process!
-
-
-
-
-
-
-
-
-# Links to content
----
-## Links to content
-- [Features](#features)
-- [User Experience](#user-experience)
-- [Design](#design)
-- [Fonts](#fonts)
-- [Colour](#colour)
-- [Wireframes](#wireframes)
-- [Development Process](#development-process)
-  - [Project Planning](#project-planning)
-  - [Inline JavaScript](#inline-javascript)
-  - [Data Model](#data-model)
-- [Testing](#testing)
-  - [Manual Testing](#manual-testing)
-  - [Feature Testing](#feature-testing)
-  - [Responsiveness](#responsiveness)
-  - [Browser Compatibility](#browser-compatibility)
-  - [Lighthouse](#lighthouse)
-  - [Code Validation](#code-validation)
-  - [Python](#python)
-  - [JavaScript](#javascript)
-  - [HTML](#html)
-  - [CSS](#css)
-  - [User Stories](#user-stories)
-  - [Automated Testing](#automated-testing)
-  - [Django Testing](#django-testing)
-  - [Selenium Testing](#selenium-testing)
-  - [Bugs](#bugs)
-- [Libraries and Programs Used](#libraries-and-programs-used)
-- [Deployment](#deployment)
-  - [Deploying the App on Heroku](#deploying-the-app-on-heroku)
-  - [Making a Local Clone](#making-a-local-clone)
-  - [Running the App in Your Local Environment](#running-the-app-in-your-local-environment)
-- [Credits](#credits)
-- [Acknowledgements](#acknowledgements)
 
 
 
